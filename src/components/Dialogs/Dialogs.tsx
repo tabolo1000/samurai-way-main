@@ -1,10 +1,11 @@
 import React from 'react';
+import {DialogsStyled} from "./DialogsStyled";
 
 export const Dialogs = () => {
     return (
-        <div>
+        <DialogsStyled>
             <h1>dialogs</h1>
-        </div>
+        </DialogsStyled>
     );
 };
 

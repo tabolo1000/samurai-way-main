@@ -1,6 +1,7 @@
 import React from 'react';
 import {FlexWrapper} from "../FlexWrapper";
 import styled from "styled-components";
+import {LiStyled, SidebarStyled, UlStyled} from "./NavbarStyled";
 
 export const Navbar = () => {
     return (
@@ -16,15 +17,4 @@ export const Navbar = () => {
     );
 };
 
-const SidebarStyled = styled.div`
-    grid-area: sidebar;
-`
 
-const UlStyled = styled.ul`
-      list-style: none;
-    `
-
-const LiStyled = styled.li`
-      margin: 10px;
-      font-size: 1.5rem;
-    `

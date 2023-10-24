@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components'
 import {FlexWrapper} from "../FlexWrapper";
 import sprite from '../../image/spite.svg'
+import {StyledHeader, SvgStyled} from "./HeaderStyled";
 
 
 export function Header() {
@@ -15,14 +16,7 @@ export function Header() {
     )
 }
 
-const SvgStyled = styled.svg`
-  fill: transparent;
-  margin: 7px 40px;
-`
 
-const StyledHeader = styled.div`
-  grid-area: header;
-  background: rgba(132, 255, 0, 0.75);
-`
+
 
 
