@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import avatar from "../../image/avatar-3-evil-navi-james-cameron.jpg";
 import beach from "../../image/images.jpeg"
+import {MyPosts} from "./MyPosts/MyPosts"
 export const Profile = () => {
     return (
         <ContentStyled>
@@ -14,11 +15,7 @@ export const Profile = () => {
                 <h3>Education: <span>BSU'11</span></h3>
                 <h3>Web Site: <span>https://</span></h3>
             </div>
-            <div>
-                <h3>My posts</h3>
-                <textarea name="post" id="12" cols={40} rows={10}></textarea>
-                <button>Send</button>
-            </div>
+           <MyPosts/>
         </ContentStyled>
     );
 };

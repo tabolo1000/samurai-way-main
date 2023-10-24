@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlexWrapper} from "../../components/FlexWrapper";
+import {FlexWrapper} from "../FlexWrapper";
 import styled from "styled-components";
 
 export const Navbar = () => {

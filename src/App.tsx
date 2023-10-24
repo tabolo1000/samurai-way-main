@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
-import {Header} from "./layout/Header/Header";
+import {Header} from "./components/Header/Header";
 import styled from "styled-components";
-import {Navbar} from "./layout/Navbar/Navbar";
-import {Footer} from "./layout/Footer/Footer";
-import {Profile} from "./layout/Profile/Profile";
+import {Navbar} from "./components/Navbar/Navbar";
+import {Footer} from "./components/Footer/Footer";
+import {Profile} from "./components/Profile/Profile";
 
 
 
