@@ -5,6 +5,7 @@ import styled from "styled-components";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Footer} from "./components/Footer/Footer";
 import {Profile} from "./components/Profile/Profile";
+import {Dialogs} from "./components/Dialogs/Dialogs";
 
 
 
@@ -13,7 +14,10 @@ function App() {
       <AppStyled>
           <Header/>
           <Navbar/>
-          <Profile/>
+          <ContentStyled>
+              {/*<Profile/>*/}
+              <Dialogs/>
+          </ContentStyled>
           <Footer/>
       </AppStyled>
   );
@@ -32,4 +36,7 @@ const AppStyled = styled.div`
   
   grid-template-rows:  60px 1fr;
   grid-template-columns: 2fr 10fr;
+`
+const ContentStyled = styled.div`
+  grid-area: content;
 `
