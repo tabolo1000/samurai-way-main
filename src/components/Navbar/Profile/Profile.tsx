@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
-import avatar from "../../image/avatar-3-evil-navi-james-cameron.jpg";
-import beach from "../../image/images.jpeg"
+import avatar from "../../../image/avatar-3-evil-navi-james-cameron.jpg";
+import beach from "../../../image/images.jpeg"
 import {MyPosts} from "./MyPosts/MyPosts"
 export const Profile = () => {
     return (

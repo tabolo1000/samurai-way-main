@@ -4,7 +4,7 @@ import {DialogsStyled} from "./DialogsStyled";
 export const Dialogs = () => {
     return (
         <DialogsStyled>
-            <h1>dialogs</h1>
+            <h1>Dialogs</h1>
         </DialogsStyled>
     );
 };
