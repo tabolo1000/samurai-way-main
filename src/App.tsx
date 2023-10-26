@@ -47,9 +47,9 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Profile/>}/>
                     <Route path="/dialogs" element={<Dialogs/>}/>
-                     <Route path="/news" element={<News/>}/>
-                     <Route path="/music" element={<Music/>}/>
-                     <Route path="/setting" element={<Setting/>}/>
+                    <Route path="/news" element={<News/>}/>
+                    <Route path="/music" element={<Music/>}/>
+                    <Route path="/setting" element={<Setting/>}/>
                 </Routes>
             </ContentStyled>
             <Footer/>
