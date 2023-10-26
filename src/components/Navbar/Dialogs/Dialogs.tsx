@@ -2,21 +2,42 @@ import React from 'react';
 import {DialogsStyled, LinkStyle, LinkList, NameDialog, UlList} from "./DialogsStyled";
 import {Link} from 'react-router-dom';
 
-export const Dialogs = () => {
+
+interface DialogsItemProps {
+    name: string,
+    id: number,
+}
+const DialogItem = (props: DialogsItemProps) => {
+    const path = "dialogs" + props.id;
+    return(
+        <LinkList><LinkStyle to ={path}>{props.name}</LinkStyle></LinkList>
+    )
+}
+interface DialogsMessageProps {
+    message: string,
+}
+
+const DialogMessage = (props: DialogsMessageProps) => {
+    return(
+     <LinkList>{props.message}</LinkList>
+    )
+}
+export const Dialogs = (god: any) => {
+    debugger;
     return (
         <div>
             <NameDialog>Dialog</NameDialog>
             <DialogsStyled>
                 <UlList>
-                    <LinkList><LinkStyle to = "/dialogs/Ola/">Ola</LinkStyle></LinkList>
-                    <LinkList><LinkStyle to = "/dialogs/Viktoria/">Viktoria</LinkStyle></LinkList>
-                    <LinkList><LinkStyle to = "/dialogs/Anna/">Anna</LinkStyle></LinkList>
+                    <DialogItem name={"Ola"} id={1}></DialogItem>
+                    <DialogItem name={"Viktoria"} id={2}></DialogItem>
+                    <DialogItem name={"Anna"} id={3}></DialogItem>
                 </UlList>
                 <UlList>
-                    <LinkList>Hi!</LinkList>
-                    <LinkList>How are you.</LinkList>
-                    <LinkList>I'm good. </LinkList>
-                    <LinkList>Glad to hear it.</LinkList>
+                    <DialogMessage message={"Hi"}></DialogMessage>
+                    <DialogMessage message={"How are you"}></DialogMessage>
+                    <DialogMessage message={"I'm good."}></DialogMessage>
+                    <DialogMessage message={"Glad to hear it."}></DialogMessage>
                 </UlList>
             </DialogsStyled>
         </div>
