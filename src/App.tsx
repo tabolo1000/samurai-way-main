@@ -17,39 +17,19 @@ import {Setting} from "./components/Navbar/Setting/Setting";
 
 
 function App() {
-    // const router = createBrowserRouter([
-    //     {
-    //         path: "/",
-    //         element: <Profile/>
-    //     },
-    //     {
-    //         path: "/dialogs",
-    //         element: <Dialogs/>
-    //     },
-    //     {
-    //         path: "/new",
-    //         element: <News/>
-    //     },
-    //     {
-    //         path: "/music",
-    //         element: <Music/>
-    //     },
-    //     {
-    //         path: "/setting",
-    //         element: <Setting/>,
-    //     },
-    // ])
+    const arrRoute = ['/',"/dialogs","/news","/music","/setting"]
+    const arrComponents =[<Profile/>, <Dialogs/>, <News/>, <Music/>, <Setting/>]
     return (
         <AppStyled>
             <Header/>
             <Navbar/>
             <ContentStyled>
                 <Routes>
-                    <Route path="/" element={<Profile/>}/>
-                    <Route path="/dialogs" element={<Dialogs/>}/>
-                    <Route path="/news" element={<News/>}/>
-                    <Route path="/music" element={<Music/>}/>
-                    <Route path="/setting" element={<Setting/>}/>
+                    {arrRoute.map((item, index)=>{
+                        return(
+                        <Route path={item} element={arrComponents[index]}/>
+                        )
+                    })}
                 </Routes>
             </ContentStyled>
             <Footer/>

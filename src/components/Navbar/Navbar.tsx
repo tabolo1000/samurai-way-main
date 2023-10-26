@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 export const Navbar = () => {
 
-const menu = ["/", "/dialogs", "/news", "/music", "/dialogs"];
+const menu = ["/", "/dialogs", "/news", "/music", "/setting"];
 const name = ["Profile","Message","New","Music", "Setting"]
 
 
