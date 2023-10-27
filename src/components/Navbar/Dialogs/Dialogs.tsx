@@ -22,22 +22,38 @@ const DialogMessage = (props: DialogsMessageProps) => {
      <LinkList>{props.message}</LinkList>
     )
 }
-export const Dialogs = (god: any) => {
-    debugger;
+export const Dialogs = () => {
+    const stateItems = [
+        {id:1, name: "Ola"},
+        {id:2, name: "Viktoria"},
+        {id:3, name: "Anna"},
+    ];
+interface postDataType {
+    id: number,
+    message: string,
+    countLikes: number,
+}
+
+const postData: Array<postDataType> = [
+        {id: 1,message: "Hi", countLikes: 1},
+        {id: 2,message: "How are you", countLikes: 1}   ,
+        {id: 3,message: "I'm good", countLikes: 1},
+        {id: 4,message: "Glad to hear that", countLikes: 1},
+    ];
     return (
         <div>
             <NameDialog>Dialog</NameDialog>
             <DialogsStyled>
                 <UlList>
-                    <DialogItem name={"Ola"} id={1}></DialogItem>
-                    <DialogItem name={"Viktoria"} id={2}></DialogItem>
-                    <DialogItem name={"Anna"} id={3}></DialogItem>
+                    <DialogItem name={stateItems[0].name} id={stateItems[0].id}></DialogItem>
+                    <DialogItem name={stateItems[1].name} id={stateItems[1].id}></DialogItem>
+                    <DialogItem name={stateItems[2].name} id={stateItems[2].id}></DialogItem>
                 </UlList>
                 <UlList>
-                    <DialogMessage message={"Hi"}></DialogMessage>
-                    <DialogMessage message={"How are you"}></DialogMessage>
-                    <DialogMessage message={"I'm good."}></DialogMessage>
-                    <DialogMessage message={"Glad to hear it."}></DialogMessage>
+                    <DialogMessage message={postData[0].message}></DialogMessage>
+                    <DialogMessage message={postData[1].message}></DialogMessage>
+                    <DialogMessage message={postData[2].message}></DialogMessage>
+                    <DialogMessage message={postData[3].message}></DialogMessage>
                 </UlList>
             </DialogsStyled>
         </div>
