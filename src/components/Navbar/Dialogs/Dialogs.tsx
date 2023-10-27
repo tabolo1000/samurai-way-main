@@ -23,37 +23,39 @@ const DialogMessage = (props: DialogsMessageProps) => {
     )
 }
 export const Dialogs = () => {
-    const stateItems = [
+    const dialogs = [
         {id:1, name: "Ola"},
         {id:2, name: "Viktoria"},
         {id:3, name: "Anna"},
     ];
-interface postDataType {
+interface PostDataType {
     id: number,
     message: string,
     countLikes: number,
 }
 
-const postData: Array<postDataType> = [
+const postData: Array<PostDataType> = [
         {id: 1,message: "Hi", countLikes: 1},
         {id: 2,message: "How are you", countLikes: 1}   ,
         {id: 3,message: "I'm good", countLikes: 1},
         {id: 4,message: "Glad to hear that", countLikes: 1},
     ];
+const dialogsElements =
+    dialogs.map((item:DialogsItemProps) => <DialogItem name={item.name} id={item.id}></DialogItem>);
+
+const messageElements =
+    postData.map((item:PostDataType) => <DialogMessage message={item.message}></DialogMessage>)
+
+
     return (
         <div>
             <NameDialog>Dialog</NameDialog>
             <DialogsStyled>
                 <UlList>
-                    <DialogItem name={stateItems[0].name} id={stateItems[0].id}></DialogItem>
-                    <DialogItem name={stateItems[1].name} id={stateItems[1].id}></DialogItem>
-                    <DialogItem name={stateItems[2].name} id={stateItems[2].id}></DialogItem>
+                    {dialogsElements}
                 </UlList>
                 <UlList>
-                    <DialogMessage message={postData[0].message}></DialogMessage>
-                    <DialogMessage message={postData[1].message}></DialogMessage>
-                    <DialogMessage message={postData[2].message}></DialogMessage>
-                    <DialogMessage message={postData[3].message}></DialogMessage>
+                    {messageElements}
                 </UlList>
             </DialogsStyled>
         </div>
