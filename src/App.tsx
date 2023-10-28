@@ -25,7 +25,7 @@ function App() {
     return (
         <AppStyled>
             <Header/>
-            <Navbar dialog = {state.messageData}/>
+            <Navbar />
             <ContentStyled>
                 <Routes>
                     {arrRoute.map((item, index)=>{

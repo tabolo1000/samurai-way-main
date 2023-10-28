@@ -1,5 +1,5 @@
 import React from "react";
-import {LinkList, LinkStyle} from "../DialogsStyled";
+import {LinkList, LinkListRight, LinkStyle} from "../DialogsStyled";
 import {Avatar} from "../../../../style/GlobalStyle";
 
 
@@ -8,12 +8,13 @@ interface DialogsItemProps {
     id: number,
     image: string,
 }
+
 export const DialogItem = (props: DialogsItemProps) => {
     const path = "dialogs" + props.id;
-    return(
+    return (
         <>
             <Avatar src={props.image} alt=""/>
-        <LinkList><LinkStyle to ={path}>{props.name}</LinkStyle></LinkList>
+            <LinkList><LinkStyle to={path}>{props.name}</LinkStyle></LinkList>
         </>
     )
 }

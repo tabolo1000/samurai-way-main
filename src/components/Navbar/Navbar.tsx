@@ -19,7 +19,7 @@ import {Link} from "react-router-dom";
         message: string,
         countLikes: number,
     }
-export const Navbar = (props: dialogTypeProps) => {
+export const Navbar = () => {
     const menu = ["/", "/dialogs", "/news", "/music", "/setting"];
     const name = ["Profile","Message","New","Music", "Setting"]
 const arrayNavbar = menu.map((item, index)=>{

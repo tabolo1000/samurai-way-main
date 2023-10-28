@@ -16,11 +16,27 @@ export const LinkStyle = styled(Link)`
      text-decoration: none;
     `
 
-export const LinkList = styled.li`
+export const LinkListLeft = styled.li`
      padding: 10px;
      font-size: 20px;
      list-style: none;
   text-decoration: none;
+  color: yellow;
+    `
+
+export const LinkListRight = styled.li`
+     padding: 10px;
+     font-size: 20px;
+     list-style: none;
+  text-decoration: none;
+  text-align: right;
+  color: blue;
+    `
+export const LinkList = styled.li`
+     padding: 10px;
+     font-size: 20px;
+     list-style: none;
+  text-decoration: none;;
     `
 export const NameDialog = styled.h2`
   padding: 0 100px;
