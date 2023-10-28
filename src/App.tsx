@@ -15,14 +15,32 @@ import {News} from "./components/Navbar/News/News";
 import {Music} from "./components/Navbar/Music/Music";
 import {Setting} from "./components/Navbar/Setting/Setting";
 
+const state = {
+    dialog:{
+        dialogsData: [
+            {id: 1, name: "Ola"},
+            {id: 2, name: "Viktoria"},
+            {id: 3, name: "Anna"},
+        ],
+        postData: [
+            {id: 1, message: "Hi", countLikes: 1},
+            {id: 2, message: "How are you", countLikes: 1},
+            {id: 3, message: "I'm good", countLikes: 1},
+            {id: 4, message: "Glad to hear that", countLikes: 1},
+        ]
+    }
 
+}
 function App() {
+
+
+
     const arrRoute = ['/',"/dialogs","/news","/music","/setting"]
-    const arrComponents =[<Profile/>, <Dialogs/>, <News/>, <Music/>, <Setting/>]
+    const arrComponents =[<Profile/>, <Dialogs dialogs = {state.dialog}/>, <News/>, <Music/>, <Setting/>]
     return (
         <AppStyled>
             <Header/>
-            <Navbar/>
+            <Navbar dialog = {state.dialog}/>
             <ContentStyled>
                 <Routes>
                     {arrRoute.map((item, index)=>{
