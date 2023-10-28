@@ -6,9 +6,8 @@ import {DialogMessage} from "./DialogMessage/DialogMessage";
 
 
 interface dialogTypeProps {
-    dialogs: dialogType
+    messageData: dialogType
 }
-
 interface dialogType {
     dialogsData: Array<dialogDataType>,
     postData: Array<postDataType>
@@ -17,6 +16,7 @@ interface dialogType {
 interface dialogDataType {
     id: number,
     name: string,
+    image: string,
 }
 
 interface postDataType {
@@ -30,11 +30,11 @@ export const Dialogs = (props: dialogTypeProps) => {
 
 
     const dialogsElements =
-        props.dialogs.dialogsData.map((item) => <DialogItem name={item.name} id={item.id}></DialogItem>);
+        props.messageData.dialogsData.map((item) => <DialogItem name={item.name} id={item.id} image={item.image}></DialogItem>);
 
 
     const messageElements =
-        props.dialogs.postData.map((item) => <DialogMessage id={item.id} message={item.message}
+        props.messageData.postData.map((item) => <DialogMessage id={item.id} message={item.message}
                                                             countLikes={item.countLikes}></DialogMessage>);
 
 

@@ -1,4 +1,4 @@
-import {createGlobalStyle} from "styled-components";
+import styled, {createGlobalStyle} from "styled-components";
 
 const GlobalStyled = createGlobalStyle`
   html, .root, body {
@@ -23,5 +23,9 @@ code {
     monospace;
 }
     `
-
+export const Avatar = styled.img`
+  width: 90px;
+  border-radius: 50px;
+  height: 110px;
+`
 export default GlobalStyled;
