@@ -28,4 +28,9 @@ export const Avatar = styled.img`
   border-radius: 50px;
   height: 110px;
 `
+export const AvatarLittle = styled.img`
+  width: 40px;
+  border-radius: 50px;
+  height: 40px;
+`
 export default GlobalStyled;
