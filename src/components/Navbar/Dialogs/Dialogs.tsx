@@ -61,6 +61,15 @@ export const Dialogs = (props: dialogTypeProps) => {
 
     const allMessage = [...otherMessage, ...myMessage].sort((a, b) => a.props.timeMessage > b.props.timeMessage ? 1 : -1);
 
+    const createRefMainPost = React.useRef<HTMLTextAreaElement>(null);
+
+    const addMessage = () => {
+        if(createRefMainPost.current !== null){
+            debugger;
+            alert(createRefMainPost.current.value);
+        }
+    }
+
     return (
         <div>
             <NameDialog>Dialog</NameDialog>
@@ -70,6 +79,8 @@ export const Dialogs = (props: dialogTypeProps) => {
                 </UlList>
                 <UlList>
                     {allMessage}
+                    <textarea name="q" ref = {createRefMainPost}  cols={30} rows={10}></textarea>
+                    <button onClick = {()=>{addMessage()}}>Click</button>
                 </UlList>
             </DialogsStyled>
         </div>

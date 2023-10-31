@@ -1,10 +1,9 @@
 import React from 'react';
 
-export const Music = () => {
+export const Hoo = () => {
     return (
         <div>
-
-            <h1>Music</h1>
+            <h1>hello</h1>
         </div>
     );
 };

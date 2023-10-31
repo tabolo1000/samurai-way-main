@@ -15,22 +15,78 @@ import {News} from "./components/Navbar/News/News";
 import {Music} from "./components/Navbar/Music/Music";
 import {Setting} from "./components/Navbar/Setting/Setting";
 import {state} from "./redux/state";
-
-function App() {
-
+import {Hoo} from "./components/Navbar/Hoo/Hoo";
 
 
-    const arrRoute = ['/',"/dialogs","/news","/music","/setting"]
-    const arrComponents =[<Profile/>, <Dialogs messageData = {state.messageData}/>, <News/>, <Music/>, <Setting/>]
+interface propsType {
+    state: dialogTypeProps;
+}
+
+interface dialogTypeProps {
+    messageData: dialogType;
+    profileData: profileDataType;
+}
+
+export interface profileDataType {
+    postsProfileData: PostProfileDataType;
+    addPost: (myPost:string) => number;
+}
+
+interface PostProfileDataType {
+    allMyPosts: Array<allMyPropsType>
+}
+
+export interface allMyPropsType {
+    id: number;
+    message: string;
+}
+
+interface dialogType {
+    dialogsData: Array<dialogDataType>,
+    postData: postDataType
+}
+
+interface dialogDataType {
+    id: number,
+    name: string,
+    image: string,
+}
+
+interface postDataType {
+    otherUsersMessage: Array<otherUsersMessageType>,
+    myMessage: Array<myMessageType>
+}
+
+interface otherUsersMessageType {
+    id: number,
+    message: string,
+    countLikes: number,
+    timeMessage: number,
+    isItMyMessage: boolean,
+}
+
+interface myMessageType {
+    id: number,
+    message: string,
+    countLikes: number,
+    timeMessage: number,
+    isItMyMessage: boolean,
+}
+
+function App(props: propsType) {
+
+    const arrRoute = ['/', "/dialogs", "/news", "/music", "/setting", "/hoo"]
+    const arrComponents = [<Profile profileData = {props.state.profileData}/>, <Dialogs messageData={state.messageData}/>, <News/>, <Music/>, <Setting/>,
+        <Hoo/>,]
     return (
         <AppStyled>
             <Header/>
-            <Navbar />
+            <Navbar/>
             <ContentStyled>
                 <Routes>
-                    {arrRoute.map((item, index)=>{
-                        return(
-                        <Route path={item} element={arrComponents[index]}/>
+                    {arrRoute.map((item, index) => {
+                        return (
+                            <Route path={item} element={arrComponents[index]}/>
                         )
                     })}
                 </Routes>

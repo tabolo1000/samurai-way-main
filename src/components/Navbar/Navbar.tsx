@@ -25,12 +25,15 @@ interface postDataType {
 }
 
 export const Navbar = () => {
-    const menu = ["/", "/dialogs", "/news", "/music", "/setting",];
-    const name = ["Profile", "Message", "New", "Music", "Setting",]
+    const menu = ["/", "/dialogs", "/news", "/music", "/setting", "/hoo"];
+    const name = ["Profile", "Message", "New", "Music", "Setting", "Hoo"]
     const arrayNavbar = menu.map((item, index) => {
         return (
-            <LiStyled><NavlinkStyled to={`${item}`}>{name[index]}</NavlinkStyled></LiStyled>)
-    })
+            <LiStyled>
+                <NavlinkStyled to={`${item}`}>{name[index]}
+                </NavlinkStyled>
+            </LiStyled>
+        )})
 
     return (
         <SidebarStyled>

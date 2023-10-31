@@ -12,20 +12,17 @@ interface DialogsMessageProps {
 
 
 export const DialogMessage = (props: DialogsMessageProps) => {
-    {
-        if (props.isItMyMessage === true) {
-            debugger
-            return (
-                <LinkListRight><MessageStyle>{props.message}</MessageStyle></LinkListRight>
-            )
-        } else {
-            debugger;
-            return (
-
-                <LinkListLeft><MessageStyle>{props.message}</MessageStyle></LinkListLeft>
-            )
-        }
+    let con = []
+    if (props.isItMyMessage === true) {
+        con.push(<LinkListRight><MessageStyle>{props.message}</MessageStyle></LinkListRight>)
+    } else{
+        con.push(<LinkListLeft><MessageStyle>{props.message}</MessageStyle></LinkListLeft>)
     }
+    return (
+        <>
+            {con}
+        </>
+    )
 }
 
 const MessageStyle = styled.span`

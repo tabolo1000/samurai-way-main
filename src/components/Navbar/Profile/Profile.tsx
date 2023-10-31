@@ -1,9 +1,12 @@
 import React from 'react';
-import styled from "styled-components";
-import avatar from "../../../image/avatar-3-evil-navi-james-cameron.jpg";
 import beach from "../../../image/images.jpeg"
 import {MyPosts} from "./MyPosts/MyPosts"
 import {ContentStyled, ImageAvatarStyled, ImageBackGroundStyled} from "./ProfileStyled";
+import {profileDataType} from "../../../App";
+
+interface propsType {
+    profileData: profileDataType;
+}
 
 interface ProfileProps {
     img: string,
@@ -13,7 +16,15 @@ interface ProfileProps {
     education: string,
     webSite: string
 }
-
+export const Profile = (props: propsType) => {
+    // const createRef = React.createRef()
+    return (
+        <ContentStyled>
+            <ProfileInfo img={beach} name = "Nik Tabola" date = {12} city = "Minsk" education = "BSU'11" webSite = "https://"/>
+            <MyPosts addPost = {props.profileData.addPost} allMyPosts = {props.profileData.postsProfileData.allMyPosts}/>
+        </ContentStyled>
+    );
+};
 const ProfileInfo = (props: ProfileProps) =>{
     return(
         <div>
@@ -29,13 +40,5 @@ const ProfileInfo = (props: ProfileProps) =>{
         </div>
     )
 }
-export const Profile = () => {
-   // const createRef = React.createRef()
-    return (
-        <ContentStyled>
-            <ProfileInfo img={beach} name = "Nik Tabola" date = {12} city = "Minsk" education = "BSU'11" webSite = "https://"/>
-           <MyPosts/>
-        </ContentStyled>
-    );
-};
+
 
