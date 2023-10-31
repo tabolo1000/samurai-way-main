@@ -33,7 +33,17 @@ export interface profileDataType {
 }
 
 interface PostProfileDataType {
+    profileInfo: profileInfoType;
     allMyPosts: Array<allMyPropsType>
+}
+
+export interface profileInfoType {
+    img: string,
+    name: string,
+    date: string,
+    city: string,
+    education: string,
+    webSite: string;
 }
 
 export interface allMyPropsType {

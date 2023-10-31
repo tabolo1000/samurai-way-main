@@ -3,42 +3,22 @@ import beach from "../../../image/images.jpeg"
 import {MyPosts} from "./MyPosts/MyPosts"
 import {ContentStyled, ImageAvatarStyled, ImageBackGroundStyled} from "./ProfileStyled";
 import {profileDataType} from "../../../App";
+import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
 interface propsType {
     profileData: profileDataType;
 }
 
-interface ProfileProps {
-    img: string,
-    name: string,
-    date: number,
-    city: string,
-    education: string,
-    webSite: string
-}
 export const Profile = (props: propsType) => {
     // const createRef = React.createRef()
+    let propsProfileInfo = props.profileData.postsProfileData.profileInfo;
     return (
         <ContentStyled>
-            <ProfileInfo img={beach} name = "Nik Tabola" date = {12} city = "Minsk" education = "BSU'11" webSite = "https://"/>
+            <ProfileInfo img={propsProfileInfo.img} name = "Nik Tabola" date = {propsProfileInfo.date} city = {propsProfileInfo.city} education = {propsProfileInfo.education} webSite = {propsProfileInfo.webSite}/>
             <MyPosts addPost = {props.profileData.addPost} allMyPosts = {props.profileData.postsProfileData.allMyPosts}/>
         </ContentStyled>
     );
 };
-const ProfileInfo = (props: ProfileProps) =>{
-    return(
-        <div>
-            <ImageBackGroundStyled/>
-            <div>
-                <ImageAvatarStyled src={props.img}/>
-                <h2>{props.name}</h2>
-                <h3>Date of Birth: {props.date}</h3>
-                <h3>City: {props.city}</h3>
-                <h3>Education: <span>{props.education}</span></h3>
-                <h3>Web Site: <span>{props.webSite}</span></h3>
-            </div>
-        </div>
-    )
-}
+
 
 

@@ -1,3 +1,5 @@
+import beach from "../image/images.jpeg"
+
 export const state = {
     messageData: {
         dialogsData: [
@@ -44,6 +46,14 @@ export const state = {
     },
     profileData: {
         postsProfileData: {
+            profileInfo: {
+                img: beach,
+                name: "Nik Tabala",
+                date: "12.12.12",
+                city: "Minsk",
+                education: "BSU'11",
+                webSite: "https://"
+            },
             allMyPosts: [
                 {id: 1, message: "What's you know about it"}
             ]
