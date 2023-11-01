@@ -14,7 +14,7 @@ import {
 import {News} from "./components/Navbar/News/News";
 import {Music} from "./components/Navbar/Music/Music";
 import {Setting} from "./components/Navbar/Setting/Setting";
-import {state} from "./redux/state";
+// import {state} from "./redux/state";
 import {Hoo} from "./components/Navbar/Hoo/Hoo";
 
 
@@ -22,7 +22,7 @@ interface propsType {
     state: dialogTypeProps;
 }
 
-interface dialogTypeProps {
+export interface dialogTypeProps {
     messageData: dialogType;
     profileData: profileDataType;
 }
@@ -49,6 +49,7 @@ export interface profileInfoType {
 export interface allMyPropsType {
     id: number;
     message: string;
+    image: string;
 }
 
 interface dialogType {
@@ -86,7 +87,7 @@ interface myMessageType {
 function App(props: propsType) {
 
     const arrRoute = ['/', "/dialogs", "/news", "/music", "/setting", "/hoo"]
-    const arrComponents = [<Profile profileData = {props.state.profileData}/>, <Dialogs messageData={state.messageData}/>, <News/>, <Music/>, <Setting/>,
+    const arrComponents = [<Profile profileData = {props.state.profileData}/>, <Dialogs messageData={props.state.messageData}/>, <News/>, <Music/>, <Setting/>,
         <Hoo/>,]
     return (
         <AppStyled>

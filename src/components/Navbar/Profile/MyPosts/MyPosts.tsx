@@ -1,6 +1,7 @@
 import React, {useRef} from 'react';
 import {Post} from "./Post/Post";
 import {allMyPropsType} from "../../../../App";
+import {state} from "../../../../redux/state";
 
 interface propsType {
     addPost: (myPost: string) => number;
@@ -8,11 +9,14 @@ interface propsType {
 }
 
 export const MyPosts = (props: propsType) => {
+
     // const newPostElement = React.createRef();
     let newPostEl = useRef<HTMLTextAreaElement>(null);
     const addPost = () => {
+        debugger
         if (newPostEl.current !== null) {
-            props.addPost(newPostEl.current.value)
+            props.addPost(
+                newPostEl.current.value)
         }
     }
 
@@ -26,7 +30,7 @@ export const MyPosts = (props: propsType) => {
                 }}>Send
                 </button>
             </div>
-            <Post/>
+            <Post allMyPosts={props.allMyPosts}/>
         </div>
     );
 };

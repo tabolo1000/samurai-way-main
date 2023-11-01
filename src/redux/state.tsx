@@ -1,4 +1,6 @@
 import beach from "../image/images.jpeg"
+import {useState} from "react";
+import {renderEntireTree} from "../render";
 
 export const state = {
     messageData: {
@@ -55,19 +57,21 @@ export const state = {
                 webSite: "https://"
             },
             allMyPosts: [
-                {id: 1, message: "What's you know about it"}
+                {id: 1, image: "https://cdn.pixabay.com/photo/2021/06/11/12/26/woman-6328478_1280.jpg", message: "What's you know about it"}
             ]
         },
         addPost(myPost: string){
             debugger;
-                let lengththisArr = this.postsProfileData.allMyPosts.length;
+                let lengththisArr = state.profileData.postsProfileData.allMyPosts.length;
 
                 let post = {
-                    id: lengththisArr, message: myPost
+                    id: lengththisArr, message: myPost,
+                    image: "https://cdn.pixabay.com/photo/2021/06/11/12/26/woman-6328478_1280.jpg",
                 }
-            return(
-                this.postsProfileData.allMyPosts.push(post)
-            )
+                state.profileData.postsProfileData.allMyPosts.push(post);
+                renderEntireTree(state);
+
         }
     }
 }
+
