@@ -1,7 +1,12 @@
 import beach from "../image/images.jpeg"
-import {useState} from "react";
-import {renderEntireTree} from "../render";
+import {dialogTypeProps} from "../App";
 
+}
+
+
+let renderEntireTree = (state:any) => {
+    debugger
+    console.log("hi")}
 export const state = {
     messageData: {
         dialogsData: [
@@ -60,7 +65,7 @@ export const state = {
                 {id: 1, image: "https://cdn.pixabay.com/photo/2021/06/11/12/26/woman-6328478_1280.jpg", message: "What's you know about it"}
             ],
             postTextAreaData: {
-                letter: "some text"
+                letter: "",
             }
         },
         changePostTextAreaData(letter:string){
@@ -83,3 +88,7 @@ export const state = {
     }
 }
 
+export const subscriber = (observer:(state:any)=>void) => {
+    debugger
+    renderEntireTree = observer
+}

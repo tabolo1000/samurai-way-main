@@ -32,7 +32,7 @@ export const MyPosts = (props: propsType) => {
         <div>
             <div>
                 <h3>My posts</h3>
-                <textarea onChange = {() => {addletter()}} ref={newPostEl} name="post" id="12" cols={40} rows={10} value = {props.letter}></textarea>
+                <textarea onChange = {() => {addletter()}} ref={newPostEl} name="post" id="12" cols={40} rows={10} value = {props.letter} placeholder={"Put your text"}></textarea>
                 <button onClick={() => {
                     addPost()
                 }}>Send
