@@ -15,7 +15,12 @@ export const Profile = (props: propsType) => {
     return (
         <ContentStyled>
             <ProfileInfo img={propsProfileInfo.img} name = "Nik Tabola" date = {propsProfileInfo.date} city = {propsProfileInfo.city} education = {propsProfileInfo.education} webSite = {propsProfileInfo.webSite}/>
-            <MyPosts addPost = {props.profileData.addPost} allMyPosts = {props.profileData.postsProfileData.allMyPosts}/>
+            <MyPosts
+                addPost = {props.profileData.addPost}
+                allMyPosts = {props.profileData.postsProfileData.allMyPosts}
+                changePostTextAreaData = {props.profileData.changePostTextAreaData}
+                letter = {props.profileData.postsProfileData.postTextAreaData.letter}
+            />
         </ContentStyled>
     );
 };

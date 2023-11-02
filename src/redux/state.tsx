@@ -58,10 +58,17 @@ export const state = {
             },
             allMyPosts: [
                 {id: 1, image: "https://cdn.pixabay.com/photo/2021/06/11/12/26/woman-6328478_1280.jpg", message: "What's you know about it"}
-            ]
+            ],
+            postTextAreaData: {
+                letter: "some text"
+            }
         },
+        changePostTextAreaData(letter:string){
+          state.profileData.postsProfileData.postTextAreaData.letter = letter;
+          renderEntireTree(state);
+        },
+
         addPost(myPost: string){
-            debugger;
                 let lengththisArr = state.profileData.postsProfileData.allMyPosts.length;
 
                 let post = {
@@ -69,6 +76,7 @@ export const state = {
                     image: "https://cdn.pixabay.com/photo/2021/06/11/12/26/woman-6328478_1280.jpg",
                 }
                 state.profileData.postsProfileData.allMyPosts.push(post);
+                state.profileData.postsProfileData.postTextAreaData.letter = "";
                 renderEntireTree(state);
 
         }

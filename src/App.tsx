@@ -30,11 +30,17 @@ export interface dialogTypeProps {
 export interface profileDataType {
     postsProfileData: PostProfileDataType;
     addPost: (myPost:string) => number;
+    changePostTextAreaData:(letter:string) => string;
 }
 
 interface PostProfileDataType {
     profileInfo: profileInfoType;
     allMyPosts: Array<allMyPropsType>
+    postTextAreaData: postTextAreaDataType
+}
+
+interface postTextAreaDataType {
+    letter: string;
 }
 
 export interface profileInfoType {
