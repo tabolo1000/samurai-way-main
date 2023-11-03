@@ -5,34 +5,21 @@ import './index.css';
 import App, {dialogTypeProps} from './App';
 import GlobalStyle from "./style/GlobalStyle";
 import {BrowserRouter} from "react-router-dom";
-import {state} from "./redux/state";
-import {subscriber} from "./redux/state";
+import {store} from "./redux/state";
 
 
-    let renderEntireTree = (state:any) => {
+let renderEntireTree = (state: any) => {
     ReactDOM.render(
         <React.Fragment>
             <BrowserRouter>
                 <GlobalStyle/>
-                <App state={state}/>
+                <App store={store}/>
             </BrowserRouter>
         </React.Fragment>
         ,
         document.getElementById('root')
     );
 };
-    renderEntireTree(state);
-subscriber(renderEntireTree);
 
-
-
-// ReactDOM.render(
-//     <React.Fragment>
-//         <BrowserRouter>
-//              <GlobalStyle/>
-//              <App state = {state}/>
-//         </BrowserRouter>
-//     </React.Fragment>
-//     ,
-//   document.getElementById('root')
-// );
+renderEntireTree(store.getState());
+store.subscriber(renderEntireTree);

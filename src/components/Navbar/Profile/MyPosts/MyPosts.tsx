@@ -1,10 +1,9 @@
 import React, {useRef} from 'react';
 import {Post} from "./Post/Post";
 import {allMyPropsType} from "../../../../App";
-import {state} from "../../../../redux/state";
 
 interface propsType {
-    addPost: (myPost: string) => number;
+    addPost: (myPost: string) => void;
     allMyPosts: Array<allMyPropsType>;
     changePostTextAreaData: (letter:string) => void,
     letter: string,
@@ -17,7 +16,6 @@ export const MyPosts = (props: propsType) => {
 
     const addletter= () => {
         if (newPostEl.current !== null){
-            console.log(newPostEl.current.value)
             props.changePostTextAreaData(newPostEl.current.value)
         }
     }

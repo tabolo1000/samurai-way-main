@@ -14,12 +14,27 @@ import {
 import {News} from "./components/Navbar/News/News";
 import {Music} from "./components/Navbar/Music/Music";
 import {Setting} from "./components/Navbar/Setting/Setting";
-// import {state} from "./redux/state";
 import {Hoo} from "./components/Navbar/Hoo/Hoo";
 
-
 interface propsType {
-    state: dialogTypeProps;
+    store: stateType;
+
+}
+// interface stateType {
+//     _state: dialogTypeProps;
+//     addPost: (myPost:string) => number;
+//     changePostTextAreaData:(letter:string) => string;
+//     getState: any;
+//     callSubscriber: any;
+//     // callSubscriber: (state:any)=>void;
+//     subscriber: (obsorver:any)=> void;
+//
+// }
+interface stateType {
+    _state: dialogTypeProps;
+    addPost: (myPost: string) => void;
+    changePostTextAreaData: (letter: string) => void;
+    getState: () => dialogTypeProps;
 }
 
 export interface dialogTypeProps {
@@ -29,8 +44,6 @@ export interface dialogTypeProps {
 
 export interface profileDataType {
     postsProfileData: PostProfileDataType;
-    addPost: (myPost:string) => number;
-    changePostTextAreaData:(letter:string) => string;
 }
 
 interface PostProfileDataType {
@@ -93,7 +106,14 @@ interface myMessageType {
 function App(props: propsType) {
 
     const arrRoute = ['/', "/dialogs", "/news", "/music", "/setting", "/hoo"]
-    const arrComponents = [<Profile profileData = {props.state.profileData}/>, <Dialogs messageData={props.state.messageData}/>, <News/>, <Music/>, <Setting/>,
+    const arrComponents = [
+        <Profile
+        addPost = {props.store.addPost.bind(props.store)}
+        profileData = {props.store.getState().profileData}
+     changePostTextAreaData = {props.store.changePostTextAreaData.bind(props.store)}
+    />, <Dialogs
+
+        messageData={props.store.getState().messageData}/>, <News/>, <Music/>, <Setting/>,
         <Hoo/>,]
     return (
         <AppStyled>
