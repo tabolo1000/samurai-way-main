@@ -1,5 +1,7 @@
 import beach from "../image/images.jpeg"
 
+const ADD_POST: string = "ADD_POST";
+const CHANGE_POST_TEXT_AREA_DATA: string = "CHANGE_POST_TEXT_AREA_DATA";
 
 export const store = {
     _state: {
@@ -74,21 +76,6 @@ export const store = {
     getState() {
       return this._state;
     },
-    // changePostTextAreaData(letter: string) {
-    //     this._state.profileData.postsProfileData.postTextAreaData.letter = letter;
-    //     this._callSubscriber(this._state);
-    // },
-    // addPost(myPost: string):void {
-    //     let lengththisArr = this._state.profileData.postsProfileData.allMyPosts.length;
-    //
-    //     let post = {
-    //         id: lengththisArr, message: myPost,
-    //         image: "https://cdn.pixabay.com/photo/2021/06/11/12/26/woman-6328478_1280.jpg",
-    //     }
-    //     this._state.profileData.postsProfileData.allMyPosts.push(post);
-    //     this._state.profileData.postsProfileData.postTextAreaData.letter = "";
-    //     this._callSubscriber(this._state);
-    // },
     _callSubscriber(state:any){
             console.log("hi")
         },
@@ -96,20 +83,28 @@ export const store = {
         this._callSubscriber = observer
    },
     dispatch(action:any){
-        if(action.type === "ADD_POST"){
-            let lengththisArr = this._state.profileData.postsProfileData.allMyPosts.length;
+        if(action.type === ADD_POST){
+            let lengthThisArr: number = this._state.profileData.postsProfileData.allMyPosts.length;
 
         let post = {
-            id: lengththisArr, message: action.myPost,
+            id: lengthThisArr, message: action.message,
             image: "https://cdn.pixabay.com/photo/2021/06/11/12/26/woman-6328478_1280.jpg",
         }
             this._state.profileData.postsProfileData.allMyPosts.push(post);
             this._state.profileData.postsProfileData.postTextAreaData.letter = "";
             this._callSubscriber(this._state);
-        }else if(action.type === "CHANGE_POST_TEXT_AREA_DATA"){
+        }else if(action.type === CHANGE_POST_TEXT_AREA_DATA){
             this._state.profileData.postsProfileData.postTextAreaData.letter = action.letter;
             this._callSubscriber(this._state);
         }
     }
 }
+
+
+export let addPostActionCreator = (message: string) => ({type: ADD_POST, message: message,});
+export let changePostTextAreaDataCreator = (letter: string) => (
+    {
+        type: CHANGE_POST_TEXT_AREA_DATA,
+        letter: letter,
+    })
 

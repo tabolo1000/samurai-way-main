@@ -1,6 +1,7 @@
 import React, {useRef} from 'react';
 import {Post} from "./Post/Post";
 import {allMyPropsType} from "../../../../App";
+import {addPostActionCreator, changePostTextAreaDataCreator} from "../../../../redux/state";
 
 interface propsType {
     dispatch: (action: any) => void;
@@ -14,21 +15,14 @@ export const MyPosts = (props: propsType) => {
 
     const addletter = () => {
         if (newPostEl.current !== null) {
-            props.dispatch({
-                    type: "CHANGE_POST_TEXT_AREA_DATA",
-                    letter: newPostEl.current.value
-                }
-            )
+            let letter = newPostEl.current.value
+            props.dispatch(changePostTextAreaDataCreator(letter))
         }
     }
     const addPost = () => {
         if (newPostEl.current !== null) {
-            props.dispatch(
-                {
-                    type: "ADD_POST",
-                    myPost: newPostEl.current.value,
-                }
-            )
+            let message = newPostEl.current.value
+            props.dispatch(addPostActionCreator(message))
         }
     }
 
