@@ -74,26 +74,42 @@ export const store = {
     getState() {
       return this._state;
     },
-    changePostTextAreaData(letter: string) {
-        this._state.profileData.postsProfileData.postTextAreaData.letter = letter;
-        this._callSubscriber(this._state);
-    },
-    addPost(myPost: string):void {
-        let lengththisArr = this._state.profileData.postsProfileData.allMyPosts.length;
-
-        let post = {
-            id: lengththisArr, message: myPost,
-            image: "https://cdn.pixabay.com/photo/2021/06/11/12/26/woman-6328478_1280.jpg",
-        }
-        this._state.profileData.postsProfileData.allMyPosts.push(post);
-        this._state.profileData.postsProfileData.postTextAreaData.letter = "";
-        this._callSubscriber(this._state);
-    },
+    // changePostTextAreaData(letter: string) {
+    //     this._state.profileData.postsProfileData.postTextAreaData.letter = letter;
+    //     this._callSubscriber(this._state);
+    // },
+    // addPost(myPost: string):void {
+    //     let lengththisArr = this._state.profileData.postsProfileData.allMyPosts.length;
+    //
+    //     let post = {
+    //         id: lengththisArr, message: myPost,
+    //         image: "https://cdn.pixabay.com/photo/2021/06/11/12/26/woman-6328478_1280.jpg",
+    //     }
+    //     this._state.profileData.postsProfileData.allMyPosts.push(post);
+    //     this._state.profileData.postsProfileData.postTextAreaData.letter = "";
+    //     this._callSubscriber(this._state);
+    // },
     _callSubscriber(state:any){
             console.log("hi")
         },
     subscriber(observer:any){
         this._callSubscriber = observer
    },
+    dispatch(action:any){
+        if(action.type === "ADD_POST"){
+            let lengththisArr = this._state.profileData.postsProfileData.allMyPosts.length;
+
+        let post = {
+            id: lengththisArr, message: action.myPost,
+            image: "https://cdn.pixabay.com/photo/2021/06/11/12/26/woman-6328478_1280.jpg",
+        }
+            this._state.profileData.postsProfileData.allMyPosts.push(post);
+            this._state.profileData.postsProfileData.postTextAreaData.letter = "";
+            this._callSubscriber(this._state);
+        }else if(action.type === "CHANGE_POST_TEXT_AREA_DATA"){
+            this._state.profileData.postsProfileData.postTextAreaData.letter = action.letter;
+            this._callSubscriber(this._state);
+        }
+    }
 }
 

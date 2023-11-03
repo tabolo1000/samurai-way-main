@@ -32,8 +32,9 @@ interface propsType {
 // }
 interface stateType {
     _state: dialogTypeProps;
-    addPost: (myPost: string) => void;
-    changePostTextAreaData: (letter: string) => void;
+    dispatch: (action: any) => void;
+    // addPost: (myPost: string) => void;
+    // changePostTextAreaData: (letter: string) => void;
     getState: () => dialogTypeProps;
 }
 
@@ -41,7 +42,6 @@ export interface dialogTypeProps {
     messageData: dialogType;
     profileData: profileDataType;
 }
-
 export interface profileDataType {
     postsProfileData: PostProfileDataType;
 }
@@ -108,9 +108,8 @@ function App(props: propsType) {
     const arrRoute = ['/', "/dialogs", "/news", "/music", "/setting", "/hoo"]
     const arrComponents = [
         <Profile
-        addPost = {props.store.addPost.bind(props.store)}
+        dispatch = {props.store.dispatch.bind(props.store)}
         profileData = {props.store.getState().profileData}
-     changePostTextAreaData = {props.store.changePostTextAreaData.bind(props.store)}
     />, <Dialogs
 
         messageData={props.store.getState().messageData}/>, <News/>, <Music/>, <Setting/>,
