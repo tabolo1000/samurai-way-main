@@ -2,6 +2,8 @@ import beach from "../image/images.jpeg"
 
 const ADD_POST: string = "ADD_POST";
 const CHANGE_POST_TEXT_AREA_DATA: string = "CHANGE_POST_TEXT_AREA_DATA";
+const ADD_MESSAGE: string = "ADD_MESSAGE";
+const CHANGE_DIALOGS_TEXT_AREA: string = "CHANGE_DIALOGS_TEXT_AREA";
 
 export const store = {
     _state: {
@@ -44,6 +46,9 @@ export const store = {
                         id: 4, message: "Good too!", countLikes: 2, timeMessage: 19, isItMyMessage: true,
                     }
                 ],
+                dialogTextArea: {
+                    textMessage: "text"
+                }
 
 
             },
@@ -96,11 +101,38 @@ export const store = {
         }else if(action.type === CHANGE_POST_TEXT_AREA_DATA){
             this._state.profileData.postsProfileData.postTextAreaData.letter = action.letter;
             this._callSubscriber(this._state);
+        }else if(action.type === ADD_MESSAGE){
+            let idForMessage = this._state.messageData.postData.myMessage.length
+            let newMessage: any = {
+                id: idForMessage,
+                message: action.message,
+                counterLike: action.like,
+                timeMessage: action.timeMessage,
+                isItMyMessage: action.isItMyMessage,
+            }
+            this._state.messageData.postData.myMessage.push(newMessage);
+            this._callSubscriber(this._state);
+        }else if(action.type === CHANGE_DIALOGS_TEXT_AREA){
+            this._state.messageData.postData.dialogTextArea.textMessage = action.message;
+            this._callSubscriber(this._state);
         }
     }
 }
-
-
+export let addMessageActionCreator = (message: string) => (
+    {
+        type: ADD_MESSAGE,
+        message: message,
+        like: 5,
+        timeMessage: 20,
+        isItMyMessage: true,
+    }
+)
+export let changeDialogTextAreaCreator = (message: string) => (
+    {
+        type: CHANGE_DIALOGS_TEXT_AREA,
+        message: message,
+    }
+)
 export let addPostActionCreator = (message: string) => ({type: ADD_POST, message: message,});
 export let changePostTextAreaDataCreator = (letter: string) => (
     {

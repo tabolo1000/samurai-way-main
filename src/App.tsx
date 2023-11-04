@@ -84,7 +84,8 @@ interface dialogDataType {
 
 interface postDataType {
     otherUsersMessage: Array<otherUsersMessageType>,
-    myMessage: Array<myMessageType>
+    myMessage: Array<myMessageType>,
+    dialogTextArea: any,
 }
 
 interface otherUsersMessageType {
@@ -111,7 +112,7 @@ function App(props: propsType) {
         dispatch = {props.store.dispatch.bind(props.store)}
         profileData = {props.store.getState().profileData}
     />, <Dialogs
-
+        dispatch = {props.store.dispatch.bind(props.store)}
         messageData={props.store.getState().messageData}/>, <News/>, <Music/>, <Setting/>,
         <Hoo/>,]
     return (
