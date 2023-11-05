@@ -1,9 +1,9 @@
 import beach from "../image/images.jpeg"
 import profileReducer from "./profileReducer";
+import dialogReducer from "./dialogReducer";
 
 
-const ADD_MESSAGE: string = "ADD_MESSAGE";
-const CHANGE_DIALOGS_TEXT_AREA: string = "CHANGE_DIALOGS_TEXT_AREA";
+
 
 export const store = {
     _state: {
@@ -88,39 +88,14 @@ export const store = {
         this._callSubscriber = observer
    },
     dispatch(action:any){
-        this._state.profileData = profileReducer(this._state.profileData, action)
+        this._state.profileData = profileReducer(this._state.profileData, action);
+        this._state.messageData = dialogReducer(this._state.messageData, action);
+
         this._callSubscriber(this._state)
 
-        if(action.type === ADD_MESSAGE){
-            let idForMessage = this._state.messageData.postData.myMessage.length
-            let newMessage: any = {
-                id: idForMessage,
-                message: action.message,
-                counterLike: action.like,
-                timeMessage: action.timeMessage,
-                isItMyMessage: action.isItMyMessage,
-            }
-            this._state.messageData.postData.myMessage.push(newMessage);
-            this._callSubscriber(this._state);
-        }else if(action.type === CHANGE_DIALOGS_TEXT_AREA){
-            this._state.messageData.postData.dialogTextArea.textMessage = action.message;
-            this._callSubscriber(this._state);
-        }
+
+
     }
 }
-export let addMessageActionCreator = (message: string) => (
-    {
-        type: ADD_MESSAGE,
-        message: message,
-        like: 5,
-        timeMessage: 20,
-        isItMyMessage: true,
-    }
-)
-export let changeDialogTextAreaCreator = (message: string) => (
-    {
-        type: CHANGE_DIALOGS_TEXT_AREA,
-        message: message,
-    }
-)
+
 

@@ -71,7 +71,7 @@ export interface allMyPropsType {
     image: string;
 }
 
-interface dialogType {
+export interface dialogType {
     dialogsData: Array<dialogDataType>,
     postData: postDataType
 }

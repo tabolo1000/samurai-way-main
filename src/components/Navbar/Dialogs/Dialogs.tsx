@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {DialogMessage} from "./DialogMessage/DialogMessage";
 import {FlexWrapper} from "../../FlexWrapper";
-import {addMessageActionCreator, changeDialogTextAreaCreator} from "../../../store/state";
+import {addMessageActionCreator, changeDialogTextAreaCreator} from "../../../store/dialogReducer";
 
 
 interface dialogTypeProps {
