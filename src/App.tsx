@@ -46,7 +46,7 @@ export interface profileDataType {
     postsProfileData: PostProfileDataType;
 }
 
-interface PostProfileDataType {
+export interface PostProfileDataType {
     profileInfo: profileInfoType;
     allMyPosts: Array<allMyPropsType>
     postTextAreaData: postTextAreaDataType

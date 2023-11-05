@@ -1,7 +1,7 @@
 import beach from "../image/images.jpeg"
+import profileReducer from "./profileReducer";
 
-const ADD_POST: string = "ADD_POST";
-const CHANGE_POST_TEXT_AREA_DATA: string = "CHANGE_POST_TEXT_AREA_DATA";
+
 const ADD_MESSAGE: string = "ADD_MESSAGE";
 const CHANGE_DIALOGS_TEXT_AREA: string = "CHANGE_DIALOGS_TEXT_AREA";
 
@@ -88,20 +88,10 @@ export const store = {
         this._callSubscriber = observer
    },
     dispatch(action:any){
-        if(action.type === ADD_POST){
-            let lengthThisArr: number = this._state.profileData.postsProfileData.allMyPosts.length;
+        this._state.profileData = profileReducer(this._state.profileData, action)
+        this._callSubscriber(this._state)
 
-        let post = {
-            id: lengthThisArr, message: action.message,
-            image: "https://cdn.pixabay.com/photo/2021/06/11/12/26/woman-6328478_1280.jpg",
-        }
-            this._state.profileData.postsProfileData.allMyPosts.push(post);
-            this._state.profileData.postsProfileData.postTextAreaData.letter = "";
-            this._callSubscriber(this._state);
-        }else if(action.type === CHANGE_POST_TEXT_AREA_DATA){
-            this._state.profileData.postsProfileData.postTextAreaData.letter = action.letter;
-            this._callSubscriber(this._state);
-        }else if(action.type === ADD_MESSAGE){
+        if(action.type === ADD_MESSAGE){
             let idForMessage = this._state.messageData.postData.myMessage.length
             let newMessage: any = {
                 id: idForMessage,
@@ -133,10 +123,4 @@ export let changeDialogTextAreaCreator = (message: string) => (
         message: message,
     }
 )
-export let addPostActionCreator = (message: string) => ({type: ADD_POST, message: message,});
-export let changePostTextAreaDataCreator = (letter: string) => (
-    {
-        type: CHANGE_POST_TEXT_AREA_DATA,
-        letter: letter,
-    })
 

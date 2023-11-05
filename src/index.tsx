@@ -5,7 +5,7 @@ import './index.css';
 import App, {dialogTypeProps} from './App';
 import GlobalStyle from "./style/GlobalStyle";
 import {BrowserRouter} from "react-router-dom";
-import {store} from "./redux/state";
+import {store} from "./store/state";
 
 
 let renderEntireTree = (state: any) => {

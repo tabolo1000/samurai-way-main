@@ -25,13 +25,13 @@ export const LinkListLeft = styled.li`
     `
 
 export const LinkListRight = styled.li`
-     padding: 10px;
-     font-size: 20px;
-     list-style: none;
+  padding: 10px;
+  font-size: 20px;
+  list-style: none;
   text-decoration: none;
   text-align: right;
   color: blue;
-    `
+`
 export const LinkList = styled.li`
      padding: 10px;
      font-size: 20px;

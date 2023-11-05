@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
 import {Post} from "./Post/Post";
 import {allMyPropsType} from "../../../../App";
-import {addPostActionCreator, changePostTextAreaDataCreator} from "../../../../redux/state";
+import {addPostActionCreator, changePostTextAreaDataCreator} from "../../../../store/profileReducer";
 
 interface propsType {
     dispatch: (action: any) => void;
