@@ -18,20 +18,8 @@ import {Hoo} from "./components/Navbar/Hoo/Hoo";
 
 interface propsType {
     store: stateType;
-
 }
-// interface stateType {
-//     _state: dialogTypeProps;
-//     addPost: (myPost:string) => number;
-//     changePostTextAreaData:(letter:string) => string;
-//     getState: any;
-//     callSubscriber: any;
-//     // callSubscriber: (state:any)=>void;
-//     subscriber: (obsorver:any)=> void;
-//
-// }
 interface stateType {
-    _state: dialogTypeProps;
     dispatch: (action: any) => void;
     // addPost: (myPost: string) => void;
     // changePostTextAreaData: (letter: string) => void;
@@ -104,16 +92,16 @@ interface myMessageType {
     isItMyMessage: boolean,
 }
 
-function App(props: propsType) {
-
+function App(props: any) {
+    console.dir(props.store.getState())
     const arrRoute = ['/', "/dialogs", "/news", "/music", "/setting", "/hoo"]
     const arrComponents = [
         <Profile
         dispatch = {props.store.dispatch.bind(props.store)}
-        profileData = {props.store.getState().profileData}
+        profileData = {props.store.getState().profileReducer}
     />, <Dialogs
         dispatch = {props.store.dispatch.bind(props.store)}
-        messageData={props.store.getState().messageData}/>, <News/>, <Music/>, <Setting/>,
+        messageData={props.store.getState().dialogReducer}/>, <News/>, <Music/>, <Setting/>,
         <Hoo/>,]
     return (
         <AppStyled>

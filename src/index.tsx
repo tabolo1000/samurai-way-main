@@ -5,7 +5,7 @@ import './index.css';
 import App, {dialogTypeProps} from './App';
 import GlobalStyle from "./style/GlobalStyle";
 import {BrowserRouter} from "react-router-dom";
-import {store} from "./store/state";
+import store from "./store/reduxStore";
 
 
 let renderEntireTree = (state: any) => {
@@ -13,13 +13,17 @@ let renderEntireTree = (state: any) => {
         <React.Fragment>
             <BrowserRouter>
                 <GlobalStyle/>
-                <App store={store}/>
+                <App store={store} state={state}/>
             </BrowserRouter>
         </React.Fragment>
         ,
         document.getElementById('root')
     );
 };
-
 renderEntireTree(store.getState());
-store.subscriber(renderEntireTree);
+
+
+store.subscribe(()=>{
+    let state = store.getState()
+    renderEntireTree(state);
+});
