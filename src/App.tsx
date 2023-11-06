@@ -15,11 +15,12 @@ import {News} from "./components/Navbar/News/News";
 import {Music} from "./components/Navbar/Music/Music";
 import {Setting} from "./components/Navbar/Setting/Setting";
 import {Hoo} from "./components/Navbar/Hoo/Hoo";
+import {DialogContainer} from "./components/Navbar/Dialogs/DialogContainer";
 
-interface propsType {
+export interface propsType {
     store: stateType;
 }
-interface stateType {
+export interface stateType {
     dispatch: (action: any) => void;
     // addPost: (myPost: string) => void;
     // changePostTextAreaData: (letter: string) => void;
@@ -99,9 +100,8 @@ function App(props: any) {
         <Profile
         dispatch = {props.store.dispatch.bind(props.store)}
         profileData = {props.store.getState().profileReducer}
-    />, <Dialogs
-        dispatch = {props.store.dispatch.bind(props.store)}
-        messageData={props.store.getState().dialogReducer}/>, <News/>, <Music/>, <Setting/>,
+    />, <DialogContainer store = {props.store} state = {props.state} />
+       , <News/>, <Music/>, <Setting/>,
         <Hoo/>,]
     return (
         <AppStyled>

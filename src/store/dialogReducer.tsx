@@ -89,7 +89,7 @@ export let addMessageActionCreator = (message: string) => (
         isItMyMessage: true,
     }
 )
-export let changeDialogTextAreaCreator = (message: string) => (
+export let changeDialogTextAreaActionCreator = (message: string) => (
     {
         type: CHANGE_DIALOGS_TEXT_AREA,
         message: message,

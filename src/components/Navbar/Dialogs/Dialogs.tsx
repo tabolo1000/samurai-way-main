@@ -1,18 +1,21 @@
 import React from 'react';
 import {DialogsStyled, LinkStyle, NameDialog, UlList} from "./DialogsStyled";
-import {Link} from 'react-router-dom';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {DialogMessage} from "./DialogMessage/DialogMessage";
-import {FlexWrapper} from "../../FlexWrapper";
-import {addMessageActionCreator, changeDialogTextAreaCreator} from "../../../store/dialogReducer";
+import {dialogTypeProps} from "../../../App";
 
 
-interface dialogTypeProps {
-    messageData: dialogType;
-    dispatch: (action: any) => void;
+
+
+interface dialogPropsType {
+    state: dialogType;
+    sendMessage: (message: string) => void;
+    upDateNewMessageBody: (message: string) => void;
 }
 
-interface dialogType {
+
+
+export interface dialogType {
     dialogsData: Array<dialogDataType>,
     postData: postDataType,
 }
@@ -50,26 +53,20 @@ interface myMessageType {
 }
 
 
-export const Dialogs = (props: dialogTypeProps) => {
 
+export const Dialogs = (props: dialogPropsType) => {
 
     const dialogsElements =
-        props.messageData.dialogsData.map((item) => <DialogItem name={item.name} id={item.id}
+        props.state.dialogsData.map((item) => <DialogItem name={item.name} id={item.id}
                                                                 image={item.image}></DialogItem>);
 
 
     const otherMessage =
-        props.messageData.postData.otherUsersMessage.map((item) => <DialogMessage id={item.id} message={item.message}
-                                                                                  timeMessage={item.timeMessage}
-                                                                                  isItMyMessage={item.isItMyMessage}
-                                                                                  countLikes={item.countLikes}></DialogMessage>)
+        props.state.postData.otherUsersMessage.map((item) => <DialogMessage id={item.id} message={item.message} timeMessage={item.timeMessage} isItMyMessage={item.isItMyMessage} countLikes={item.countLikes}></DialogMessage>)
     ;
 
     const myMessage =
-        props.messageData.postData.myMessage.map((item) => <DialogMessage id={item.id} message={item.message}
-                                                                          timeMessage={item.timeMessage}
-                                                                          isItMyMessage={item.isItMyMessage}
-                                                                          countLikes={item.countLikes}
+        props.state.postData.myMessage.map((item) => <DialogMessage id={item.id} message={item.message} timeMessage={item.timeMessage} isItMyMessage={item.isItMyMessage} countLikes={item.countLikes}
         ></DialogMessage>);
 
     const allMessage = [...otherMessage, ...myMessage].sort((a, b) => a.props.timeMessage > b.props.timeMessage ? 1 : -1);
@@ -79,14 +76,14 @@ export const Dialogs = (props: dialogTypeProps) => {
     const addMessage = () => {
         if (createRefMainPost.current !== null) {
             let message = createRefMainPost.current.value
-            props.dispatch(addMessageActionCreator(message))
+            props.sendMessage(message)
         }
     }
 
     const changeDialogTextArea = () => {
         if (createRefMainPost.current !== null) {
-            let letter = createRefMainPost.current.value
-            props.dispatch(changeDialogTextAreaCreator(letter))
+            let message = createRefMainPost.current.value
+            props.upDateNewMessageBody(message)
         }
     }
 
@@ -100,7 +97,7 @@ export const Dialogs = (props: dialogTypeProps) => {
                 <UlList>
                     {allMessage}
                     <textarea onChange={changeDialogTextArea} name="q" ref={createRefMainPost} cols={30} rows={10}
-                              value={props.messageData.postData.dialogTextArea.textMessage}></textarea>
+                              value={props.state.postData.dialogTextArea.textMessage}></textarea>
                     <button onClick={() => {
                         addMessage()
                     }}>Click
