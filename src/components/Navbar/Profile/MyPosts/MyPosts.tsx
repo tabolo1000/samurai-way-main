@@ -1,28 +1,27 @@
 import React, {useRef} from 'react';
 import {Post} from "./Post/Post";
-import {allMyPropsType} from "../../../../App";
-import {addPostActionCreator, changePostTextAreaDataCreator} from "../../../../store/profileReducer";
+import {profileDataType} from "../../../../App";
 
 interface propsType {
-    dispatch: (action: any) => void;
-    allMyPosts: Array<allMyPropsType>;
-    letter: string,
+    state: profileDataType;
+    addPost: (message: string) => void;
+    onPostChange: (message: string) => void,
 }
 
 export const MyPosts = (props: propsType) => {
-    
+    debugger
     let newPostEl = useRef<HTMLTextAreaElement>(null);
 
-    const addletter = () => {
+    const postChange = () => {
         if (newPostEl.current !== null) {
-            let letter = newPostEl.current.value
-            props.dispatch(changePostTextAreaDataCreator(letter))
+            let message = newPostEl.current.value
+            props.onPostChange(message)
         }
     }
     const addPost = () => {
         if (newPostEl.current !== null) {
             let message = newPostEl.current.value
-            props.dispatch(addPostActionCreator(message))
+            props.addPost(message)
         }
     }
 
@@ -31,15 +30,15 @@ export const MyPosts = (props: propsType) => {
             <div>
                 <h3>My posts</h3>
                 <textarea onChange={() => {
-                    addletter()
-                }} ref={newPostEl} name="post" id="12" cols={40} rows={10} value={props.letter}
+                    postChange()
+                }} ref={newPostEl} name="post" id="12" cols={40} rows={10} value={props.state.postsProfileData.postTextAreaData.letter}
                           placeholder={"Put your text"}></textarea>
                 <button onClick={() => {
                     addPost()
                 }}>Send
                 </button>
             </div>
-            <Post allMyPosts={props.allMyPosts}/>
+            <Post allMyPosts={props.state.postsProfileData.allMyPosts}/>
         </div>
     );
 };

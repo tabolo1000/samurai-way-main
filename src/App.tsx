@@ -22,8 +22,6 @@ export interface propsType {
 }
 export interface stateType {
     dispatch: (action: any) => void;
-    // addPost: (myPost: string) => void;
-    // changePostTextAreaData: (letter: string) => void;
     getState: () => dialogTypeProps;
 }
 
@@ -97,9 +95,7 @@ function App(props: any) {
     console.dir(props.store.getState())
     const arrRoute = ['/', "/dialogs", "/news", "/music", "/setting", "/hoo"]
     const arrComponents = [
-        <Profile
-        dispatch = {props.store.dispatch.bind(props.store)}
-        profileData = {props.store.getState().profileReducer}
+        <Profile store = {props.store} state = {props.state}
     />, <DialogContainer store = {props.store} state = {props.state} />
        , <News/>, <Music/>, <Setting/>,
         <Hoo/>,]
