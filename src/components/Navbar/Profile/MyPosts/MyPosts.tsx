@@ -9,7 +9,16 @@ interface propsType {
 }
 
 export const MyPosts = (props: propsType) => {
-    debugger
+    enum pos {
+        top = "f",left = "d",
+    }
+    const arr: {f: string, d: number} = {f: "39", d: 45};
+
+    console.log(`${arr[pos.left] + " " + arr[pos.top]}`)
+    // const d<number> = (n: number): number{
+    //     return n
+    // };
+    // d(5);
     let newPostEl = useRef<HTMLTextAreaElement>(null);
 
     const postChange = () => {

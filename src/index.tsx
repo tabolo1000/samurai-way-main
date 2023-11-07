@@ -6,14 +6,18 @@ import App, {dialogTypeProps} from './App';
 import GlobalStyle from "./style/GlobalStyle";
 import {BrowserRouter} from "react-router-dom";
 import store from "./store/reduxStore";
+import {Provider} from "./store/reactContext";
 
 
 let renderEntireTree = (state: any) => {
     ReactDOM.render(
         <React.Fragment>
             <BrowserRouter>
-                <GlobalStyle/>
-                <App store={store} state={state}/>
+                <Provider store = {store}>
+                    <GlobalStyle/>
+                    <App />
+                </Provider>
+
             </BrowserRouter>
         </React.Fragment>
         ,
