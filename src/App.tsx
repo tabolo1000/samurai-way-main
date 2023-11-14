@@ -15,7 +15,8 @@ import {News} from "./components/Navbar/News/News";
 import {Music} from "./components/Navbar/Music/Music";
 import {Setting} from "./components/Navbar/Setting/Setting";
 import {Hoo} from "./components/Navbar/Hoo/Hoo";
-import {DialogContainer} from "./components/Navbar/Dialogs/DialogContainer";
+import {DialogsContainer} from "./components/Navbar/Dialogs/DialogsContainer";
+import {ProfileContainer} from "./components/Navbar/Profile/ProfileContainer";
 
 export interface propsType {
     store: stateType;
@@ -91,12 +92,10 @@ interface myMessageType {
     isItMyMessage: boolean,
 }
 
-function App(props: any) {
-    console.dir(props.store.getState())
+function App() {
     const arrRoute = ['/', "/dialogs", "/news", "/music", "/setting", "/hoo"]
     const arrComponents = [
-        <Profile store = {props.store} state = {props.state}
-    />, <DialogContainer store = {props.store} state = {props.state} />
+        <ProfileContainer />, <DialogsContainer />
        , <News/>, <Music/>, <Setting/>,
         <Hoo/>,]
     return (

@@ -1,26 +1,43 @@
 import React from 'react';
 import {ContentStyled} from "./ProfileStyled";
-import {profileDataType, stateType} from "../../../App";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
+import {MyPosts} from "./MyPosts/MyPosts";
+
+
 
 interface propsType {
-    store: stateType;
-    state: stateWithReducerType;
+    profileInfo: profileInfoType,
+    allMyPosts: allMyPostsType[],
+    postTextAreaData: postTextAreaDataType,
+    onPostChange: (message: string) => void,
+    addPost: (message: string) => void,
 }
 
-interface stateWithReducerType {
-    profileReducer: profileDataType
-}
+export interface profileInfoType {
+    img: string,
+    name: string,
+    data: string,
+    city: string,
+    education: string,
+    webSite: string,
+};
 
+interface allMyPostsType {
+    id: number,
+    image: string,
+    message: string,
+}
+interface postTextAreaDataType {
+    letter: string,
+}
 
 
 export const Profile = (props: propsType) => {
-    const profileInfo = props.state.profileReducer.postsProfileData.profileInfo
+    debugger
     return (
         <ContentStyled>
-            <ProfileInfo img={profileInfo.img} name = "Nik Tabola" date = {profileInfo.date} city = {profileInfo.city} education = {profileInfo.education} webSite = {profileInfo.webSite}/>
-            <MyPostsContainer store = {props.store} state = {props.state}/>
+            <ProfileInfo profileInfo = {props.profileInfo}/>
+            <MyPosts allMyPosts = {props.allMyPosts} postTextAreaData = {props.postTextAreaData} onPostChange = {props.onPostChange} addPost = {props.addPost}/>
         </ContentStyled>
     );
 };

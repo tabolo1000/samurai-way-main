@@ -33,6 +33,7 @@ let initialState = {
             },
 }
 
+
 const profileReducer = (state= initialState, action: any) => {
     switch (action.type) {
         case ADD_POST:
@@ -46,8 +47,8 @@ const profileReducer = (state= initialState, action: any) => {
 
             return state;
         case CHANGE_POST_TEXT_AREA_DATA:
-            state.postsProfileData.postTextAreaData.letter = action.letter;
-            console.log(state)
+            state.postsProfileData.postTextAreaData.letter = action.message;
+            console.log()
             return state;
         default:
             return state;

@@ -1,15 +1,16 @@
 import React, {useRef} from 'react';
 import {Post} from "./Post/Post";
-import {profileDataType} from "../../../../App";
+import {PostProfileDataType, profileDataType} from "../../../../App";
 
 interface propsType {
-    state: profileDataType;
+    postData: PostProfileDataType;
     addPost: (message: string) => void;
     onPostChange: (message: string) => void,
 }
 
-export const MyPosts = (props: propsType) => {
-    debugger
+
+
+export const MyPosts = (props: any) => {
     let newPostEl = useRef<HTMLTextAreaElement>(null);
 
     const postChange = () => {
@@ -24,6 +25,7 @@ export const MyPosts = (props: propsType) => {
             props.addPost(message)
         }
     }
+    debugger
 
     return (
         <div>
@@ -31,14 +33,14 @@ export const MyPosts = (props: propsType) => {
                 <h3>My posts</h3>
                 <textarea onChange={() => {
                     postChange()
-                }} ref={newPostEl} name="post" id="12" cols={40} rows={10} value={props.state.postsProfileData.postTextAreaData.letter}
+                }} ref={newPostEl} name="post" id="12" cols={40} rows={10} value={props.postTextAreaData.letter}
                           placeholder={"Put your text"}></textarea>
                 <button onClick={() => {
                     addPost()
                 }}>Send
                 </button>
             </div>
-            <Post allMyPosts={props.state.postsProfileData.allMyPosts}/>
+            <Post allMyPosts={props.allMyPosts}/>
         </div>
     );
 };
