@@ -36,20 +36,28 @@ let initialState = {
 
 const profileReducer = (state= initialState, action: any) => {
     switch (action.type) {
+
         case ADD_POST:
             let lengthThisArr: number = state.postsProfileData.allMyPosts.length;
             let post = {
                 id: lengthThisArr, message: action.message,
                 image: "https://cdn.pixabay.com/photo/2021/06/11/12/26/woman-6328478_1280.jpg",
             }
-            state.postsProfileData.allMyPosts.push(post);
-            state.postsProfileData.postTextAreaData.letter = "";
+            const newStateProfileForAdd = {...state}
+            newStateProfileForAdd.postsProfileData = {...state.postsProfileData};
+            newStateProfileForAdd.postsProfileData.postTextAreaData = {...state.postsProfileData.postTextAreaData}
+            newStateProfileForAdd.postsProfileData.allMyPosts = [...state.postsProfileData.allMyPosts]
+            newStateProfileForAdd.postsProfileData.allMyPosts.push(post);
+            newStateProfileForAdd.postsProfileData.postTextAreaData.letter = "";
 
-            return state;
-        case CHANGE_POST_TEXT_AREA_DATA:
-            state.postsProfileData.postTextAreaData.letter = action.message;
-            console.log()
-            return state;
+            return newStateProfileForAdd;
+        case CHANGE_POST_TEXT_AREA_DATA:{
+            const newStateForChange = {...state};
+            newStateForChange.postsProfileData = {...state.postsProfileData};
+            newStateForChange.postsProfileData.postTextAreaData = {...state.postsProfileData.postTextAreaData};
+            newStateForChange.postsProfileData.postTextAreaData.letter = action.message;
+            return newStateForChange;
+    }
         default:
             return state;
     }
