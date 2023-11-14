@@ -29,6 +29,8 @@ let initialState = {
                     image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=1170&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 },
             ],
+
+
     postData: {
                 otherUsersMessage: [
                     {id: 1, message: "Hello!", countLikes: 1, timeMessage: 12, isItMyMessage: false,},
@@ -77,19 +79,30 @@ const dialogReducer = (state = initialState, action: any) => {
                 timeMessage: action.timeMessage,
                 isItMyMessage: action.isItMyMessage,
             }
-            const newStateDialogForAdd = {...state};
-            newStateDialogForAdd.postData = {...state.postData};
-            newStateDialogForAdd.postData.myMessage = [...state.postData.myMessage]
-            newStateDialogForAdd.postData.myMessage.push(newMessage);
-            newStateDialogForAdd.postData.dialogTextArea = {...state.postData.dialogTextArea};
-            newStateDialogForAdd.postData.dialogTextArea.textMessage = "";
-            return newStateDialogForAdd;
+            return {
+                ...state,
+                postData: {
+                    ...state.postData,
+                    myMessage: [
+                        ...state.postData.myMessage,
+                        newMessage
+                    ],
+                    dialogTextArea: {
+                        ...state.postData.dialogTextArea,
+                        textMessage: "",
+                    },
+                },
+            };
         case CHANGE_DIALOGS_TEXT_AREA:
-            const newStateDialogForChange = {...state};
-            newStateDialogForChange.postData = {...state.postData};
-            newStateDialogForChange.postData.dialogTextArea = {...state.postData.dialogTextArea};
-            newStateDialogForChange.postData.dialogTextArea.textMessage = action.message;
-            return newStateDialogForChange
+            return {
+                ...state,
+                postData: {
+                    ...state.postData,
+                    dialogTextArea: {
+                        textMessage: action.message
+                    }
+                }
+            }
         default:
             return state;
 

@@ -78,24 +78,24 @@ export const store = {
 
         }
     },
-    getState() {
-      return this._state;
-    },
-    _callSubscriber(state:any){
-            console.log("hi")
-        },
-    subscriber(observer:any){
-        this._callSubscriber = observer
-   },
-    dispatch(action:any){
-        this._state.profileData = profileReducer(this._state.profileData, action);
-        this._state.messageData = dialogReducer(this._state.messageData, action);
-
-        this._callSubscriber(this._state)
-
-
-
-    }
+   //  getState() {
+   //    return this._state;
+   //  },
+   //  _callSubscriber(state:any){
+   //          console.log("hi")
+   //      },
+   //  subscriber(observer:any){
+   //      this._callSubscriber = observer
+   // },
+   //  dispatch(action:any){
+   //      this._state.profileData = profileReducer(this._state.profileData, action);
+   //      this._state.messageData = dialogReducer(this._state.messageData, action);
+   //
+   //      this._callSubscriber(this._state)
+   //
+   //
+   //
+   //  }
 }
 
 
