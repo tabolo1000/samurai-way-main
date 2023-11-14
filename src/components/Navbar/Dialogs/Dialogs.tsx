@@ -101,7 +101,7 @@ export const Dialogs = (props: dialogTypeProps) => {
                 </UlList>
                 <UlList>
                     {allMessage}
-                    <textarea onChange={changeDialogTextArea} name="q" ref={createRefMainPost} cols={30} rows={10}
+                    <textarea onChange={changeDialogTextArea} name="q" ref={createRefMainPost} cols={30} rows={10} placeholder = "Input your text!"
                               value={props.postData.dialogTextArea.textMessage}></textarea>
                     <button onClick={() => {
                         addMessage()

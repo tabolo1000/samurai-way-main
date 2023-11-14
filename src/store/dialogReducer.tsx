@@ -58,6 +58,14 @@ let initialState = {
             },
 }
 
+interface newMessageType {
+    id: number,
+    message: string,
+    counterLike?: any,
+    timeMessage: number,
+    isItMyMessage: boolean,
+}
+
 const dialogReducer = (state = initialState, action: any) => {
     switch (action.type) {
         case ADD_MESSAGE:
@@ -69,11 +77,19 @@ const dialogReducer = (state = initialState, action: any) => {
                 timeMessage: action.timeMessage,
                 isItMyMessage: action.isItMyMessage,
             }
-            state.postData.myMessage.push(newMessage);
-            return state
+            const newStateDialogForAdd = {...state};
+            newStateDialogForAdd.postData = {...state.postData};
+            newStateDialogForAdd.postData.myMessage = [...state.postData.myMessage]
+            newStateDialogForAdd.postData.myMessage.push(newMessage);
+            newStateDialogForAdd.postData.dialogTextArea = {...state.postData.dialogTextArea};
+            newStateDialogForAdd.postData.dialogTextArea.textMessage = "";
+            return newStateDialogForAdd;
         case CHANGE_DIALOGS_TEXT_AREA:
-            state.postData.dialogTextArea.textMessage = action.message;
-            return state
+            const newStateDialogForChange = {...state};
+            newStateDialogForChange.postData = {...state.postData};
+            newStateDialogForChange.postData.dialogTextArea = {...state.postData.dialogTextArea};
+            newStateDialogForChange.postData.dialogTextArea.textMessage = action.message;
+            return newStateDialogForChange
         default:
             return state;
 
