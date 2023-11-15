@@ -10,7 +10,11 @@ export const Users = (props: any) => {
             img: "https://www.facebook.com/photo/?fbid=235045017455756&set=ecnf.100028507771963",
             followed: "follow",
             fullName: "Nik",
-            status: "I'm looking for a Job right now"
+            status: "I'm looking for a Job right now",
+            location: {
+                city: "Ternople",
+                country: "Ukraine"
+            }
         },
         {
             id: 1,
@@ -23,73 +27,42 @@ export const Users = (props: any) => {
             id: 1,
             img: "https://www.facebook.com/photo/?fbid=235045017455756&set=ecnf.100028507771963",
             followed: "follow",
-            fullName: "Nik",
-            status: "I'm looking for a Job right now"
+            fullName: "Kamila",
+            status: "I'm looking for a Job right now",
         },
     ]
+    console.log(props.users[1].img)
     return (
         <>
             <MainBlock>
                 <h1>Users</h1>
 
-                <FlexWrapper>
-                    <>
-                        <div>
-                            <div>
-                                <ImageStyled
-                                    src={"https://scontent-waw1-1.xx.fbcdn.net/v/t1.6435-9/68880094_235045020789089_6371964698107052032_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=7a1959&_nc_ohc=lovJuSZlQzcAX_oxmAJ&_nc_ht=scontent-waw1-1.xx&oh=00_AfBz41MhO9fau1GJmkzAx0dc-Jq1WsDBRPrgrNLEBq-L8Q&oe=657C146B"}
-                                    alt=""/>
-                            </div>
-                            {<ButtonStyled>Follow</ButtonStyled>}
-                        </div>
+                {props.users.map((item: any, index: number) => {
+                    return (
+                        <FlexWrapper>
+                            <>
+                                <div>
+                                    <div>
+                                        <ImageStyled
+                                            src={props.users[index].img}
+                                            alt=""/>
+                                    </div>
+                                    {(props.users[index].followed === "follow") ?
+                                        <ButtonStyled>follow</ButtonStyled> :
+                                        <ButtonStyled>unfollow</ButtonStyled>
+                                    }
+                                </div>
 
-                    </>
-                    <InformationUser>
-                        <h3>Kamila Sirenko</h3>
-                        <p>I'm so pretty</p>
-                        <h3>Ukraine</h3>
-                    </InformationUser>
-                </FlexWrapper>
-            </MainBlock>
-            <MainBlock>
-                <FlexWrapper>
-                    <>
-                        <div>
-                            <div>
-                                <ImageStyled
-                                    src={"https://scontent-waw1-1.xx.fbcdn.net/v/t1.6435-9/68880094_235045020789089_6371964698107052032_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=7a1959&_nc_ohc=lovJuSZlQzcAX_oxmAJ&_nc_ht=scontent-waw1-1.xx&oh=00_AfBz41MhO9fau1GJmkzAx0dc-Jq1WsDBRPrgrNLEBq-L8Q&oe=657C146B"}
-                                    alt=""/>
-                            </div>
-                            <ButtonStyled>Follow</ButtonStyled>
-                        </div>
-
-                    </>
-                    <InformationUser>
-                        <h3>Kamila Sirenko</h3>
-                        <p>I'm so pretty</p>
-                        <h3>Ukraine</h3>
-                    </InformationUser>
-                </FlexWrapper>
-            </MainBlock>
-            <MainBlock>
-                <FlexWrapper>
-                    <>
-                        <div>
-                            <div>
-                                <ImageStyled
-                                    src={"https://scontent-waw1-1.xx.fbcdn.net/v/t1.6435-9/68880094_235045020789089_6371964698107052032_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=7a1959&_nc_ohc=lovJuSZlQzcAX_oxmAJ&_nc_ht=scontent-waw1-1.xx&oh=00_AfBz41MhO9fau1GJmkzAx0dc-Jq1WsDBRPrgrNLEBq-L8Q&oe=657C146B"}
-                                    alt=""/>
-                            </div>
-                            <ButtonStyled>Follow</ButtonStyled>
-                        </div>
-
-                    </>
-                    <InformationUser>
-                        <h3>Kamila Sirenko</h3>
-                        <p>I'm so pretty</p>
-                        <h3>Ukraine</h3>
-                    </InformationUser>
-                </FlexWrapper>
+                            </>
+                            <InformationUser>
+                                <h3>{props.users[index].fullName}</h3>
+                                <p>{props.users[index].status}</p>
+                                <h3>{props.users[index].location.country}</h3>
+                                <h3>{props.users[index].location.city}</h3>
+                            </InformationUser>
+                        </FlexWrapper>
+                    )
+                })}
             </MainBlock>
         </>
     );

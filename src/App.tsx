@@ -18,6 +18,7 @@ import {Hoo} from "./components/Navbar/Hoo/Hoo";
 import {DialogsContainer} from "./components/Navbar/Dialogs/DialogsContainer";
 import {ProfileContainer} from "./components/Navbar/Profile/ProfileContainer";
 import {Users} from "./components/Navbar/Users/Users";
+import {UsersContainer} from "./components/Navbar/Users/UsersContainer";
 
 export interface propsType {
     store: stateType;
@@ -97,7 +98,7 @@ function App() {
     const arrRoute = ['/', "/dialogs", "/news", "/music", "/setting", "/users", "/hoo"]
     const arrComponents = [
         <ProfileContainer />, <DialogsContainer />
-       , <News/>, <Music/>, <Setting/>, <Users/>,
+       , <News/>, <Music/>, <Setting/>, <UsersContainer/>,
         <Hoo/>,]
     return (
         <AppStyled>
