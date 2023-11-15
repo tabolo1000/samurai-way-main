@@ -25,8 +25,8 @@ interface postDataType {
 }
 
 export const Navbar = () => {
-    const menu = ["/", "/dialogs", "/news", "/music", "/setting", "/hoo"];
-    const name = ["Profile", "Message", "New", "Music", "Setting", "Hoo"]
+    const menu = ["/", "/dialogs", "/news", "/music", "/setting", "/users", "/hoo"];
+    const name = ["Profile", "Message", "New", "Music", "Setting", "Users", "Hoo"]
     const arrayNavbar = menu.map((item, index) => {
         return (
             <LiStyled>
