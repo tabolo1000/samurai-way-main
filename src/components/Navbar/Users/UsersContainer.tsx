@@ -11,7 +11,7 @@ const myStateToProps = (state: any) => {
 const myDispatchToProps = (dispatch: any) => {
     return {
         follow: (usersId: number)=>{
-            dispatch(followAC(usersId))
+            dispatch(followAC(usersId));
         },
         unfollow: (usersId: number) => {
             dispatch(unfollowAC(usersId))

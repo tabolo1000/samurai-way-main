@@ -9,7 +9,6 @@ import store from "./store/reduxStore";
 import {Provider} from "react-redux";
 
 store.subscribe(() => {
-    debugger
     renderEntireTree();
 });
 

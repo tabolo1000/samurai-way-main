@@ -8,24 +8,44 @@ const initialState: any = {
          {
             id: 1,
             img: "https://scontent-waw1-1.xx.fbcdn.net/v/t1.6435-9/68880094_235045020789089_6371964698107052032_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=7a1959&_nc_ohc=lovJuSZlQzcAX_oxmAJ&_nc_ht=scontent-waw1-1.xx&oh=00_AfBz41MhO9fau1GJmkzAx0dc-Jq1WsDBRPrgrNLEBq-L8Q&oe=657C146B",
-            followed: "follow",
-            fullName: "Nik",
+            followed: "Follow",
+            fullName: "Kamila",
+            status: "I'm looking for a Job right now",
+             location: {
+                city: "Ternopl", country: "Ukraine",
+             }
+        },
+         {
+            id: 2,
+            img: "https://scontent-waw1-1.xx.fbcdn.net/v/t1.6435-9/68880094_235045020789089_6371964698107052032_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=7a1959&_nc_ohc=lovJuSZlQzcAX_oxmAJ&_nc_ht=scontent-waw1-1.xx&oh=00_AfBz41MhO9fau1GJmkzAx0dc-Jq1WsDBRPrgrNLEBq-L8Q&oe=657C146B",
+            followed: "Unfollow",
+            fullName: "Kamila",
+            status: "I'm looking for a Job right now",
+             location: {
+                city: "Ternopl", country: "Ukraine",
+             }
+        },
+         {
+            id: 3,
+            img: "https://scontent-waw1-1.xx.fbcdn.net/v/t1.6435-9/68880094_235045020789089_6371964698107052032_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=7a1959&_nc_ohc=lovJuSZlQzcAX_oxmAJ&_nc_ht=scontent-waw1-1.xx&oh=00_AfBz41MhO9fau1GJmkzAx0dc-Jq1WsDBRPrgrNLEBq-L8Q&oe=657C146B",
+            followed: "Follow",
+            fullName: "Kamila",
+            status: "I'm looking for a Job right now",
+             location: {
+                city: "Ternopl", country: "Ukraine",
+             }
+        },
+         {
+            id: 4,
+            img: "https://scontent-waw1-1.xx.fbcdn.net/v/t1.6435-9/68880094_235045020789089_6371964698107052032_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=7a1959&_nc_ohc=lovJuSZlQzcAX_oxmAJ&_nc_ht=scontent-waw1-1.xx&oh=00_AfBz41MhO9fau1GJmkzAx0dc-Jq1WsDBRPrgrNLEBq-L8Q&oe=657C146B",
+            followed: "Unfollow",
+            fullName: "Kamila",
             status: "I'm looking for a Job right now",
              location: {
                 city: "Ternopl", country: "Ukraine",
              }
         },
 
-         {
-            id: 1,
-            img: "https://scontent-waw1-1.xx.fbcdn.net/v/t1.6435-9/68880094_235045020789089_6371964698107052032_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=7a1959&_nc_ohc=lovJuSZlQzcAX_oxmAJ&_nc_ht=scontent-waw1-1.xx&oh=00_AfBz41MhO9fau1GJmkzAx0dc-Jq1WsDBRPrgrNLEBq-L8Q&oe=657C146B",
-            followed: "follow",
-            fullName: "Nik",
-            status: "I'm looking for a Job right now",
-             location: {
-                city: "Ternopl", country: "Ukraine",
-             }
-        },
     ]
 }
 export const userReducer = (state = initialState, action: any) => {
@@ -34,22 +54,35 @@ export const userReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 users: state.users.map((item: any) => {
-                    return (
-                        (action.usersId === item.id)?
-                        item.followed = "follow":
-                            item
-                    )
+                        if(action.usersId === item.id) {
+                            return ({
+                                ...item,
+                                followed: "Follow",
+                            })
+                        }else {
+                            return ({
+                                ...item
+                            })
+                        }
+
+
                 })
             }
         }case (UNFOLLOW): {
             return {
                 ...state,
                 users: state.users.map((item: any) => {
-                    return (
-                        ( action.usersId === item.id) ?
-                            item.followed = "unfollow":
-                            item
-                    )
+                    if(action.usersId === item.id) {
+                        return ({
+                                ...item,
+                                followed: "Unfollow"
+                            }
+                        )
+                    }else{
+                        return ({
+                            ...item,
+                        })
+                    }
                 })
             }
         }case (SET_USERS): {
