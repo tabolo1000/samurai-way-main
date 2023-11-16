@@ -5,7 +5,7 @@ const SET_USERS = "SET_USERS",
 
 const initialState: any = {
     users: [
-    ]
+    ],
 };
 
 export const userReducer = (state = initialState, action: any) => {
