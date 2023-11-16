@@ -6,17 +6,20 @@ import axios from "axios";
 
 export const Users = (props: any) => {
     debugger
-    if (props.users.length === 0) {
+   const addUsers =  () => {
+        if (props.users.length === 0) {
         axios.get("https://social-network.samuraijs.com/api/1.0/users")
             .then((response: any) => {
                 props.setUsers(response.data.items)
             })
     }
+   }
 
 return (
     <>
         <MainBlockStyled>
             <h1>Users</h1>
+            <button onClick = { () => {addUsers()} }>  Click here for add users</button>
             {props.users.map((item: any, index: number) => {
 
                 debugger
