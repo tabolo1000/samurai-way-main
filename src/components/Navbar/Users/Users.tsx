@@ -1,81 +1,62 @@
 import React from 'react';
 import styled from "styled-components";
 import {FlexWrapper} from "../../FlexWrapper";
+import axios from "axios";
 
 
 export const Users = (props: any) => {
-    let newUsers = () => [
-        {
-            id: 1,
-            img: "https://www.facebook.com/photo/?fbid=235045017455756&set=ecnf.100028507771963",
-            followed: "follow",
-            fullName: "Kamila",
-            status: "I'm looking for a Job right now",
-            location: {
-                city: "Ternople",
-                country: "Ukraine"
-            }
-        },
-        {
-            id: 1,
-            img: "https://www.facebook.com/photo/?fbid=235045017455756&set=ecnf.100028507771963",
-            followed: "follow",
-            fullName: "Kamila",
-            status: "I'm looking for a Job right now"
-        },
-        {
-            id: 1,
-            img: "https://www.facebook.com/photo/?fbid=235045017455756&set=ecnf.100028507771963",
-            followed: "follow",
-            fullName: "Kamila",
-            status: "I'm looking for a Job right now",
-        },
-    ]
-    return (
-        <>
-            <MainBlockStyled>
-                <h1>Users</h1>
+    debugger
+    if (props.users.length === 0) {
+        axios.get("https://social-network.samuraijs.com/api/1.0/users")
+            .then((response: any) => {
+                props.setUsers(response.data.items)
+            })
+    }
 
-                {props.users.map((item: any, index: number) => {
-                    return (
-                        <MainBlockStyled>
+return (
+    <>
+        <MainBlockStyled>
+            <h1>Users</h1>
+            {props.users.map((item: any, index: number) => {
+
+                debugger
+                return (
+                    <MainBlockStyled>
                         <FlexWrapper>
                             <>
                                 <FlexWrapper justify={"center"} align={"center"} direction={"column"}>
                                     <div>
                                         <ImageStyled
-                                            src={props.users[index].img}
+                                            src={(props.users[index].photos.large === null)? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcCpOS2pB-j57L3TGakCD768IzT27le10ZMg&usqp=CAU": props.users[index].photos.large }
                                             alt=""/>
                                     </div>
                                     <div>
-                                    {(props.users[index].followed === "Follow") ?
-                                        <ButtonFollowStyled onClick = { ()=> {
-                                            props.unfollow(props.users[index].id)
-                                        }}> {props.users[index].followed}</ButtonFollowStyled> :
-                                        <ButtonUnfollowStyled onClick = {() => {
-                                            props.follow(props.users[index].id)
-                                        }}>{props.users[index].followed}</ButtonUnfollowStyled>
-                                    }
+                                        {(props.users[index].followed === true) ?
+                                            <ButtonFollowStyled onClick={() => {
+                                                props.unfollow(props.users[index].id)
+                                            }}> Unfollow </ButtonFollowStyled> :
+                                            <ButtonUnfollowStyled onClick={() => {
+                                                props.follow(props.users[index].id)
+                                            }}>Follow</ButtonUnfollowStyled>
+                                        }
                                     </div>
                                 </FlexWrapper>
 
                             </>
                             <InformationUser>
-                                <h3>{props.users[index].fullName}</h3>
+                                <h3>{props.users[index].name}</h3>
                                 <p>{props.users[index].status}</p>
-                                <h3>{props.users[index].location.country}</h3>
-                                <h3>{props.users[index].location.city}</h3>
+                                <h3>{"Ucrain"}</h3>
+                                <h3>{"Ternopl"}</h3>
                             </InformationUser>
                         </FlexWrapper>
-                        </MainBlockStyled>
-                    )
-                })}
-            </MainBlockStyled>
-        </>
-    );
-};
-
-
+                    </MainBlockStyled>
+                )
+            })}
+        </MainBlockStyled>
+    </>
+)
+}
 
 const ImageStyled = styled.img`
   width: 100px;
