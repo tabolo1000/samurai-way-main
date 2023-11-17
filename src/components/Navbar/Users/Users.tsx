@@ -2,9 +2,32 @@ import React from 'react';
 import styled from "styled-components";
 import {FlexWrapper} from "../../FlexWrapper";
 import axios from "axios";
+import {itemsType} from "../../../store/userReducer";
 
-export class Users extends React.Component {
-    constructor(props: any) {
+interface propsType{
+    follow: (usersId: number) => void,
+    unfollow: (usersId: number) => void,
+    setUsers: (users: itemsType) => void,
+    users: usersType[]
+}
+
+export interface usersType {
+    followed: boolean,
+    name: string,
+    id: number,
+    uniqueUrlName: null | string,
+    photos: photosType,
+    status: string | null,
+}
+
+interface photosType {
+    large:  string | undefined,
+    small:  string | undefined,
+}
+
+export class Users extends React.Component<propsType> {
+    constructor(props: propsType) {
+        debugger
         super(props);
         axios.get("https://social-network.samuraijs.com/api/1.0/users")
             .then((response: any) => {
@@ -12,12 +35,12 @@ export class Users extends React.Component {
             })
     }
     render() {
+
         debugger
       return  <>
             <MainBlockStyled>
                 <h1>Users</h1>
                 {this.props.users.map((item: any, index: number) => {
-
                     debugger
                     return (
                         <MainBlockStyled>
@@ -26,8 +49,11 @@ export class Users extends React.Component {
                                     <FlexWrapper justify={"center"} align={"center"} direction={"column"}>
                                         <div>
                                             <ImageStyled
-                                                src={(this.props.users[index].photos.large === null) ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcCpOS2pB-j57L3TGakCD768IzT27le10ZMg&usqp=CAU" : this.props.users[index].photos.large}
-                                                alt=""/>
+                                                src={
+                                                (this.props.users[index].photos.large === null)
+                                                    ? ("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcCpOS2pB-j57L3TGakCD768IzT27le10ZMg&usqp=CAU" )
+                                                    : this.props.users[index].photos.large
+                                                 }/>
                                         </div>
                                         <div>
                                             {(this.props.users[index].followed === true) ?

@@ -1,3 +1,5 @@
+import {usersType} from "../components/Navbar/Users/Users";
+
 const SET_USERS = "SET_USERS",
     FOLLOW = "FOLLOW",
     UNFOLLOW = "UNFOLLOW";
@@ -70,9 +72,13 @@ export const unfollowAC = (usersId: number) =>{
     }
 }
 
-export const setUsersAC = (users: any) => {
+export const setUsersAC = (users: itemsType) => {
     return {
         type: SET_USERS,
         users,
     }
+}
+
+export interface itemsType {
+    users: usersType[];
 }
