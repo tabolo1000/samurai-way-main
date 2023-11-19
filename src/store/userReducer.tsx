@@ -3,13 +3,15 @@ import {usersType} from "../components/Navbar/Users/Users";
 const SET_USERS = "SET_USERS",
     FOLLOW = "FOLLOW",
     UNFOLLOW = "UNFOLLOW",
-    SET_CURRENT_PAGE: string = "SET_CURRENT_PAGE";
+    SET_CURRENT_PAGE: string = "SET_CURRENT_PAGE",
+    SET_COUNT_USERS: string = "SET_COUNT_USERS";
 
 
 const initialState: any = {
     users: [
     ],
     currentPage: 1,
+    totalCount: null,
 };
 
 export const userReducer = (state = initialState, action: any) => {
@@ -61,6 +63,11 @@ export const userReducer = (state = initialState, action: any) => {
                 users: [...action.users],
                 currentPage: action.currentPage,
             }
+        }case (SET_COUNT_USERS): {
+            return {
+                ...state,
+                totalCount: action.totalCount,
+            }
         }
         default:
             return state;
@@ -98,5 +105,12 @@ export const setCurrentPageAC = (users: itemsType, currentPage: number) => {
         currentPage,
         users,
 
+    }
+}
+
+export const setCountUsersAC = (totalCount: number) => {
+    return {
+        type: SET_COUNT_USERS,
+        totalCount,
     }
 }

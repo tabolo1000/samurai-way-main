@@ -11,7 +11,9 @@ interface propsType {
     setUsers: (users: itemsType) => void,
     users: usersType[],
     setCurrentPage: (users: itemsType, currentPage: number) => void,
-    currentPage: number
+    currentPage: number,
+    setCountUsers: (totalCount: number) => void,
+    totalCount: number,
 }
 
 export interface usersType {
@@ -33,7 +35,7 @@ export class Users extends React.Component<propsType> {
         axios.get(`https://social-network.samuraijs.com/api/1.0/users`)
             .then((response: any) => {
                 this.props.setUsers(response.data.items)
-                // this.props.countUsers(response.data.totalCount)
+                this.props.setCountUsers(response.data.totalCount)
             })
     }
     getCurrentPage = (currentPage: number) => {
@@ -42,20 +44,26 @@ export class Users extends React.Component<propsType> {
                  this.props.setCurrentPage(response.data.items, currentPage)
             })
     }
+    calculatePage = () => {
+     return   Math.ceil(this.props.totalCount / 10);
+    }
 
 
     render() {
+        let arrPages = [];
+        for(let i = 1; i <= this.calculatePage(); i++ ){
+            arrPages[i] = i;
+        }
         return <>
+        {arrPages}
             <h1>{this.props.currentPage}</h1>
             <MainBlockStyled>
                 <PaginationStyled>
                     <h1>Users</h1>
                     <ListPaginationStyled>
-                        <PagePaginationStyled onClick = {() => {this.getCurrentPage(1)}}>1</PagePaginationStyled>
-                        <PagePaginationStyled onClick = {() => {this.getCurrentPage(2)}}>2</PagePaginationStyled>
-                        <PagePaginationStyled onClick = {() => {this.getCurrentPage(3)}}>3</PagePaginationStyled>
-                        <PagePaginationStyled onClick = {() => {this.getCurrentPage(4)}}>4</PagePaginationStyled>
-                        <PagePaginationStyled onClick = {() => {this.getCurrentPage(5)}}>5</PagePaginationStyled>
+                        {arrPages.map((items) => {
+                            return <PagePaginationStyled onClick = {() => {this.getCurrentPage(items)}}>{items}</PagePaginationStyled>
+                        })}
                     </ListPaginationStyled>
                 </PaginationStyled>
                 {this.props.users.map((item: any, index: number) => {
