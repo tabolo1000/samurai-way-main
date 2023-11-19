@@ -4,11 +4,14 @@ import {FlexWrapper} from "../../FlexWrapper";
 import axios from "axios";
 import {itemsType} from "../../../store/userReducer";
 
-interface propsType{
+
+interface propsType {
     follow: (usersId: number) => void,
     unfollow: (usersId: number) => void,
     setUsers: (users: itemsType) => void,
-    users: usersType[]
+    users: usersType[],
+    setCurrentPage: (users: itemsType, currentPage: number) => void,
+    currentPage: number
 }
 
 export interface usersType {
@@ -21,26 +24,41 @@ export interface usersType {
 }
 
 interface photosType {
-    large:  string | undefined,
-    small:  string | undefined,
+    large: string | undefined,
+    small: string | undefined,
 }
 
 export class Users extends React.Component<propsType> {
     componentDidMount() {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users")
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users`)
             .then((response: any) => {
                 this.props.setUsers(response.data.items)
+                // this.props.countUsers(response.data.totalCount)
+            })
+    }
+    getCurrentPage = (currentPage: number) => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage || this.props.currentPage}`)
+            .then((response: any) => {
+                 this.props.setCurrentPage(response.data.items, currentPage)
             })
     }
 
-    render() {
 
-        debugger
-      return  <>
+    render() {
+        return <>
+            <h1>{this.props.currentPage}</h1>
             <MainBlockStyled>
-                <h1>Users</h1>
+                <PaginationStyled>
+                    <h1>Users</h1>
+                    <ListPaginationStyled>
+                        <PagePaginationStyled onClick = {() => {this.getCurrentPage(1)}}>1</PagePaginationStyled>
+                        <PagePaginationStyled onClick = {() => {this.getCurrentPage(2)}}>2</PagePaginationStyled>
+                        <PagePaginationStyled onClick = {() => {this.getCurrentPage(3)}}>3</PagePaginationStyled>
+                        <PagePaginationStyled onClick = {() => {this.getCurrentPage(4)}}>4</PagePaginationStyled>
+                        <PagePaginationStyled onClick = {() => {this.getCurrentPage(5)}}>5</PagePaginationStyled>
+                    </ListPaginationStyled>
+                </PaginationStyled>
                 {this.props.users.map((item: any, index: number) => {
-                    debugger
                     return (
                         <MainBlockStyled>
                             <FlexWrapper>
@@ -49,10 +67,10 @@ export class Users extends React.Component<propsType> {
                                         <div>
                                             <ImageStyled
                                                 src={
-                                                (this.props.users[index].photos.large === null)
-                                                    ? ("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcCpOS2pB-j57L3TGakCD768IzT27le10ZMg&usqp=CAU" )
-                                                    : this.props.users[index].photos.large
-                                                 }/>
+                                                    (this.props.users[index].photos.large === null)
+                                                        ? ("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcCpOS2pB-j57L3TGakCD768IzT27le10ZMg&usqp=CAU")
+                                                        : this.props.users[index].photos.large
+                                                }/>
                                         </div>
                                         <div>
                                             {(this.props.users[index].followed === true) ?
@@ -81,8 +99,26 @@ export class Users extends React.Component<propsType> {
         </>
     }
 }
+const PagePaginationStyled = styled.li`
+  display:inline-block;
+  margin-left: 5px;
+  &:hover{
+    color: darkblue;
+    cursor: pointer;
+    transform: scale(2);
+  }
+`
 
-
+const ListPaginationStyled = styled.ul`
+  list-style: none;
+  display: inline-block;
+  
+`
+const PaginationStyled = styled.div`
+  margin: 10px 0 10px;
+  text-align: center;
+  
+`
 const ImageStyled = styled.img`
   width: 100px;
   border-radius: 10px;

@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {followAC, itemsType, setUsersAC, unfollowAC} from "../../../store/userReducer";
+import {followAC, itemsType, setCurrentPageAC, setUsersAC, unfollowAC} from "../../../store/userReducer";
 import {Users, usersType} from "./Users";
 
 
@@ -8,6 +8,7 @@ import {Users, usersType} from "./Users";
 const myStateToProps = (state: any) => {
     return {
         users: state.userReducer.users,
+        currentPage: state.userReducer.currentPage || 1,
     }
 }
 
@@ -22,6 +23,9 @@ const myDispatchToProps = (dispatch: any) => {
         setUsers: (users: itemsType) => {
             dispatch(setUsersAC(users))
         },
+        setCurrentPage: (users: itemsType, currentPage: number) => {
+            dispatch(setCurrentPageAC(users, currentPage));
+        }
     }
 }
 export const UsersContainer = connect(myStateToProps, myDispatchToProps)(Users);

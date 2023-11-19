@@ -2,12 +2,14 @@ import {usersType} from "../components/Navbar/Users/Users";
 
 const SET_USERS = "SET_USERS",
     FOLLOW = "FOLLOW",
-    UNFOLLOW = "UNFOLLOW";
+    UNFOLLOW = "UNFOLLOW",
+    SET_CURRENT_PAGE: string = "SET_CURRENT_PAGE";
 
 
 const initialState: any = {
     users: [
     ],
+    currentPage: 1,
 };
 
 export const userReducer = (state = initialState, action: any) => {
@@ -53,7 +55,14 @@ export const userReducer = (state = initialState, action: any) => {
                     ...action.users,
                 ]
             }
-        }default:
+        }case (SET_CURRENT_PAGE): {
+            return {
+                ...state,
+                users: [...action.users],
+                currentPage: action.currentPage,
+            }
+        }
+        default:
             return state;
     }
 }
@@ -81,4 +90,13 @@ export const setUsersAC = (users: itemsType) => {
 
 export interface itemsType {
     users: usersType[];
+}
+
+export const setCurrentPageAC = (users: itemsType, currentPage: number) => {
+    return {
+        type: SET_CURRENT_PAGE,
+        currentPage,
+        users,
+
+    }
 }
