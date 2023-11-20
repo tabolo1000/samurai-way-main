@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {FlexWrapper} from "../../FlexWrapper";
 import axios from "axios";
 import {itemsType} from "../../../store/userReducer";
+import {usersType} from "./UsersContainer";
 
 
 interface propsType {
@@ -10,61 +11,32 @@ interface propsType {
     unfollow: (usersId: number) => void,
     setUsers: (users: itemsType) => void,
     users: usersType[],
-    setCurrentPage: (users: itemsType, currentPage: number) => void,
+    getCurrentPage: (currentNumber: number) => void,
     currentPage: number,
-    setCountUsers: (totalCount: number) => void,
     totalCount: number,
 }
 
-export interface usersType {
-    followed: boolean,
-    name: string,
-    id: number,
-    uniqueUrlName: null | string,
-    photos: photosType,
-    status: string | null,
-}
+export const Users = (props: any) => {
 
-interface photosType {
-    large: string | undefined,
-    small: string | undefined,
-}
-
-export class Users extends React.Component<propsType> {
-    componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users`)
-            .then((response: any) => {
-                this.props.setUsers(response.data.items)
-                this.props.setCountUsers(response.data.totalCount)
-            })
-    }
-    getCurrentPage = (currentPage: number) => {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage || this.props.currentPage}`)
-            .then((response: any) => {
-                 this.props.setCurrentPage(response.data.items, currentPage)
-            })
-    }
-    calculatePage = () => {
-     return   Math.ceil(this.props.totalCount / 10);
+    let calculatePage = () => {
+     return   Math.ceil(props.totalCount / 10);
     }
 
-
-    render() {
         let arrIndexPages: any = [];
-        for(let i = 1; i <= this.calculatePage(); i++ ){
+        for(let i = 1; i <= calculatePage(); i++ ){
             arrIndexPages[i] = i;
         }
          let arrAllPages = arrIndexPages.map((items: any) => {
-                            return <PagePaginationStyled onClick = {() => {this.getCurrentPage(items)}}>{items}</PagePaginationStyled>
+                            return <PagePaginationStyled onClick = {() => {props.getCurrentPage(items)}}>{items}</PagePaginationStyled>
                         });
-        let number = 5 - this.props.currentPage;
+        let number = 5 - props.currentPage;
         let pathPages = arrAllPages.slice(
-            ((this.props.currentPage - 5) < 5) ? number : this.props.currentPage - 5,
-            ((this.props.currentPage - 5) <= 5) ? 10 - number : this.props.currentPage + 4
+            ((props.currentPage - 5) < 1) ? 1 : props.currentPage - 5,
+            ((props.currentPage - 5) <= 5) ? 10 - number : props.currentPage + 4
         )
-        console.log(this.props.currentPage)
+        console.log(props.currentPage)
         return <>
-            <h1>{this.props.currentPage}</h1>
+            <h1>{props.currentPage}</h1>
             <MainBlockStyled>
                 <PaginationStyled>
                     <h1>Users</h1>
@@ -72,7 +44,7 @@ export class Users extends React.Component<propsType> {
                         {pathPages}
                     </ListPaginationStyled>
                 </PaginationStyled>
-                {this.props.users.map((item: any, index: number) => {
+                {props.users.map((item: any, index: number) => {
                     return (
                         <MainBlockStyled>
                             <FlexWrapper>
@@ -81,18 +53,18 @@ export class Users extends React.Component<propsType> {
                                         <div>
                                             <ImageStyled
                                                 src={
-                                                    (this.props.users[index].photos.large === null)
+                                                    (props.users[index].photos.large === null)
                                                         ? ("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcCpOS2pB-j57L3TGakCD768IzT27le10ZMg&usqp=CAU")
-                                                        : this.props.users[index].photos.large
+                                                        : props.users[index].photos.large
                                                 }/>
                                         </div>
                                         <div>
-                                            {(this.props.users[index].followed === true) ?
+                                            {(props.users[index].followed === true) ?
                                                 <ButtonFollowStyled onClick={() => {
-                                                    this.props.unfollow(this.props.users[index].id)
+                                                    props.unfollow(props.users[index].id)
                                                 }}> Unfollow </ButtonFollowStyled> :
                                                 <ButtonUnfollowStyled onClick={() => {
-                                                    this.props.follow(this.props.users[index].id)
+                                                    props.follow(props.users[index].id)
                                                 }}>Follow</ButtonUnfollowStyled>
                                             }
                                         </div>
@@ -100,8 +72,8 @@ export class Users extends React.Component<propsType> {
 
                                 </>
                                 <InformationUser>
-                                    <h3>{this.props.users[index].name}</h3>
-                                    <p>{this.props.users[index].status}</p>
+                                    <h3>{props.users[index].name}</h3>
+                                    <p>{props.users[index].status}</p>
                                     <h3>{"Ucrain"}</h3>
                                     <h3>{"Ternopl"}</h3>
                                 </InformationUser>
@@ -111,7 +83,6 @@ export class Users extends React.Component<propsType> {
                 })}
             </MainBlockStyled>
         </>
-    }
 }
 const PagePaginationStyled = styled.li`
   display:inline-block;

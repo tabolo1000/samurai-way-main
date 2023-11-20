@@ -1,4 +1,5 @@
-import {usersType} from "../components/Navbar/Users/Users";
+import {usersType} from "../components/Navbar/Users/UsersContainer";
+
 
 const SET_USERS = "SET_USERS",
     FOLLOW = "FOLLOW",
