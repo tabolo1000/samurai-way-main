@@ -10,7 +10,7 @@ const SET_USERS = "SET_USERS",
 const initialState: any = {
     users: [
     ],
-    currentPage: 1,
+    currentPage: 10,
     totalCount: null,
 };
 

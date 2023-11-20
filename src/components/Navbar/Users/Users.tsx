@@ -50,20 +50,26 @@ export class Users extends React.Component<propsType> {
 
 
     render() {
-        let arrPages = [];
+        let arrIndexPages: any = [];
         for(let i = 1; i <= this.calculatePage(); i++ ){
-            arrPages[i] = i;
+            arrIndexPages[i] = i;
         }
+         let arrAllPages = arrIndexPages.map((items: any) => {
+                            return <PagePaginationStyled onClick = {() => {this.getCurrentPage(items)}}>{items}</PagePaginationStyled>
+                        });
+        let number = 5 - this.props.currentPage;
+        let pathPages = arrAllPages.slice(
+            ((this.props.currentPage - 5) < 5) ? number : this.props.currentPage - 5,
+            ((this.props.currentPage - 5) <= 5) ? 10 - number : this.props.currentPage + 4
+        )
+        console.log(this.props.currentPage)
         return <>
-        {arrPages}
             <h1>{this.props.currentPage}</h1>
             <MainBlockStyled>
                 <PaginationStyled>
                     <h1>Users</h1>
                     <ListPaginationStyled>
-                        {arrPages.map((items) => {
-                            return <PagePaginationStyled onClick = {() => {this.getCurrentPage(items)}}>{items}</PagePaginationStyled>
-                        })}
+                        {pathPages}
                     </ListPaginationStyled>
                 </PaginationStyled>
                 {this.props.users.map((item: any, index: number) => {

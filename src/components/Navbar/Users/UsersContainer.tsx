@@ -15,7 +15,7 @@ import {Users, usersType} from "./Users";
 const myStateToProps = (state: any) => {
     return {
         users: state.userReducer.users,
-        currentPage: state.userReducer.currentPage || 1,
+        currentPage: state.userReducer.currentPage || 10,
         totalCount: state.userReducer.totalCount || 1,
     }
 }
