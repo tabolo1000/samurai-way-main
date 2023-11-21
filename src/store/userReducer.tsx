@@ -6,7 +6,7 @@ const SET_USERS = "SET_USERS",
     UNFOLLOW = "UNFOLLOW",
     SET_CURRENT_PAGE: string = "SET_CURRENT_PAGE",
     SET_COUNT_USERS: string = "SET_COUNT_USERS",
-    CHANGE_PRELOADER_AC: string = "CHANGE_PRELOADER_AC"
+    TOGGLE_IS_FETCHING: string = "TOGGLE_IS_FETCHING"
 
 
 const initialState: any = {
@@ -71,10 +71,10 @@ export const userReducer = (state = initialState, action: any) => {
                 ...state,
                 totalCount: action.totalCount,
             }
-        }case (CHANGE_PRELOADER_AC): {
+        }case (TOGGLE_IS_FETCHING): {
             return {
                 ...state,
-                isFetching: action.loaderStatus,
+                isFetching: action.isFetching,
             }
         }
         default:
@@ -82,21 +82,21 @@ export const userReducer = (state = initialState, action: any) => {
     }
 }
 
-export const followAC = ( usersId: number) => {
+export const follow = ( usersId: number) => {
     return {
         type: FOLLOW,
         usersId,
     }
 }
 
-export const unfollowAC = (usersId: number) =>{
+export const unfollow = (usersId: number) =>{
     return {
         type: UNFOLLOW,
         usersId,
     }
 }
 
-export const setUsersAC = (users: itemsType) => {
+export const setUsers = (users: itemsType) => {
     return {
         type: SET_USERS,
         users,
@@ -107,7 +107,7 @@ export interface itemsType {
     users: usersType[];
 }
 
-export const setCurrentPageAC = (users: itemsType, currentPage: number) => {
+export const setCurrentPage = (users: itemsType, currentPage: number) => {
     return {
         type: SET_CURRENT_PAGE,
         currentPage,
@@ -116,16 +116,16 @@ export const setCurrentPageAC = (users: itemsType, currentPage: number) => {
     }
 }
 
-export const setCountUsersAC = (totalCount: number) => {
+export const setCountUsers = (totalCount: number) => {
     return {
         type: SET_COUNT_USERS,
         totalCount,
     }
 }
 
-export const changePreloaderAC = (loaderStatus: boolean) => {
+export const toggleIsFetching = (isFetching: boolean) => {
     return {
-        type: CHANGE_PRELOADER_AC,
-        loaderStatus,
+        type: TOGGLE_IS_FETCHING,
+        isFetching,
     }
 }

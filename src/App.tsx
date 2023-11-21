@@ -4,8 +4,7 @@ import {Header} from "./components/Header/Header";
 import styled from "styled-components";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Footer} from "./components/Footer/Footer";
-import {Profile} from "./components/Navbar/Profile/Profile";
-import {Dialogs} from "./components/Navbar/Dialogs/Dialogs";
+
 import {
     BrowserRouter as Router, Routes,
     createBrowserRouter, Link, Outlet,

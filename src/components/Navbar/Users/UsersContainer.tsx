@@ -1,12 +1,11 @@
 import {connect} from "react-redux";
 import {
-    changePreloaderAC,
-    followAC,
+    follow,
     itemsType,
-    setCountUsersAC,
-    setCurrentPageAC,
-    setUsersAC,
-    unfollowAC
+    setCountUsers,
+    setCurrentPage,
+    setUsers, toggleIsFetching,
+    unfollow
 } from "../../../store/userReducer";
 import {Users  } from "./Users";
 import axios from "axios";
@@ -22,7 +21,7 @@ interface propsType {
     setCountUsers: (totalCounts: number) => void,
     totalCount: number,
     isFetching: boolean,
-    changePreloader: (loaderStatus: boolean) => void,
+    toggleIsFetching: (loaderStatus: boolean) => void,
 }
 
 export interface usersType {
@@ -41,12 +40,13 @@ interface photosType {
 
 export class UsersContainer extends React.Component<any> {
     componentDidMount() {
-        this.props.changePreloader(true)
+        this.props.toggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users`)
             .then((response: any) => {
+                this.props.toggleIsFetching(false)
                 this.props.setUsers(response.data.items)
                 this.props.setCountUsers(response.data.totalCount)
-                this.props.changePreloader(false)
+
             })
     }
 
@@ -79,26 +79,12 @@ const myStateToProps = (state: any) => {
     }
 }
 
-const myDispatchToProps = (dispatch: any) => {
-    return {
-        follow: (usersId: number)=>{
-            dispatch(followAC(usersId));
-        },
-        unfollow: (usersId: number) => {
-            dispatch(unfollowAC(usersId))
-        },
-        setUsers: (users: itemsType) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (users: itemsType, currentPage: number) => {
-            dispatch(setCurrentPageAC(users, currentPage));
-        },
-        setCountUsers: (totalCount: number) => {
-            dispatch(setCountUsersAC(totalCount))
-        },
-        changePreloader: (loaderStatus: boolean) => {
-            dispatch(changePreloaderAC(loaderStatus))
-        }
-    }
-}
-export default connect(myStateToProps, myDispatchToProps)(UsersContainer);
+
+export default connect(myStateToProps, {
+        follow,
+        unfollow,
+        setUsers,
+        setCurrentPage,
+        setCountUsers,
+        toggleIsFetching,
+})(UsersContainer);
