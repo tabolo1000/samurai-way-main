@@ -5,14 +5,15 @@ const SET_USERS = "SET_USERS",
     FOLLOW = "FOLLOW",
     UNFOLLOW = "UNFOLLOW",
     SET_CURRENT_PAGE: string = "SET_CURRENT_PAGE",
-    SET_COUNT_USERS: string = "SET_COUNT_USERS";
+    SET_COUNT_USERS: string = "SET_COUNT_USERS",
+    CHANGE_PRELOADER_AC: string = "CHANGE_PRELOADER_AC"
 
 
 const initialState: any = {
-    users: [
-    ],
+    users: [],
     currentPage: 10,
     totalCount: null,
+    isFetching: false,
 };
 
 export const userReducer = (state = initialState, action: any) => {
@@ -54,6 +55,7 @@ export const userReducer = (state = initialState, action: any) => {
             }
         }case (SET_USERS): {
             return {
+                ...state,
                 users: [
                     ...action.users,
                 ]
@@ -68,6 +70,11 @@ export const userReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 totalCount: action.totalCount,
+            }
+        }case (CHANGE_PRELOADER_AC): {
+            return {
+                ...state,
+                isFetching: action.loaderStatus,
             }
         }
         default:
@@ -113,5 +120,12 @@ export const setCountUsersAC = (totalCount: number) => {
     return {
         type: SET_COUNT_USERS,
         totalCount,
+    }
+}
+
+export const changePreloaderAC = (loaderStatus: boolean) => {
+    return {
+        type: CHANGE_PRELOADER_AC,
+        loaderStatus,
     }
 }

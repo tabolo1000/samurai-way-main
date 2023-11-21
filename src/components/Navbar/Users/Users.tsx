@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
 import {FlexWrapper} from "../../FlexWrapper";
-import axios from "axios";
 import {itemsType} from "../../../store/userReducer";
 import {usersType} from "./UsersContainer";
 
@@ -14,10 +13,10 @@ interface propsType {
     getCurrentPage: (currentNumber: number) => void,
     currentPage: number,
     totalCount: number,
+    isFetching: boolean,
 }
 
 export const Users = (props: any) => {
-
     let calculatePage = () => {
      return   Math.ceil(props.totalCount / 10);
     }
@@ -34,9 +33,52 @@ export const Users = (props: any) => {
             ((props.currentPage - 5) < 1) ? 1 : props.currentPage - 5,
             ((props.currentPage - 5) <= 5) ? 10 - number : props.currentPage + 4
         )
-        console.log(props.currentPage)
+        const fetchingIs = () =>{
+            {
+                if (props.isFetching === false) {
+                    return (
+                        props.users.map((item: any, index: number) => {
+                            return (
+                                <MainBlockStyled>
+                                    <FlexWrapper>
+                                        <>
+                                            <FlexWrapper justify={"center"} align={"center"} direction={"column"}>
+                                                <div>
+                                                    <ImageStyled
+                                                        src={
+                                                            (props.users[index].photos.large === null)
+                                                                ? ("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcCpOS2pB-j57L3TGakCD768IzT27le10ZMg&usqp=CAU")
+                                                                : props.users[index].photos.large
+                                                        }/>
+                                                </div>
+                                                <div>
+                                                    {(props.users[index].followed === true) ?
+                                                        <ButtonFollowStyled onClick={() => {
+                                                            props.unfollow(props.users[index].id)
+                                                        }}> Unfollow </ButtonFollowStyled> :
+                                                        <ButtonUnfollowStyled onClick={() => {
+                                                            props.follow(props.users[index].id)
+                                                        }}>Follow</ButtonUnfollowStyled>
+                                                    }
+                                                </div>
+                                            </FlexWrapper>
+
+                                        </>
+                                        <InformationUser>
+                                            <h3>{props.users[index].name}</h3>
+                                            <p>{props.users[index].status}</p>
+                                            <h3>{"Ucrain"}</h3>
+                                            <h3>{"Ternopl"}</h3>
+                                        </InformationUser>
+                                    </FlexWrapper>
+                                </MainBlockStyled>
+                            )
+                        }))
+
+                }
+               else { return (<h3>Loading...</h3>)}
+        }}
         return <>
-            <h1>{props.currentPage}</h1>
             <MainBlockStyled>
                 <PaginationStyled>
                     <h1>Users</h1>
@@ -44,43 +86,8 @@ export const Users = (props: any) => {
                         {pathPages}
                     </ListPaginationStyled>
                 </PaginationStyled>
-                {props.users.map((item: any, index: number) => {
-                    return (
-                        <MainBlockStyled>
-                            <FlexWrapper>
-                                <>
-                                    <FlexWrapper justify={"center"} align={"center"} direction={"column"}>
-                                        <div>
-                                            <ImageStyled
-                                                src={
-                                                    (props.users[index].photos.large === null)
-                                                        ? ("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcCpOS2pB-j57L3TGakCD768IzT27le10ZMg&usqp=CAU")
-                                                        : props.users[index].photos.large
-                                                }/>
-                                        </div>
-                                        <div>
-                                            {(props.users[index].followed === true) ?
-                                                <ButtonFollowStyled onClick={() => {
-                                                    props.unfollow(props.users[index].id)
-                                                }}> Unfollow </ButtonFollowStyled> :
-                                                <ButtonUnfollowStyled onClick={() => {
-                                                    props.follow(props.users[index].id)
-                                                }}>Follow</ButtonUnfollowStyled>
-                                            }
-                                        </div>
-                                    </FlexWrapper>
+                {fetchingIs()}
 
-                                </>
-                                <InformationUser>
-                                    <h3>{props.users[index].name}</h3>
-                                    <p>{props.users[index].status}</p>
-                                    <h3>{"Ucrain"}</h3>
-                                    <h3>{"Ternopl"}</h3>
-                                </InformationUser>
-                            </FlexWrapper>
-                        </MainBlockStyled>
-                    )
-                })}
             </MainBlockStyled>
         </>
 }

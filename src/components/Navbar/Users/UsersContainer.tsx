@@ -1,5 +1,6 @@
 import {connect} from "react-redux";
 import {
+    changePreloaderAC,
     followAC,
     itemsType,
     setCountUsersAC,
@@ -20,6 +21,8 @@ interface propsType {
     currentPage: number,
     setCountUsers: (totalCounts: number) => void,
     totalCount: number,
+    isFetching: boolean,
+    changePreloader: (loaderStatus: boolean) => void,
 }
 
 export interface usersType {
@@ -36,12 +39,14 @@ interface photosType {
     small: string | undefined,
 }
 
-export class UsersContainer extends React.Component<propsType> {
+export class UsersContainer extends React.Component<any> {
     componentDidMount() {
+        this.props.changePreloader(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users`)
             .then((response: any) => {
                 this.props.setUsers(response.data.items)
                 this.props.setCountUsers(response.data.totalCount)
+                this.props.changePreloader(false)
             })
     }
 
@@ -59,6 +64,7 @@ export class UsersContainer extends React.Component<propsType> {
           currentPage = {this.props.currentPage}
           getCurrentPage = {this.getCurrentPage}
           totalCount = {this.props.totalCount }
+          isFetching = {this.props.isFetching}
       />
     }
 
@@ -69,6 +75,7 @@ const myStateToProps = (state: any) => {
         users: state.userReducer.users,
         currentPage: state.userReducer.currentPage || 10,
         totalCount: state.userReducer.totalCount || 1,
+        isFetching: state.userReducer.isFetching
     }
 }
 
@@ -88,6 +95,9 @@ const myDispatchToProps = (dispatch: any) => {
         },
         setCountUsers: (totalCount: number) => {
             dispatch(setCountUsersAC(totalCount))
+        },
+        changePreloader: (loaderStatus: boolean) => {
+            dispatch(changePreloaderAC(loaderStatus))
         }
     }
 }
