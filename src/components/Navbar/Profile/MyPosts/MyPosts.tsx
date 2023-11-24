@@ -11,6 +11,8 @@ interface propsType {
 
 
 export const MyPosts = (props: any) => {
+    debugger
+
     let newPostEl = useRef<HTMLTextAreaElement>(null);
 
     const postChange = () => {
@@ -25,7 +27,6 @@ export const MyPosts = (props: any) => {
             props.addPost(message)
         }
     }
-    debugger
 
     return (
         <div>

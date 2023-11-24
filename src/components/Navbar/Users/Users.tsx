@@ -34,7 +34,7 @@ export const Users = (props: any) => {
             ((props.currentPage - 5) <= 5) ? 10 - number : props.currentPage + 4
         )
         const fetchingIs = () =>{
-            {
+
                 if (props.isFetching === false) {
                     return (
                         props.users.map((item: any, index: number) => {
@@ -77,7 +77,7 @@ export const Users = (props: any) => {
 
                 }
                else { return (<h3>Loading...</h3>)}
-        }}
+        }
         return <>
             <MainBlockStyled>
                 <PaginationStyled>

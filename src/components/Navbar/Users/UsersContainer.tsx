@@ -40,6 +40,7 @@ interface photosType {
 
 export class UsersContainer extends React.Component<any> {
     componentDidMount() {
+
         this.props.toggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users`)
             .then((response: any) => {

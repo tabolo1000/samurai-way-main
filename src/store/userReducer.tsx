@@ -32,8 +32,6 @@ export const userReducer = (state = initialState, action: any) => {
                                 ...item
                             })
                         }
-
-
                 })
             }
         }case (UNFOLLOW): {
