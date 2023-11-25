@@ -4,7 +4,6 @@ import {profileInfoType} from "../ProfileContainer";
 
 
 export const ProfileInfo = (props: any) => {
-    debugger
     const toggle = () => {
         if (props.isFetching) {
             return (

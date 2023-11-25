@@ -10,6 +10,10 @@ import {
     toggleIsFetchingAC
 } from "../../../store/profileReducer";
 import {connect} from "react-redux";
+// import {useNavigate} from "react-router";
+import {withRouter} from "../../withRouter";
+
+
 
 
 interface propsType {
@@ -92,7 +96,9 @@ const mapDispatchToProps = (dispatch: any) => {
     }
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);
+
+const withUrlDataContainerComponent = withRouter(ProfileContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(withUrlDataContainerComponent);
 
 
 
