@@ -1,6 +1,7 @@
 import {ImageAvatarStyled, ImageBackGroundStyled} from "../ProfileStyled";
 import React from "react";
 import {profileInfoType} from "../ProfileContainer";
+import {useParams} from "react-router-dom";
 
 
 export const ProfileInfo = (props: any) => {

@@ -45,7 +45,7 @@ export const Users = (props: any) => {
                                         <>
                                             <FlexWrapper justify={"center"} align={"center"} direction={"column"}>
                                                 <div>
-                                                    <NavLink to = "/">
+                                                    <NavLink to = {`/profile/` + item.id}>
                                                     <ImageStyled
                                                         src={
                                                             (props.users[index].photos.large === null)

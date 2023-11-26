@@ -25,7 +25,7 @@ interface postDataType {
 }
 
 export const Navbar = () => {
-    const menu = ["/", "/dialogs", "/news", "/music", "/setting", "/users", "/hoo"];
+    const menu = ["/profile", "/dialogs", "/news", "/music", "/setting", "/users", "/hoo"];
     const name = ["Profile", "Message", "New", "Music", "Setting", "Users", "Hoo"]
     const arrayNavbar = menu.map((item, index) => {
         return (

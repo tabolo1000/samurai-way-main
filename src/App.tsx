@@ -93,22 +93,32 @@ interface myMessageType {
 }
 
 function App() {
-    const arrRoute = ['/', "/dialogs", "/news", "/music", "/setting", "/users", "/hoo"]
-    const arrComponents = [
-        <ProfileContainer />, <DialogsContainer />
-       , <News/>, <Music/>, <Setting/>, <UsersContainer/>,
-        <Hoo/>,]
+    // const arrRoute = ['/', "/dialogs", "/news", "/music", "/setting", "/users", "/hoo"]
+    // const arrComponents = [
+    //     <ProfileContainer />, <DialogsContainer />
+    //    , <News/>, <Music/>, <Setting/>, <UsersContainer/>,
+    //     <Hoo/>,]
     return (
         <AppStyled>
             <Header/>
             <Navbar/>
             <ContentStyled>
                 <Routes>
-                    {arrRoute.map((item, index) => {
-                        return (
-                            <Route path={item} element={arrComponents[index]}/>
-                        )
-                    })}
+                    <Route path={`/profile/:userId?`} element={<ProfileContainer />}/>
+                    <Route path={`/dialogs`} element={<DialogsContainer />}/>
+                    <Route path={`/news`} element={<News/>}/>
+                    <Route path={`/music`} element={<Music/>}/>
+                    <Route path={`/setting`} element={<Setting/>}/>
+                    <Route path={`/users`} element={<UsersContainer/>}/>
+                     <Route path={`/hoo`} element={<Hoo/>}/>
+
+
+
+                    {/*{arrRoute.map((item, index) => {*/}
+                    {/*    return (*/}
+                    {/*        <Route path={`${item}/:id`} element={arrComponents[index]}/>*/}
+                    {/*    )*/}
+                    {/*})}*/}
                 </Routes>
             </ContentStyled>
             <Footer/>

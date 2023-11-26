@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {ContentStyled} from "./ProfileStyled";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPosts} from "./MyPosts/MyPosts";
@@ -12,6 +12,7 @@ import {
 import {connect} from "react-redux";
 // import {useNavigate} from "react-router";
 import {withRouter} from "../../withRouter";
+import {useParams} from "react-router-dom";
 
 
 
@@ -44,31 +45,42 @@ interface postTextAreaDataType {
     letter: string,
 }
 
+export let ProfileContainer = (props: any) => {
 
-export class ProfileContainer extends React.Component<any> {
-    componentDidMount(){
+        // debugger
+
+          let {userId}:any =  useParams();
+       if(!userId){
+           userId = 2
+       }
+  console.log(userId)
+        useEffect(() => {
+            axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
+                .then((response:any) => {
+                    debugger
+                    props.setUsers(response.data)
+                    props.toggleIsFetching(true)
+                })
+        }, [userId]);
         // this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
-            .then((response:any) => {
-                debugger
-                this.props.setUsers(response.data)
-                this.props.toggleIsFetching(true)
-            })
-    }
-    render() {
+
+
 
         return (
             <ContentStyled>
-                <ProfileInfo profileInfo={this.props.profileInfo}
-                userInformation = {this.props.userInformation}
-                isFetching = {this.props.isFetching}/>
-                <MyPosts allMyPosts = {this.props.allMyPosts} postTextAreaData={this.props.postTextAreaData}
-                         onPostChange = {this.props.onPostChange} addPost={this.props.addPost}
-                         userInformation = {this.props.userInformation}/>
+                <ProfileInfo profileInfo={props.profileInfo}
+                userInformation = {props.userInformation}
+                isFetching = {props.isFetching}/>
+                <MyPosts allMyPosts = {props.allMyPosts} postTextAreaData={props.postTextAreaData}
+                         onPostChange = {props.onPostChange} addPost={props.addPost}
+                         userInformation = {props.userInformation}/>
             </ContentStyled>
         );
-    }
 }
+
+
+
+
 const mapStateToProps = (state: any) => {
     return {
         userInformation: state.profileReducer.userInformation,
@@ -97,8 +109,7 @@ const mapDispatchToProps = (dispatch: any) => {
     }
 }
 
-const withUrlDataContainerComponent = withRouter(ProfileContainer)
-export default connect(mapStateToProps, mapDispatchToProps)(withUrlDataContainerComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);
 
 
 
