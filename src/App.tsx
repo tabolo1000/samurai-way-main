@@ -17,6 +17,8 @@ import {Hoo} from "./components/Navbar/Hoo/Hoo";
 import {DialogsContainer} from "./components/Navbar/Dialogs/DialogsContainer";
 import ProfileContainer from "./components/Navbar/Profile/ProfileContainer";
 import UsersContainer from "./components/Navbar/Users/UsersContainer";
+import AuthorizationContainer from "./components/Header/Auth/AuthorizationContainer";
+
 
 export interface propsType {
     store: stateType;
@@ -104,6 +106,7 @@ function App() {
             <Navbar/>
             <ContentStyled>
                 <Routes>
+                    <Route path = {`/auth`} element = {<AuthorizationContainer/>}/>
                     <Route path={`/profile/:userId?`} element={<ProfileContainer />}/>
                     <Route path={`/dialogs`} element={<DialogsContainer />}/>
                     <Route path={`/news`} element={<News/>}/>

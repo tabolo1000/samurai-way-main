@@ -15,8 +15,6 @@ import {withRouter} from "../../withRouter";
 import {useParams} from "react-router-dom";
 
 
-
-
 interface propsType {
     profileInfo: profileInfoType,
     allMyPosts: allMyPostsType[],
@@ -47,38 +45,34 @@ interface postTextAreaDataType {
 
 export let ProfileContainer = (props: any) => {
 
-        // debugger
+    // debugger
 
-          let {userId}:any =  useParams();
-       if(!userId){
-           userId = 2
-       }
-  console.log(userId)
-        useEffect(() => {
-            axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-                .then((response:any) => {
-                    debugger
-                    props.setUsers(response.data)
-                    props.toggleIsFetching(true)
-                })
-        }, [userId]);
-        // this.props.toggleIsFetching(true)
-
+    let {userId}: any = useParams();
+    if (!userId) {
+        userId = 2
+    }
+    useEffect(() => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
+            .then((response: any) => {
+                debugger
+                props.setUsers(response.data)
+                props.toggleIsFetching(true)
+            })
+    }, [userId]);
+    // this.props.toggleIsFetching(true)
 
 
-        return (
-            <ContentStyled>
-                <ProfileInfo profileInfo={props.profileInfo}
-                userInformation = {props.userInformation}
-                isFetching = {props.isFetching}/>
-                <MyPosts allMyPosts = {props.allMyPosts} postTextAreaData={props.postTextAreaData}
-                         onPostChange = {props.onPostChange} addPost={props.addPost}
-                         userInformation = {props.userInformation}/>
-            </ContentStyled>
-        );
+    return (
+        <ContentStyled>
+            <ProfileInfo profileInfo={props.profileInfo}
+                         userInformation={props.userInformation}
+                         isFetching={props.isFetching}/>
+            <MyPosts allMyPosts={props.allMyPosts} postTextAreaData={props.postTextAreaData}
+                     onPostChange={props.onPostChange} addPost={props.addPost}
+                     userInformation={props.userInformation}/>
+        </ContentStyled>
+    );
 }
-
-
 
 
 const mapStateToProps = (state: any) => {
@@ -97,15 +91,15 @@ const mapDispatchToProps = (dispatch: any) => {
         onPostChange: (message: string) => {
             dispatch(changePostTextAreaDataCreator(message))
         },
-        addPost: (message:string) => {
+        addPost: (message: string) => {
             dispatch(addPostActionCreator(message))
         },
         setUsers: (userInformation: any) => {
-             dispatch(setUsersAC(userInformation))
+            dispatch(setUsersAC(userInformation))
         },
         toggleIsFetching: (isFetching: any) => {
             dispatch(toggleIsFetchingAC(isFetching))
-    }
+        }
     }
 }
 
