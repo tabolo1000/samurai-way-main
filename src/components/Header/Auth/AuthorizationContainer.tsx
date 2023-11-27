@@ -20,7 +20,6 @@ class AuthorizationContainer extends React.Component<any> {
     render(){
         return (
             <div>
-                { (!this.props.data) ? 1 : this.props.data.id }
                 <Auth {...this.props}/>
             </div>
         );

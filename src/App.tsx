@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import {Header} from "./components/Header/Header";
 import styled from "styled-components";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Footer} from "./components/Footer/Footer";
@@ -18,6 +17,7 @@ import {DialogsContainer} from "./components/Navbar/Dialogs/DialogsContainer";
 import ProfileContainer from "./components/Navbar/Profile/ProfileContainer";
 import UsersContainer from "./components/Navbar/Users/UsersContainer";
 import AuthorizationContainer from "./components/Header/Auth/AuthorizationContainer";
+import {HeaderContainer} from "./components/Header/HeaderContainer";
 
 
 export interface propsType {
@@ -95,14 +95,9 @@ interface myMessageType {
 }
 
 function App() {
-    // const arrRoute = ['/', "/dialogs", "/news", "/music", "/setting", "/users", "/hoo"]
-    // const arrComponents = [
-    //     <ProfileContainer />, <DialogsContainer />
-    //    , <News/>, <Music/>, <Setting/>, <UsersContainer/>,
-    //     <Hoo/>,]
     return (
         <AppStyled>
-            <Header/>
+            <HeaderContainer/>
             <Navbar/>
             <ContentStyled>
                 <Routes>
@@ -114,14 +109,6 @@ function App() {
                     <Route path={`/setting`} element={<Setting/>}/>
                     <Route path={`/users`} element={<UsersContainer/>}/>
                      <Route path={`/hoo`} element={<Hoo/>}/>
-
-
-
-                    {/*{arrRoute.map((item, index) => {*/}
-                    {/*    return (*/}
-                    {/*        <Route path={`${item}/:id`} element={arrComponents[index]}/>*/}
-                    {/*    )*/}
-                    {/*})}*/}
                 </Routes>
             </ContentStyled>
             <Footer/>
