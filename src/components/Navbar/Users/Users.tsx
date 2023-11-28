@@ -4,6 +4,7 @@ import {FlexWrapper} from "../../FlexWrapper";
 import {itemsType} from "../../../store/userReducer";
 import {usersType} from "./UsersContainer";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 
 interface propsType {
@@ -54,15 +55,38 @@ export const Users = (props: any) => {
                                                             ? ("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcCpOS2pB-j57L3TGakCD768IzT27le10ZMg&usqp=CAU")
                                                             : props.users[index].photos.large
                                                     }/>
+                                                {props.users[index].id}
                                             </NavLink>
                                         </div>
                                         <div>
                                             {(props.users[index].followed === true) ?
                                                 <ButtonFollowStyled onClick={() => {
-                                                    props.unfollow(props.users[index].id)
+                                                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${props.users[index].id}`, {
+                                                        withCredentials: true,
+                                                        headers: {
+                                                            "API-KEY": "15f58b4b-0d66-4b69-a133-320f34b52e56"
+                                                        }
+                                                    }).then(response => {
+                                                        if(response.data.resultCode === 0){
+                                                            props.unfollow(props.users[index].id)
+                                                        }
+                                                    })
+
                                                 }}> Unfollow </ButtonFollowStyled> :
                                                 <ButtonUnfollowStyled onClick={() => {
-                                                    props.follow(props.users[index].id)
+                                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${
+                                                        props.users[index].id}`, [],
+                                                        {
+                                                            withCredentials: true,
+                                                            headers: {
+                                                                "API-KEY": "15f58b4b-0d66-4b69-a133-320f34b52e56",
+                                                            }
+                                                        })
+                                                        .then(response => {
+                                                            if(response.data.resultCode === 0){
+                                                                props.follow(props.users[index].id)
+                                                            }
+                                                        })
                                                 }}>Follow</ButtonUnfollowStyled>
                                             }
                                         </div>

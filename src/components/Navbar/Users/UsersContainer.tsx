@@ -42,7 +42,9 @@ export class UsersContainer extends React.Component<any> {
     componentDidMount() {
 
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users`, {
+            withCredentials: true,
+        })
             .then((response: any) => {
                 this.props.toggleIsFetching(false)
                 this.props.setUsers(response.data.items)
@@ -52,7 +54,11 @@ export class UsersContainer extends React.Component<any> {
     }
 
     getCurrentPage = (currentPage: number) => {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage || this.props.currentPage}`)
+        axios.get(
+            `https://social-network.samuraijs.com/api/1.0/users?page=${currentPage || this.props.currentPage}`, {
+                withCredentials: true,
+            }
+            )
             .then((response: any) => {
                 this.props.setCurrentPage(response.data.items, currentPage)
             })
