@@ -55,7 +55,6 @@ export const Users = (props: any) => {
                                                             ? ("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcCpOS2pB-j57L3TGakCD768IzT27le10ZMg&usqp=CAU")
                                                             : props.users[index].photos.large
                                                     }/>
-                                                {props.users[index].id}
                                             </NavLink>
                                         </div>
                                         <div>

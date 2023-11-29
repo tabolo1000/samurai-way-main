@@ -8,8 +8,8 @@ import {
     unfollow
 } from "../../../store/userReducer";
 import {Users  } from "./Users";
-import axios from "axios";
 import React from "react";
+import {usersAPI} from "../../../api/api";
 
 interface propsType {
     follow: (usersId: number) => void,
@@ -40,27 +40,18 @@ interface photosType {
 
 export class UsersContainer extends React.Component<any> {
     componentDidMount() {
-
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users`, {
-            withCredentials: true,
+        usersAPI.getUsers().then(response => {
+            this.props.toggleIsFetching(false)
+            this.props.setUsers(response.items)
+            this.props.setCountUsers(response.totalCount)
         })
-            .then((response: any) => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items)
-                this.props.setCountUsers(response.data.totalCount)
-
-            })
     }
 
-    getCurrentPage = (currentPage: number) => {
-        axios.get(
-            `https://social-network.samuraijs.com/api/1.0/users?page=${currentPage || this.props.currentPage}`, {
-                withCredentials: true,
-            }
-            )
-            .then((response: any) => {
-                this.props.setCurrentPage(response.data.items, currentPage)
+    getCurrentPage = (nowClickCurrentPage: number) => {
+       usersAPI.getUsers(nowClickCurrentPage, this.props.currentPage)
+            .then(response => {
+                this.props.setCurrentPage(response.items, nowClickCurrentPage)
             })
     }
     render() {
@@ -95,3 +86,25 @@ export default connect(myStateToProps, {
         setCountUsers,
         toggleIsFetching,
 })(UsersContainer);
+
+
+
+
+
+
+
+
+
+
+
+
+
+//     axios.get(`https://social-network.samuraijs.com/api/1.0/users`, {
+//         withCredentials: true,
+//     })
+//         .then((response: any) => {
+//             this.props.toggleIsFetching(false)
+//             this.props.setUsers(response.data.items)
+//             this.props.setCountUsers(response.data.totalCount)
+//
+//         })
