@@ -40,6 +40,7 @@ export const Users = (props: any) => {
     const fetchingIs = () => {
 
         if (props.isFetching === false) {
+            debugger
             return (
                 props.users.map((item: any, index: number) => {
                     return (
@@ -59,7 +60,8 @@ export const Users = (props: any) => {
                                         </div>
                                         <div>
                                             {(props.users[index].followed === true) ?
-                                                <ButtonFollowStyled onClick={() => {
+                                                <ButtonFollowStyled disabled = { props.followingInProgress.some( (item: any) => item.usersIdFollowing) } onClick={() => {
+                                                    props.toggleFollowingInProgress(item.id)
                                                     axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${props.users[index].id}`, {
                                                         withCredentials: true,
                                                         headers: {
@@ -69,10 +71,11 @@ export const Users = (props: any) => {
                                                         if(response.data.resultCode === 0){
                                                             props.unfollow(props.users[index].id)
                                                         }
+                                                        props.toggleFollowingInProgress(item.id)
                                                     })
 
                                                 }}> Unfollow </ButtonFollowStyled> :
-                                                <ButtonUnfollowStyled onClick={() => {
+                                                <ButtonUnfollowStyled disabled = { props.followingInProgress.some( (item: any) => item.usersIdFollowing) } onClick={() => {
                                                     axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${
                                                         props.users[index].id}`, [],
                                                         {

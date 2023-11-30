@@ -4,7 +4,7 @@ import {
     itemsType,
     setCountUsers,
     setCurrentPage,
-    setUsers, toggleIsFetching,
+    setUsers, toggleFollowingInProgress, toggleIsFetching,
     unfollow
 } from "../../../store/userReducer";
 import {Users  } from "./Users";
@@ -56,13 +56,15 @@ export class UsersContainer extends React.Component<any> {
     }
     render() {
       return <Users
-          follow  = {this.props.follow}
-          unfollow = {this.props.unfollow}
-          users = {this.props.users}
-          currentPage = {this.props.currentPage}
-          getCurrentPage = {this.getCurrentPage}
-          totalCount = {this.props.totalCount }
-          isFetching = {this.props.isFetching}
+          follow  = { this.props.follow }
+          unfollow = { this.props.unfollow }
+          users = { this.props.users }
+          currentPage = { this.props.currentPage }
+          getCurrentPage = { this.getCurrentPage }
+          totalCount = { this.props.totalCount }
+          isFetching = { this.props.isFetching }
+          followingInProgress = { this.props.folloingInProgress }
+          toggleFollowingInProgress = { this.props.toggleFollowingInProgress }
       />
     }
 
@@ -73,7 +75,8 @@ const myStateToProps = (state: any) => {
         users: state.userReducer.users,
         currentPage: state.userReducer.currentPage || 10,
         totalCount: state.userReducer.totalCount || 1,
-        isFetching: state.userReducer.isFetching
+        isFetching: state.userReducer.isFetching,
+        followingInProgress: state.userReducer.followingInProgress,
     }
 }
 
@@ -85,6 +88,7 @@ export default connect(myStateToProps, {
         setCurrentPage,
         setCountUsers,
         toggleIsFetching,
+        toggleFollowingInProgress,
 })(UsersContainer);
 
 
