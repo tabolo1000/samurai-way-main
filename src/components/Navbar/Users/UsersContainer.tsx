@@ -63,7 +63,7 @@ export class UsersContainer extends React.Component<any> {
           getCurrentPage = { this.getCurrentPage }
           totalCount = { this.props.totalCount }
           isFetching = { this.props.isFetching }
-          followingInProgress = { this.props.folloingInProgress }
+          followingInProgress = { this.props.followingInProgress }
           toggleFollowingInProgress = { this.props.toggleFollowingInProgress }
       />
     }
