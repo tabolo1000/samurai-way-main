@@ -77,23 +77,23 @@ export const userReducer = (state = initialState, action: any) => {
                 isFetching: action.isFetching,
             }
         }case (TOGGLE_FOLLOWING_IM_PROGRESS):{
-            if(!state.followingInProgress.some((i: any) => i === action.userIdFollowing)){
             return {
                 ...state,
-                 followingInProgress: [...state.followingInProgress, action.userIdFollowing]
-            }}else {
-                return {
-                ...state,
-                 followingInProgress: [...state.followingInProgress, action.userIdFollowing = null]
-            }}}
+                followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.userIdFollowing]
+                    : state.followingInProgress.filter((id: any) => id != action.userIdFollowing)
+            }
+        }
+
         default:
             return state;
     }
 }
 
-export const toggleFollowingInProgress = (userIdFollowing: any) => {
+export const toggleFollowingInProgress = (isFetching: any, userIdFollowing: any) => {
     return {
         type: TOGGLE_FOLLOWING_IM_PROGRESS,
+        isFetching,
         userIdFollowing,
     }
 }
