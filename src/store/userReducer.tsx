@@ -1,4 +1,5 @@
 import {usersType} from "../components/Navbar/Users/UsersContainer";
+import {usersAPI} from "../api/api";
 
 
 const SET_USERS = "SET_USERS",
@@ -143,5 +144,32 @@ export const toggleIsFetching = (isFetching: boolean) => {
     return {
         type: TOGGLE_IS_FETCHING,
         isFetching,
+    }
+}
+
+
+export const unfollowThunk = (isFetching: boolean, itemId: number, userIndexId: number ) => {
+    return (dispatch: any) => {
+        dispatch(toggleFollowingInProgress(true, itemId))
+        usersAPI.deleteUserUnfollow(userIndexId)
+            .then((response: any) => {
+                if(response.resultCode === 0){
+                    dispatch(unfollow(userIndexId))
+                }
+                dispatch(toggleFollowingInProgress(false, itemId))
+    })
+ }
+}
+
+export const followThunk = (isFetching: boolean, itemId: number, userIndexId: number) => {
+    return (dispatch: any) => {
+           dispatch(toggleFollowingInProgress(true, itemId))
+        usersAPI.sendUserFollowing(userIndexId)
+            .then((response: any) => {
+                if(response.resultCode === 0){
+                    dispatch(follow(userIndexId))
+                }
+                dispatch(toggleFollowingInProgress(false, itemId))
+    })
     }
 }

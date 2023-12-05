@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import {FlexWrapper} from "../../FlexWrapper";
-import {itemsType} from "../../../store/userReducer";
+import {followThunk, itemsType} from "../../../store/userReducer";
 import {usersType} from "./UsersContainer";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
@@ -65,26 +65,38 @@ export const Users = (props: any) => {
                                                     return item.id === items
                                                    }) }
                                                                     onClick={() => {
-                                                    props.toggleFollowingInProgress(true, item.id)
+                                                                        props.unfollowThunk(true, item.id, props.users[index].id)
+                                                                        // props.toggleFollowingInProgress(true, item.id)
+                                                                        //
+                                                                        // usersAPI.deleteUserUnfollow(props.users[index].id)
+                                                                        //     .then((response: any) => {
+                                                                        //         if (response.resultCode === 0) {
+                                                                        //             props.unfollow(props.users[index].id)
+                                                                        //         }
+                                                                        //         props.toggleFollowingInProgress(false, item.id)
+                                                                        //     })
 
-                                                    usersAPI.deleteUserUnfollow(props.users[index].id)
-                                                    .then((response: any) => {
-                                                        if(response.resultCode === 0){
-                                                            props.unfollow(props.users[index].id)
-                                                        }
-                                                        props.toggleFollowingInProgress(false, item.id)
-                                                    })
+                                                    // props.toggleFollowingInProgress(true, item.id)
+                                                    //
+                                                    // usersAPI.deleteUserUnfollow(props.users[index].id)
+                                                    // .then((response: any) => {
+                                                    //     if(response.resultCode === 0){
+                                                    //         props.unfollow(props.users[index].id)
+                                                    //     }
+                                                    //     props.toggleFollowingInProgress(false, item.id)
+                                                    // })
 
                                                 }}> Unfollow </ButtonFollowStyled> :
                                                 <ButtonUnfollowStyled disabled = { props.followingInProgress.some( (items: any) => item.id == items) } onClick={() => {
-                                                    props.toggleFollowingInProgress(true, item.id)
-                                                        usersAPI.sendUserFollowing(props.users[index].id)
-                                                        .then((response: any) => {
-                                                            if(response.resultCode === 0){
-                                                                props.follow(props.users[index].id)
-                                                            }
-                                                            props.toggleFollowingInProgress(false, item.id)
-                                                        })
+                                                    props.followThunk(true, item.id, props.users[index].id)
+                                                    // props.toggleFollowingInProgress(true, item.id)
+                                                    //     usersAPI.sendUserFollowing(props.users[index].id)
+                                                    //     .then((response: any) => {
+                                                    //         if(response.resultCode === 0){
+                                                    //             props.follow(props.users[index].id)
+                                                    //         }
+                                                    //         props.toggleFollowingInProgress(false, item.id)
+                                                    //     })
                                                 }}>Follow</ButtonUnfollowStyled>
                                             }
                                         </div>

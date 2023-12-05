@@ -1,11 +1,11 @@
 import {connect} from "react-redux";
 import {
-    follow,
+    follow, followThunk,
     itemsType,
     setCountUsers,
     setCurrentPage,
     setUsers, toggleFollowingInProgress, toggleIsFetching,
-    unfollow
+    unfollow, unfollowThunk
 } from "../../../store/userReducer";
 import {Users  } from "./Users";
 import React from "react";
@@ -56,6 +56,8 @@ export class UsersContainer extends React.Component<any> {
     }
     render() {
       return <Users
+          followThunk = { this.props.followThunk }
+          unfollowThunk = {this.props.unfollowThunk}
           follow  = { this.props.follow }
           unfollow = { this.props.unfollow }
           users = { this.props.users }
@@ -89,6 +91,8 @@ export default connect(myStateToProps, {
         setCountUsers,
         toggleIsFetching,
         toggleFollowingInProgress,
+    unfollowThunk,
+    followThunk,
 })(UsersContainer);
 
 
