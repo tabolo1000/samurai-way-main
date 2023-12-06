@@ -19,6 +19,7 @@ export const usersAPI = {
     setUsers(){
         return instance.get(`users`)
             .then((response => {
+                debugger
                 return response.data
             }))
     },

@@ -60,44 +60,19 @@ export const Users = (props: any) => {
                                         </div>
                                         <div>
                                             {(props.users[index].followed === true) ?
-                                                <ButtonFollowStyled disabled = { props.followingInProgress.some( (items: any) => {
-                                                    // debugger;
-                                                    return item.id === items
-                                                   }) }
-                                                                    onClick={() => {
-                                                                        props.unfollowThunk(true, item.id, props.users[index].id)
-                                                                        // props.toggleFollowingInProgress(true, item.id)
-                                                                        //
-                                                                        // usersAPI.deleteUserUnfollow(props.users[index].id)
-                                                                        //     .then((response: any) => {
-                                                                        //         if (response.resultCode === 0) {
-                                                                        //             props.unfollow(props.users[index].id)
-                                                                        //         }
-                                                                        //         props.toggleFollowingInProgress(false, item.id)
-                                                                        //     })
-
-                                                    // props.toggleFollowingInProgress(true, item.id)
-                                                    //
-                                                    // usersAPI.deleteUserUnfollow(props.users[index].id)
-                                                    // .then((response: any) => {
-                                                    //     if(response.resultCode === 0){
-                                                    //         props.unfollow(props.users[index].id)
-                                                    //     }
-                                                    //     props.toggleFollowingInProgress(false, item.id)
-                                                    // })
-
-                                                }}> Unfollow </ButtonFollowStyled> :
-                                                <ButtonUnfollowStyled disabled = { props.followingInProgress.some( (items: any) => item.id == items) } onClick={() => {
-                                                    props.followThunk(true, item.id, props.users[index].id)
-                                                    // props.toggleFollowingInProgress(true, item.id)
-                                                    //     usersAPI.sendUserFollowing(props.users[index].id)
-                                                    //     .then((response: any) => {
-                                                    //         if(response.resultCode === 0){
-                                                    //             props.follow(props.users[index].id)
-                                                    //         }
-                                                    //         props.toggleFollowingInProgress(false, item.id)
-                                                    //     })
-                                                }}>Follow</ButtonUnfollowStyled>
+                                                <ButtonFollowStyled
+                                                    disabled={props.followingInProgress.some((items: any) => {
+                                                        // debugger;
+                                                        return item.id === items
+                                                    })}
+                                                    onClick={() => {
+                                                        props.unfollowThunk(true, item.id, props.users[index].id)
+                                                    }}> Unfollow </ButtonFollowStyled> :
+                                                <ButtonUnfollowStyled
+                                                    disabled={props.followingInProgress.some((items: any) => item.id == items)}
+                                                    onClick={() => {
+                                                        props.followThunk(true, item.id, props.users[index].id)
+                                                    }}>Follow</ButtonUnfollowStyled>
                                             }
                                         </div>
                                     </FlexWrapper>

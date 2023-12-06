@@ -1,13 +1,13 @@
 import {connect} from "react-redux";
 import {
-    follow, followThunk,
+    follow, followThunk, getCurrentPageThunkCreator, getUserThunkCreator,
     itemsType,
     setCountUsers,
     setCurrentPage,
     setUsers, toggleFollowingInProgress, toggleIsFetching,
     unfollow, unfollowThunk
 } from "../../../store/userReducer";
-import {Users  } from "./Users";
+import {Users} from "./Users";
 import React from "react";
 import {usersAPI} from "../../../api/api";
 
@@ -40,34 +40,31 @@ interface photosType {
 
 export class UsersContainer extends React.Component<any> {
     componentDidMount() {
-        this.props.toggleIsFetching(true)
-        usersAPI.getUsers().then(response => {
-            this.props.toggleIsFetching(false)
-            this.props.setUsers(response.items)
-            this.props.setCountUsers(response.totalCount)
-        })
+        this.props.getUserThunkCreator()
     }
 
     getCurrentPage = (nowClickCurrentPage: number) => {
-       usersAPI.getUsers(nowClickCurrentPage, this.props.currentPage)
-            .then(response => {
-                this.props.setCurrentPage(response.items, nowClickCurrentPage)
-            })
+        this.props.getCurrentPageThunkCreator(nowClickCurrentPage, this.props.currentPage, this.props.setCurrentPage)
+        // usersAPI.getUsers(nowClickCurrentPage, this.props.currentPage)
+        //      .then(response => {
+        //          this.props.setCurrentPage(response.items, nowClickCurrentPage)
+        //      })
     }
+
     render() {
-      return <Users
-          followThunk = { this.props.followThunk }
-          unfollowThunk = {this.props.unfollowThunk}
-          follow  = { this.props.follow }
-          unfollow = { this.props.unfollow }
-          users = { this.props.users }
-          currentPage = { this.props.currentPage }
-          getCurrentPage = { this.getCurrentPage }
-          totalCount = { this.props.totalCount }
-          isFetching = { this.props.isFetching }
-          followingInProgress = { this.props.followingInProgress }
-          toggleFollowingInProgress = { this.props.toggleFollowingInProgress }
-      />
+        return <Users
+            followThunk={this.props.followThunk}
+            unfollowThunk={this.props.unfollowThunk}
+            follow={this.props.follow}
+            unfollow={this.props.unfollow}
+            users={this.props.users}
+            currentPage={this.props.currentPage}
+            getCurrentPage={this.getCurrentPage}
+            totalCount={this.props.totalCount}
+            isFetching={this.props.isFetching}
+            followingInProgress={this.props.followingInProgress}
+            toggleFollowingInProgress={this.props.toggleFollowingInProgress}
+        />
     }
 
 }
@@ -84,27 +81,18 @@ const myStateToProps = (state: any) => {
 
 
 export default connect(myStateToProps, {
-        follow,
-        unfollow,
-        setUsers,
-        setCurrentPage,
-        setCountUsers,
-        toggleIsFetching,
-        toggleFollowingInProgress,
+    follow,
+    unfollow,
+    setUsers,
+    setCurrentPage,
+    setCountUsers,
+    toggleIsFetching,
+    toggleFollowingInProgress,
     unfollowThunk,
     followThunk,
+    getUserThunkCreator,
+    getCurrentPageThunkCreator
 })(UsersContainer);
-
-
-
-
-
-
-
-
-
-
-
 
 
 //     axios.get(`https://social-network.samuraijs.com/api/1.0/users`, {

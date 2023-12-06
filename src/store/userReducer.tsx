@@ -173,3 +173,23 @@ export const followThunk = (isFetching: boolean, itemId: number, userIndexId: nu
     })
     }
 }
+export const getUserThunkCreator = () => {
+    return (dispatch: any) => {
+        dispatch(toggleIsFetching(true))
+        usersAPI.getUsers()
+            .then(response => {
+                dispatch(toggleIsFetching(false))
+                dispatch(setUsers(response.items))
+                dispatch(setCountUsers(response.totalCount))
+            })
+    }
+}
+
+export const getCurrentPageThunkCreator = (nowClickCurrentPage: number, currentPage: number, setCurrentPage: any) => {
+    return (dispatch: any) => {
+       usersAPI.getUsers(nowClickCurrentPage, currentPage)
+            .then(response => {
+                dispatch(setCurrentPage(response.items, nowClickCurrentPage))
+            })
+    }
+}
