@@ -5,7 +5,8 @@ import {addMessageActionCreator, changeDialogTextAreaActionCreator} from "../../
 const myStateToProps = (state: any) => {
     return {
         postData: state.dialogReducer.postData,
-        dialogsData: state.dialogReducer.dialogsData
+        dialogsData: state.dialogReducer.dialogsData,
+        isAuth: state.authReducer.isAuth,
     }
 }
 const myDispatchToProps = (dispatch:any) => {
