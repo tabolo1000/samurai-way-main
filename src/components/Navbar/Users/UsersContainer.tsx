@@ -9,7 +9,6 @@ import {
 } from "../../../store/userReducer";
 import {Users} from "./Users";
 import React from "react";
-import {usersAPI} from "../../../api/api";
 
 interface propsType {
     follow: (usersId: number) => void,

@@ -4,6 +4,7 @@ import {DialogItem} from "./DialogItem/DialogItem";
 import {DialogMessage} from "./DialogMessage/DialogMessage";
 import {redirect} from "react-router-dom";
 import {Auth} from "../../Header/Auth/Auth";
+import AuthReducer from "../../../store/authReducer";
 
 
 /*interface dialogPropsType {
@@ -61,7 +62,7 @@ interface myMessageType {
 
 
 export const Dialogs = (props: any) => {
-   alert(props.isAuth)
+    alert(props.isAuth)
     const dialogsElements =
         props.dialogsData.map((item: any) => <DialogItem name={item.name} id={item.id}
                                                          image={item.image}></DialogItem>);
@@ -98,30 +99,25 @@ export const Dialogs = (props: any) => {
             props.upDateNewMessageBody(message)
         }
     }
-
-    if (!props.isAuth) {
-        return <Auth replace to={"/auth"}/>
-    } else {
-          return (
-            <div>
-                <NameDialog>Dialog</NameDialog>
-                <DialogsStyled>
-                    <UlList>
-                        {dialogsElements}
-                    </UlList>
-                    <UlList>
-                        {allMessage}
-                        <textarea onChange={changeDialogTextArea} name="q" ref={createRefMainPost} cols={30} rows={10}
-                                  placeholder="Input your text!"
-                                  value={props.postData.dialogTextArea.textMessage}></textarea>
-                        <button onClick={() => {
-                            addMessage()
-                        }}>Click
-                        </button>
-                    </UlList>
-                </DialogsStyled>
-            </div>
-        )
-    }
+    return (
+        <div>
+            <NameDialog>Dialog</NameDialog>
+            <DialogsStyled>
+                <UlList>
+                    {dialogsElements}
+                </UlList>
+                <UlList>
+                    {allMessage}
+                    <textarea onChange={changeDialogTextArea} name="q" ref={createRefMainPost} cols={30} rows={10}
+                              placeholder="Input your text!"
+                              value={props.postData.dialogTextArea.textMessage}></textarea>
+                    <button onClick={() => {
+                        addMessage()
+                    }}>Click
+                    </button>
+                </UlList>
+            </DialogsStyled>
+        </div>
+    )
 };
 

@@ -5,12 +5,11 @@ import {connect} from "react-redux";
 import {setAuthUserData} from "../../../store/authReducer";
 
 class AuthorizationContainer extends React.Component<any> {
-
     componentDidMount() {
         axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
         withCredentials: true,
-    }).
-    then((response) => {
+    })
+            .then((response) => {
         this.props.setAuthUserData(
             response.data.data
         )

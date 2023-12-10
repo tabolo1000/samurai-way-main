@@ -19,7 +19,7 @@ const authReducer = (state = initialState, action: any) => {
                 data: {
                     ...action.data
                 },
-                isAuth: true,
+                isAuth: Boolean(action.data.id),
             }
         }
         default:{

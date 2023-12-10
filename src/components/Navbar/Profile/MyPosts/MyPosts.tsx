@@ -11,8 +11,6 @@ interface propsType {
 
 
 export const MyPosts = (props: any) => {
-    debugger
-
     let newPostEl = useRef<HTMLTextAreaElement>(null);
 
     const postChange = () => {

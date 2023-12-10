@@ -54,7 +54,6 @@ export let ProfileContainer = (props: any) => {
     useEffect(() => {
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
             .then((response: any) => {
-                debugger
                 props.setUsers(response.data)
                 props.toggleIsFetching(true)
             })
@@ -75,13 +74,14 @@ export let ProfileContainer = (props: any) => {
 }
 
 
-const mapStateToProps = (state: any) => {
+
+const mapStateToProps = (...arg: any) => {
     return {
-        userInformation: state.profileReducer.userInformation,
-        profileInfo: state.profileReducer.postsProfileData.profileInfo,
-        allMyPosts: state.profileReducer.postsProfileData.allMyPosts,
-        postTextAreaData: state.profileReducer.postsProfileData.postTextAreaData,
-        isFetching: state.profileReducer.isFetching,
+        userInformation: arg[0].profileReducer.userInformation,
+        profileInfo: arg[0].profileReducer.postsProfileData.profileInfo,
+        allMyPosts: arg[0].profileReducer.postsProfileData.allMyPosts,
+        postTextAreaData: arg[0].profileReducer.postsProfileData.postTextAreaData,
+        isFetching: arg[0].profileReducer.isFetching,
 
     }
 }

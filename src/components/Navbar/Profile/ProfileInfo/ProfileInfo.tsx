@@ -13,9 +13,7 @@ export const ProfileInfo = (props: any) => {
                     <h2>{props.userInformation.fullName}</h2>
                     <h3>Date of Birth: {props.profileInfo.date}</h3>
                     <h3>City: {props.profileInfo.city}</h3>
-                    <h3>Status: <span>{props.userInformation.aboutMe
-
-                    }</span></h3>
+                    <h3>Status: <span>{props.userInformation.aboutMe}</span></h3>
                     <h3>Web Site: <span>{props.userInformation.contacts.github}</span></h3>
                 </div>
             )
