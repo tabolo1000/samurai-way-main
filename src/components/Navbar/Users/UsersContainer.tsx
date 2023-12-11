@@ -9,6 +9,7 @@ import {
 } from "../../../store/userReducer";
 import {Users} from "./Users";
 import React from "react";
+import {withAuthRedirect} from "../../../hoc/AuthRedirect";
 
 interface propsType {
     follow: (usersId: number) => void,
@@ -78,6 +79,7 @@ const myStateToProps = (state: any) => {
     }
 }
 
+let AuthRedirectComponent = withAuthRedirect(UsersContainer)
 
 export default connect(myStateToProps, {
     follow,
@@ -91,7 +93,7 @@ export default connect(myStateToProps, {
     followThunk,
     getUserThunkCreator,
     getCurrentPageThunkCreator
-})(UsersContainer);
+})(AuthRedirectComponent);
 
 
 //     axios.get(`https://social-network.samuraijs.com/api/1.0/users`, {
