@@ -10,7 +10,12 @@ import {
 import {Users} from "./Users";
 import React from "react";
 import {withAuthRedirect} from "../../../hoc/AuthRedirect";
+import {compose} from "redux";
 
+
+interface Props {
+    comp: React.ElementType<any>;
+}
 interface propsType {
     follow: (usersId: number) => void,
     unfollow: (usersId: number) => void,
@@ -39,6 +44,10 @@ interface photosType {
 }
 
 export class UsersContainer extends React.Component<any> {
+
+    constructor(props: any) {
+        super(props);
+    }
     componentDidMount() {
         this.props.getUserThunkCreator()
     }
@@ -78,22 +87,30 @@ const myStateToProps = (state: any) => {
         followingInProgress: state.userReducer.followingInProgress,
     }
 }
-
-let AuthRedirectComponent = withAuthRedirect(UsersContainer)
-
-export default connect(myStateToProps, {
-    follow,
-    unfollow,
-    setUsers,
+//
+export default compose<React.ComponentType>(
+    connect(myStateToProps, {
     setCurrentPage,
     setCountUsers,
-    toggleIsFetching,
-    toggleFollowingInProgress,
     unfollowThunk,
     followThunk,
     getUserThunkCreator,
     getCurrentPageThunkCreator
-})(AuthRedirectComponent);
+}),
+    withAuthRedirect,
+    UsersContainer
+    )(Users)
+
+
+// let AuthRedirectComponent = withAuthRedirect(UsersContainer)
+// export default connect(myStateToProps, {
+//     setCurrentPage,
+//     setCountUsers,
+//     unfollowThunk,
+//     followThunk,
+//     getUserThunkCreator,
+//     getCurrentPageThunkCreator
+// })(AuthRedirectComponent);
 
 
 //     axios.get(`https://social-network.samuraijs.com/api/1.0/users`, {
