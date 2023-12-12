@@ -13,6 +13,8 @@ import {connect} from "react-redux";
 // import {useNavigate} from "react-router";
 import {withRouter} from "../../withRouter";
 import {useParams} from "react-router-dom";
+import {compose} from "redux";
+import {withAuthRedirect} from "../../../hoc/AuthRedirect";
 
 
 interface propsType {
@@ -102,8 +104,10 @@ const mapDispatchToProps = (dispatch: any) => {
         }
     }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
+    )(ProfileContainer)
+// export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);
 
 
 

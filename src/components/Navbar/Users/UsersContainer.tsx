@@ -97,9 +97,8 @@ export default compose<React.ComponentType>(
     getUserThunkCreator,
     getCurrentPageThunkCreator
 }),
-    withAuthRedirect,
-    UsersContainer
-    )(Users)
+    withAuthRedirect
+    )(UsersContainer)
 
 
 // let AuthRedirectComponent = withAuthRedirect(UsersContainer)
