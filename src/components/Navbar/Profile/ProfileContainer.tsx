@@ -106,6 +106,7 @@ const mapDispatchToProps = (dispatch: any) => {
 }
 export default compose<React.ComponentType>(
     connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
     )(ProfileContainer)
 // export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);
 
