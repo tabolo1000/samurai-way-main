@@ -15,6 +15,7 @@ import {withRouter} from "../../withRouter";
 import {useParams} from "react-router-dom";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../../hoc/AuthRedirect";
+import {ProfileStatus} from "./ProfileStatus";
 
 
 interface propsType {
@@ -68,6 +69,7 @@ export let ProfileContainer = (props: any) => {
             <ProfileInfo profileInfo={props.profileInfo}
                          userInformation={props.userInformation}
                          isFetching={props.isFetching}/>
+            <ProfileStatus/>
             <MyPosts allMyPosts={props.allMyPosts} postTextAreaData={props.postTextAreaData}
                      onPostChange={props.onPostChange} addPost={props.addPost}
                      userInformation={props.userInformation}/>
