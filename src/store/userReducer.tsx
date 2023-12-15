@@ -141,6 +141,7 @@ export const setCountUsers = (totalCount: number) => {
 }
 
 export const toggleIsFetching = (isFetching: boolean) => {
+    debugger
     return {
         type: TOGGLE_IS_FETCHING,
         isFetching,

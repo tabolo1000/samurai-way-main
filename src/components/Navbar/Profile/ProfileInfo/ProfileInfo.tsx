@@ -5,6 +5,7 @@ import {useParams} from "react-router-dom";
 
 
 export const ProfileInfo = (props: any) => {
+    debugger
     const toggle = () => {
         if (props.isFetching) {
             return (

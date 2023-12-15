@@ -5,7 +5,7 @@ import {MyPosts} from "./MyPosts/MyPosts";
 import axios from "axios";
 import {
     addPostActionCreator,
-    changePostTextAreaDataCreator,
+    changePostTextAreaDataCreator, getUserThunk,
     setUsersAC,
     toggleIsFetchingAC
 } from "../../../store/profileReducer";
@@ -47,21 +47,29 @@ interface postTextAreaDataType {
 }
 
 export let ProfileContainer = (props: any) => {
-
+debugger
     // debugger
 
-    let {userId}: any = useParams();
-    if (!userId) {
-        userId = 2
-    }
-    useEffect(() => {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-            .then((response: any) => {
-                props.setUsers(response.data)
-                props.toggleIsFetching(true)
-            })
-    }, [userId]);
-    // this.props.toggleIsFetching(true)
+    // let {userId}: any = useParams();
+    // if (!userId) {
+    //     userId = 2
+    // }
+    props.getUserInfo(2)
+
+    // useEffect(() => {
+    //     props.getUserInfo(userId)
+    //      },[userId])
+
+    //
+    // props.getUserInfo(2)
+    // useEffect(() => {
+    //     axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
+    //         .then((response: any) => {
+    //             props.setUsers(response.data)
+    //             props.toggleIsFetching(true)
+    //         })
+    // }, [userId]);
+    // // this.props.toggleIsFetching(true)
 
 
     return (
@@ -92,6 +100,9 @@ const mapStateToProps = (...arg: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
+        getUserInfo: (userId: number ) => {
+            dispatch(getUserThunk(userId))
+        },
         onPostChange: (message: string) => {
             dispatch(changePostTextAreaDataCreator(message))
         },

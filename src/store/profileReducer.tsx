@@ -1,6 +1,6 @@
-import React from 'react';
-import {PostProfileDataType, profileDataType} from "../App";
 import beach from "../image/images.jpeg"
+import {profileAPI} from "../api/api";
+
 
 const ADD_POST: string = "ADD_POST";
 const CHANGE_POST_TEXT_AREA_DATA: string = "CHANGE_POST_TEXT_AREA_DATA";
@@ -79,6 +79,7 @@ const profileReducer = (state= initialState, action: any) => {
             };
         }
         case TOGGLE_IS_FETCHING: {
+            debugger
             return {
                 ...state,
                 isFetching: action.isFetching,
@@ -113,4 +114,14 @@ export const toggleIsFetchingAC = ( isFetching: any) => (
          isFetching,
     }
 )
+
+export const getUserThunk = (userId: number) => {
+    return (dispatch: any) => {
+        profileAPI.getUserProfile(userId)
+            .then((response)=>{
+                    dispatch(setUsersAC(response.data))
+                    dispatch(toggleIsFetchingAC(true))
+            })
+    }
+}
 export default profileReducer;

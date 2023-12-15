@@ -14,7 +14,6 @@ const mapStateToPropsForRedirect = (state: any) => {
 
 
 export const withAuthRedirect = (Component: any) => {
-    debugger
         class RedirectComponent extends React.Component<any> {
             render() {
                 if(!this.props.isAuth){
