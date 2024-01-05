@@ -38,10 +38,7 @@ export const Navbar = () => {
     return (
         <SidebarStyled>
             <UlStyled>
-                {menu.map((item, index) => {
-                    return (
-                        <LiStyled><NavlinkStyled to={`${item}`}>{name[index]}</NavlinkStyled></LiStyled>)
-                })}
+                {arrayNavbar}
             </UlStyled>
 
             <WrapperGrid>
