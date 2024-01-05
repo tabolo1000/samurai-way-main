@@ -19,7 +19,13 @@ interface propsType {
     isFetching: boolean,
 }
 
-export const Users = (props: any) => {
+export const Users = ({
+    follow, unfollow, setUser,
+    users,getCurrentPage,
+    currentPage, totalCount,
+    isFatching,
+
+}) => {
     let calculatePage = () => {
         return Math.ceil(props.totalCount / 10);
     }
@@ -30,19 +36,19 @@ export const Users = (props: any) => {
     }
     let arrAllPages = arrIndexPages.map((items: any) => {
         return <PagePaginationStyled onClick={() => {
-            props.getCurrentPage(items)
+             getCurrentPage(items)
         }}>{items}</PagePaginationStyled>
     });
-    let number = 5 - props.currentPage;
+    let number = 5 - currentPage;
     let pathPages = arrAllPages.slice(
-        ((props.currentPage - 5) < 1) ? 1 : props.currentPage - 5,
-        ((props.currentPage - 5) <= 5) ? 10 - number : props.currentPage + 4
+        ((currentPage - 5) < 1) ? 1 : currentPage - 5,
+        ((currentPage - 5) <= 5) ? 10 - number : currentPage + 4
     )
     const fetchingIs = () => {
 
-        if (props.isFetching === false) {
+        if (isFetching === false) {
             return (
-                props.users.map((item: any, index: number) => {
+                users.map((item: any, index: number) => {
                     return (
                         <MainBlockStyled>
                             <FlexWrapper>
@@ -52,26 +58,26 @@ export const Users = (props: any) => {
                                             <NavLink to={`/profile/` + item.id}>
                                                 <ImageStyled
                                                     src={
-                                                        (props.users[index].photos.large === null)
+                                                        (users[index].photos.large === null)
                                                             ? ("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcCpOS2pB-j57L3TGakCD768IzT27le10ZMg&usqp=CAU")
-                                                            : props.users[index].photos.large
+                                                            : users[index].photos.large
                                                     }/>
                                             </NavLink>
                                         </div>
                                         <div>
-                                            {(props.users[index].followed === true) ?
+                                            {(users[index].followed === true) ?
                                                 <ButtonFollowStyled
-                                                    disabled={props.followingInProgress.some((items: any) => {
+                                                    disabled={followingInProgress.some((items: any) => {
                                                         // debugger;
                                                         return item.id === items
                                                     })}
                                                     onClick={() => {
-                                                        props.unfollowThunk(true, item.id, props.users[index].id)
+                                                        unfollowThunk(true, item.id, users[index].id)
                                                     }}> Unfollow </ButtonFollowStyled> :
                                                 <ButtonUnfollowStyled
-                                                    disabled={props.followingInProgress.some((items: any) => item.id == items)}
+                                                    disabled={followingInProgress.some((items: any) => item.id == items)}
                                                     onClick={() => {
-                                                        props.followThunk(true, item.id, props.users[index].id)
+                                                        followThunk(true, item.id, users[index].id)
                                                     }}>Follow</ButtonUnfollowStyled>
                                             }
                                         </div>
@@ -79,8 +85,8 @@ export const Users = (props: any) => {
 
                                 </>
                                 <InformationUser>
-                                    <h3>{props.users[index].name}</h3>
-                                    <p>{props.users[index].status}</p>
+                                    <h3>{users[index].name}</h3>
+                                    <p>{users[index].status}</p>
                                     <h3>{"Ucrain"}</h3>
                                     <h3>{"Ternopl"}</h3>
                                 </InformationUser>
