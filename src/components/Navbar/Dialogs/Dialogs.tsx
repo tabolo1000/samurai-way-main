@@ -61,22 +61,28 @@ interface myMessageType {
 }
 
 
-export const Dialogs = (props: any) => {
-    alert(props.isAuth)
+export const Dialogs = ({ 
+    dialogsData,
+    postData,
+    isAuth,
+    sendMessage,
+    upDateNewMessageBody
+} ) => {
+    alert(isAuth)
     const dialogsElements =
         props.dialogsData.map((item: any) => <DialogItem name={item.name} id={item.id}
                                                          image={item.image}></DialogItem>);
 
 
     const otherMessage =
-        props.postData.otherUsersMessage.map((item: any) => <DialogMessage id={item.id} message={item.message}
+        postData.otherUsersMessage.map((item: any) => <DialogMessage id={item.id} message={item.message}
                                                                            timeMessage={item.timeMessage}
                                                                            isItMyMessage={item.isItMyMessage}
                                                                            countLikes={item.countLikes}></DialogMessage>)
     ;
 
     const myMessage =
-        props.postData.myMessage.map((item: any) => <DialogMessage id={item.id} message={item.message}
+        postData.myMessage.map((item: any) => <DialogMessage id={item.id} message={item.message}
                                                                    timeMessage={item.timeMessage}
                                                                    isItMyMessage={item.isItMyMessage}
                                                                    countLikes={item.countLikes}
@@ -89,14 +95,14 @@ export const Dialogs = (props: any) => {
     const addMessage = () => {
         if (createRefMainPost.current !== null) {
             let message = createRefMainPost.current.value
-            props.sendMessage(message)
+            sendMessage(message)
         }
     }
 
     const changeDialogTextArea = () => {
         if (createRefMainPost.current !== null) {
             let message = createRefMainPost.current.value
-            props.upDateNewMessageBody(message)
+            upDateNewMessageBody(message)
         }
     }
     return (
@@ -110,7 +116,7 @@ export const Dialogs = (props: any) => {
                     {allMessage}
                     <textarea onChange={changeDialogTextArea} name="q" ref={createRefMainPost} cols={30} rows={10}
                               placeholder="Input your text!"
-                              value={props.postData.dialogTextArea.textMessage}></textarea>
+                              value={postData.dialogTextArea.textMessage}></textarea>
                     <button onClick={() => {
                         addMessage()
                     }}>Click
