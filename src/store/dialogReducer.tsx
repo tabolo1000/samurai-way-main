@@ -1,5 +1,5 @@
 import React from 'react';
-import {dialogType} from "../App";
+import {dialogType} from "../app/App";
 
 const ADD_MESSAGE: string = "ADD_MESSAGE";
 const CHANGE_DIALOGS_TEXT_AREA: string = "CHANGE_DIALOGS_TEXT_AREA";

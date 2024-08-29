@@ -16,9 +16,11 @@ import {compose} from "redux";
 interface Props {
     comp: React.ElementType<any>;
 }
+
+
 interface propsType {
-    follow: (usersId: number) => void,
-    unfollow: (usersId: number) => void,
+    //follow: (usersId: number) => void,
+    //unfollow: (usersId: number) => void,
     setUsers: (users: itemsType) => void,
     users: usersType[],
     setCurrentPage: (users: itemsType, currentPage: number) => void,
@@ -64,8 +66,8 @@ export class UsersContainer extends React.Component<any> {
         return <Users
             followThunk={this.props.followThunk}
             unfollowThunk={this.props.unfollowThunk}
-            follow={this.props.follow}
-            unfollow={this.props.unfollow}
+           // follow={this.props.follow}
+           // unfollow={this.props.unfollow}
             users={this.props.users}
             currentPage={this.props.currentPage}
             getCurrentPage={this.getCurrentPage}

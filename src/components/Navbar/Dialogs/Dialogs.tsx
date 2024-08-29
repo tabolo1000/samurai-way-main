@@ -67,10 +67,10 @@ export const Dialogs = ({
     isAuth,
     sendMessage,
     upDateNewMessageBody
-} ) => {
+} : any) => {
     alert(isAuth)
     const dialogsElements =
-        props.dialogsData.map((item: any) => <DialogItem name={item.name} id={item.id}
+        dialogsData.map((item: any) => <DialogItem name={item.name} id={item.id}
                                                          image={item.image}></DialogItem>);
 
 

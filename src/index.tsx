@@ -1,9 +1,7 @@
-import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import GlobalStyle from "./style/GlobalStyle";
+import App from './app/App';
+import GlobalStyle from "./styles/GlobalStyle";
 import {BrowserRouter} from "react-router-dom";
 import store from "./store/reduxStore";
 import {Provider} from "react-redux";

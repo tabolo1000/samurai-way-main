@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import {FlexWrapper} from "../../../../FlexWrapper";
-import {allMyPropsType} from "../../../../../App";
+import {allMyPropsType} from "../../../../../app/App";
 
 interface postPropsType {
     allMyPosts: Array<allMyPropsType>

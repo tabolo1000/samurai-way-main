@@ -1,4 +1,4 @@
-import beach from "../image/images.jpeg"
+import beach from "../assets/image/images.jpeg"
 import {profileAPI} from "../api/api";
 
 
@@ -115,7 +115,7 @@ export const toggleIsFetchingAC = ( isFetching: any) => (
     }
 )
 
-export const getUserThunk = (userId: number) => {
+export const getUserThunk = (userId: string) => {
     return (dispatch: any) => {
         profileAPI.getUserProfile(userId)
             .then((response)=>{

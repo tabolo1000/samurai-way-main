@@ -1,6 +1,6 @@
 import React from "react";
 import {LinkList, LinkListRight, LinkStyle} from "../DialogsStyled";
-import {Avatar} from "../../../../style/GlobalStyle";
+import {Avatar} from "../../../../styles/GlobalStyle";
 
 
 interface DialogsItemProps {

@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
 import {Post} from "./Post/Post";
-import {PostProfileDataType, profileDataType} from "../../../../App";
+import {PostProfileDataType, profileDataType} from "../../../../app/App";
 
 interface propsType {
     postData: PostProfileDataType;

@@ -1,21 +1,29 @@
-import {createStore, combineReducers, applyMiddleware} from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
 import profileReducer from "./profileReducer";
 import dialogReducer from "./dialogReducer";
-import {followThunk, userReducer} from "./userReducer";
+import { followThunk, userReducer } from "./userReducer";
 import authReducer from "./authReducer";
 import thunkMiddleware from "redux-thunk"
 
 
 
-let reducers = combineReducers({
+const rootState = combineReducers({
     profileReducer,
     dialogReducer,
     userReducer,
     authReducer,
 })
 
-let store = createStore(reducers, applyMiddleware(thunkMiddleware));
+
+
+
+let store = createStore(rootState, applyMiddleware(thunkMiddleware));
 
 
 
 export default store;
+
+
+
+
+export type RootState = ReturnType<typeof rootState>
