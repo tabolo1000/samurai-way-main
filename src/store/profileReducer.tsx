@@ -115,7 +115,7 @@ export const toggleIsFetchingAC = ( isFetching: any) => (
     }
 )
 
-export const getUserThunk = (userId: string) => {
+export const getUserThunk = (userId: number) => {
     return (dispatch: any) => {
         profileAPI.getUserProfile(userId)
             .then((response)=>{

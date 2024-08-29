@@ -1,4 +1,4 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import {
     follow, followThunk, getCurrentPageThunkCreator, getUserThunkCreator,
     itemsType,
@@ -7,10 +7,10 @@ import {
     setUsers, toggleFollowingInProgress, toggleIsFetching,
     unfollow, unfollowThunk
 } from "../../../store/userReducer";
-import {Users} from "./Users";
+import { Users } from "./Users";
 import React from "react";
-import {withAuthRedirect} from "../../../hoc/AuthRedirect";
-import {compose} from "redux";
+import { withAuthRedirect } from "../../../hoc/AuthRedirect";
+import { compose } from "redux";
 
 
 interface Props {
@@ -54,7 +54,7 @@ export class UsersContainer extends React.Component<any> {
         this.props.getUserThunkCreator()
     }
 
-    getCurrentPage = (nowClickCurrentPage: number) => {
+    getPage = (nowClickCurrentPage: number) => {
         this.props.getCurrentPageThunkCreator(nowClickCurrentPage, this.props.currentPage, this.props.setCurrentPage)
         // usersAPI.getUsers(nowClickCurrentPage, this.props.currentPage)
         //      .then(response => {
@@ -66,21 +66,24 @@ export class UsersContainer extends React.Component<any> {
         return <Users
             followThunk={this.props.followThunk}
             unfollowThunk={this.props.unfollowThunk}
-           // follow={this.props.follow}
-           // unfollow={this.props.unfollow}
+            // follow={this.props.follow}
+            // unfollow={this.props.unfollow}
             users={this.props.users}
             currentPage={this.props.currentPage}
-            getCurrentPage={this.getCurrentPage}
+            
             totalCount={this.props.totalCount}
             isFetching={this.props.isFetching}
             followingInProgress={this.props.followingInProgress}
             toggleFollowingInProgress={this.props.toggleFollowingInProgress}
+
+            getPage={this.getPage}
         />
     }
 
 }
 
 const myStateToProps = (state: any) => {
+    debugger
     return {
         users: state.userReducer.users,
         currentPage: state.userReducer.currentPage || 10,
@@ -92,15 +95,15 @@ const myStateToProps = (state: any) => {
 //
 export default compose<React.ComponentType>(
     connect(myStateToProps, {
-    setCurrentPage,
-    setCountUsers,
-    unfollowThunk,
-    followThunk,
-    getUserThunkCreator,
-    getCurrentPageThunkCreator
-}),
+        setCurrentPage,
+        setCountUsers,
+        unfollowThunk,
+        followThunk,
+        getUserThunkCreator,
+        getCurrentPageThunkCreator
+    }),
     withAuthRedirect
-    )(UsersContainer)
+)(UsersContainer)
 
 
 // let AuthRedirectComponent = withAuthRedirect(UsersContainer)

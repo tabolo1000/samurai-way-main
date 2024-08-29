@@ -99,14 +99,14 @@ export const toggleFollowingInProgress = (isFetching: any, userIdFollowing: any)
     }
 }
 
-export const follow = ( usersId: string) => {
+export const follow = ( usersId: number) => {
     return {
         type: FOLLOW,
         usersId,
     }
 }
 
-export const unfollow = (usersId: string) =>{
+export const unfollow = (usersId: number) =>{
     return {
         type: UNFOLLOW,
         usersId,
@@ -149,7 +149,7 @@ export const toggleIsFetching = (isFetching: boolean) => {
 }
 
 
-export const unfollowThunk = (isFetching: boolean, itemId: number, userIndexId: string) => {
+export const unfollowThunk = (isFetching: boolean, itemId: number, userIndexId: number) => {
     return (dispatch: any) => {
         dispatch(toggleFollowingInProgress(true, itemId))
         usersAPI.deleteUserUnfollow(userIndexId)
@@ -162,7 +162,7 @@ export const unfollowThunk = (isFetching: boolean, itemId: number, userIndexId: 
  }
 }
 
-export const followThunk = (isFetching: boolean, itemId: number, userIndexId: string) => {
+export const followThunk = (isFetching: boolean, itemId: number, userIndexId: number) => {
     return (dispatch: any) => {
            dispatch(toggleFollowingInProgress(true, itemId))
         usersAPI.sendUserFollowing(userIndexId)
@@ -174,11 +174,11 @@ export const followThunk = (isFetching: boolean, itemId: number, userIndexId: st
     })
     }
 }
-export const getUserThunkCreator = () => {
+export const getUserThunkCreator = (page: number) => {
     return (dispatch: any) => {
         //debugger
         dispatch(toggleIsFetching(true))
-        usersAPI.getUsers()
+        usersAPI.getUsers(page)
             .then(response => {
                 dispatch(toggleIsFetching(false))
                 dispatch(setUsers(response.items))

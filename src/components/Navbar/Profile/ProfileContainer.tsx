@@ -100,7 +100,7 @@ const mapStateToProps = (...arg: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        getUserInfo: (userId: string ) => {
+        getUserInfo: (userId: number ) => {
             dispatch(getUserThunk(userId))
         },
         onPostChange: (message: string) => {
