@@ -3,22 +3,8 @@ import { Link } from "react-router-dom";
 import { theme } from "../../../styles/theme";
 
 
-const Сorrespondence = styled.div`
-  width: 50%;
-  margin: 0 auto;
-  background-color: #00000089;
-  padding: 20px;
-  min-height: calc(100vh - 150px);
-`
 
 
-
-export const LinkStyle = styled(Link)`
-     padding: 10px;
-     font-size: 20px;
-     text-decoration: none;
-    `
-    
 
 export const LinkListLeft = styled.li`
      padding: 10px;
@@ -41,6 +27,10 @@ export const NameDialog = styled.h2`
   font-size: 25px;
 `
 
+
+
+//-------------------Style_for_Dialogs-------------------------------
+
 const MainDialogs = styled.div`
   padding: 20px;
 `
@@ -61,9 +51,30 @@ const TypeBox = styled.div`
   }
 `;
 
+const Сorrespondence = styled.div`
+  width: 50%;
+  margin: 0 auto;
+  background-color: #00000089;
+  border-radius: 20px;
+  padding: 20px;
+  min-height: calc(100vh - 110px);
+`
+
+
+
+//-------------------------Style_for_Dialog_Item--------------------
+
+export const LinkName = styled(Link)`
+     padding: 10px;
+     font-size: 20px;
+     
+`
+
+//-------------------------Style_for_export--------------------------
 
 export const s = {
   TypeBox,
   MainDialogs,
   Сorrespondence,
+  LinkName,
 }

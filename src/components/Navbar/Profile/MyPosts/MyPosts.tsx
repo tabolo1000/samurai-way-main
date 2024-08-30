@@ -3,6 +3,7 @@ import { Post } from "./Post/Post";
 import TextArea from 'antd/es/input/TextArea';
 import { Button } from 'antd';
 import { AllMyPostsType, PostTextAreaDataType } from '../ProfileContainer';
+import styled from 'styled-components';
 
 
 export class MyPosts extends Component<MyPostsProps> {
@@ -23,7 +24,7 @@ export class MyPosts extends Component<MyPostsProps> {
             allMyPosts,
         } = this.props
         return (
-            <div>
+            <MainMyPosts>
                 <div>
                     <h3>My posts</h3>
                     <div>
@@ -43,12 +44,20 @@ export class MyPosts extends Component<MyPostsProps> {
                     </div>
                 </div>
                 <Post allMyPosts={allMyPosts} />
-            </div>
+            </MainMyPosts>
         );
     }
 
 }
 
+
+const MainMyPosts = styled.div`
+    text-align: center;
+    h3{
+        font-size: 40px;
+        padding: 40px;
+        }
+`
 
 //------------Type_My_Posts-----------------------------------
 
@@ -57,5 +66,4 @@ type MyPostsProps = {
     postTextAreaData: PostTextAreaDataType,
     onPostChange: (message: string) => void,
     addPost: (message: string) => void,
-    userInformation: string,
 }

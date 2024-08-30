@@ -3,6 +3,7 @@ import sprite from '../../assets/image/spite.svg'
 import { s } from "./Header.styles";
 import { FlexWrapper } from "../FlexWrapper";
 import { Data } from '../../store/authReducer';
+import { GiSamuraiHelmet } from "react-icons/gi";
 
 type HeaderProps = {
     auth: boolean
@@ -14,27 +15,20 @@ export class Header extends Component<HeaderProps> {
     render() {
         return (
             <s.HeaderSection>
-                    <FlexWrapper
-                        align='center'
-                        justify="space-between">
-                        <s.Logo
-                            width="40px"
-                            height="40px"
-                            viewBox="0 0 512 512"
-                            stroke='white'
-                            xmlns="http://www.w3.org/2000/svg">
-                            <use xlinkHref={`${sprite}#${'couple'}`} />
-                        </s.Logo>
-                        <s.LoginButton to="/auth">
-                            <s.TextLogin>
-                                {
-                                    (this.props.auth)
-                                        ? "Sign out"
-                                        : "Log in"
-                                }
-                            </s.TextLogin>
-                        </s.LoginButton>
-                    </FlexWrapper>
+                <FlexWrapper
+                    align='center'
+                    justify="space-between">
+                    <s.Logo />
+                    <s.LoginButton to="/auth">
+                        <s.TextLogin>
+                            {
+                                (this.props.auth)
+                                    ? "Sign out"
+                                    : "Log in"
+                            }
+                        </s.TextLogin>
+                    </s.LoginButton>
+                </FlexWrapper>
             </s.HeaderSection>
         )
     }

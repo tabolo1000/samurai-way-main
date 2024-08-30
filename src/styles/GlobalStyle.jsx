@@ -1,5 +1,7 @@
 import styled, { createGlobalStyle } from "styled-components";
 import backgroundImage from "../assets/image/blackhole.jpeg"
+import { theme } from "./theme";
+
 
 const GlobalStyled = createGlobalStyle`
   *, 
@@ -8,7 +10,7 @@ const GlobalStyled = createGlobalStyle`
     margin:0;
     padding:0;
     box-sizing: border-box;
-    
+    ${theme.fonts}
   };
 
   body {

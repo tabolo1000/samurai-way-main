@@ -6,6 +6,7 @@ import {
     getUserThunk,
     setUsersAction,
     toggleIsFetchingAction,
+    UserInformation,
 } from "../../../store/profileReducer";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -13,11 +14,16 @@ import { withAuthRedirect } from "../../../hoc/AuthRedirect";
 import { RootState } from '../../../store/reduxStore';
 import { s } from "./ProfileStyled"
 import { ProfileInfo } from './ProfileInfo/ProfileInfo';
+import { Col, Row } from 'antd';
 
 
 
 
 export class ProfileContainer extends Component<ProfileContainerProps> {
+    componentDidMount(): void {
+        this.props.getUserThunk(2)
+    }
+
     render(): ReactNode {
         const {
             fetching,
@@ -28,20 +34,32 @@ export class ProfileContainer extends Component<ProfileContainerProps> {
             changeTypingPostAction,
             addPostAction,
         } = this.props
+        debugger
         return (
             <s.MainProfile>
-                <ProfileInfo
-                    profileInfo={profileInfo}
-                    userInformation={userInformation}
-                    fetching={fetching}
-                />
-                <MyPosts
-                    allMyPosts={allMyPosts}
-                    postTextAreaData={postTextAreaData}
-                    onPostChange={changeTypingPostAction}
-                    addPost={addPostAction}
-                    userInformation={userInformation}
-                />
+                <Row
+                    gutter={20}
+                    justify={"start"}
+                    align={"middle"}
+                >
+                    <ProfileInfo
+                        profileInfo={profileInfo}
+                        userInformation={userInformation}
+                        fetching={fetching}
+                    />
+                </Row>
+                <Row
+                    gutter={20}
+                >
+                    <Col className="gutter-row" span={24}>
+                        <MyPosts
+                            allMyPosts={allMyPosts}
+                            postTextAreaData={postTextAreaData}
+                            onPostChange={changeTypingPostAction}
+                            addPost={addPostAction}
+                        />
+                    </Col>
+                </Row>
             </s.MainProfile>
         )
     }
@@ -76,13 +94,14 @@ export default compose<React.ComponentType>(
 
 type ProfileContainerProps = {
     fetching: boolean
-    userInformation: string
+    userInformation: UserInformation
     profileInfo: ProfileItem,
     allMyPosts: AllMyPostsType[],
     postTextAreaData: PostTextAreaDataType,
     changeTypingPostAction: (message: string) => void,
     addPostAction: (message: string) => void,
     setUsersAction: (users: any) => void,
+    getUserThunk: (id: number) => void,
 }
 
 export interface ProfileItem {

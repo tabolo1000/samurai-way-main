@@ -1,28 +1,36 @@
 import styled from "styled-components";
+import { theme } from "../../../styles/theme";
+import imageBG from "../../../assets/image/image1.jpeg"
 
 
 
 export const ImageBackGroundStyled = styled.div`
-  background-color: cornflowerblue;
-  background-image: url('https://images.unsplash.com/photo-1531804055935-76f44d7c3621?auto=format&fit=crop&q=80&w=1000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGhvdG98ZW58MHx8MHx8fDA%3D');
-  //background-image: url(../../image/images.jpeg) ;
+  background-color: #415170;
+  background-image: url(${imageBG});
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center, right;
-  
-  
-  width: 100%;
-  height: 100px;
+  background-position: center;
+  box-shadow: 2px 2px 5px #415170, -2px -2px 5px #415170;
+  border: 2px solid #415170;
+  min-height: 100px;
 `
 
 
 
-//------
+//-----------------Style_Profile----------------------------------
 
 export const MainProfile = styled.div`
   grid-area: content;
+  background-color: ${theme.colors.backgorundSection};
+  min-height: calc(100vh - 80px);
+  border: 2px solid ${theme.colors.backgorundSection};
+  padding: 10px;
+  border-radius: 20px;
+  line-height: 40px;
 `
 
+
+//-----------------Style_Export------------------------------------
 export const s = {
   MainProfile
 }

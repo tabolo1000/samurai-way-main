@@ -15,7 +15,7 @@ enum ACT {
 
 let initialState: any = {
     userInformation: null,
-    fetching: false,
+    fetching: true,
     postsProfileData: {
         profileInfo: {
             img: beach,
@@ -24,6 +24,15 @@ let initialState: any = {
             city: "Minsk",
             education: "BSU'11",
             webSite: "https://"
+        },
+        userInformation: {
+            photos: {
+                large: null,
+                small: null,
+            },
+            fullName: "",
+            aboutMe: "",
+            github: "",
         },
         allMyPosts: [
             {
@@ -104,7 +113,7 @@ export const changeTypingPostAction = (message: string) => (
         message: message,
     } as const
 )
-export const setUsersAction = (userInformation: string) => (
+export const setUsersAction = (userInformation: any) => (
     {
         type: ACT.SET_INFORMATION_USER,
         userInformation,
@@ -122,10 +131,16 @@ export const toggleIsFetchingAction = (fetching: boolean) => (
 
 export const getUserThunk = (userId: number) => {
     return (dispatch: Dispatch<RootAction>) => {
+        dispatch(toggleIsFetchingAction(true))
         profileAPI.getUserProfile(userId)
             .then((response) => {
+                debugger
                 dispatch(setUsersAction(response.data))
                 dispatch(toggleIsFetchingAction(true))
+                dispatch(toggleIsFetchingAction(false))
+            })
+            .finally(() => {
+
             })
     }
 }
@@ -135,10 +150,34 @@ export const getUserThunk = (userId: number) => {
 //--------Profile_Reducer_Type------------------------------------
 
 export type ProfileAction = AddPostActionCreator | ChangePostTextAreaDataCreator
-    | SetUsersAC | ToggleIsFetchingAC 
+    | SetUsersAC | ToggleIsFetchingAC
 
 export type GetUserThunk = ReturnType<typeof getUserThunk>
 type AddPostActionCreator = ReturnType<typeof addPostAction>
 type ChangePostTextAreaDataCreator = ReturnType<typeof changeTypingPostAction>
 type SetUsersAC = ReturnType<typeof setUsersAction>
 type ToggleIsFetchingAC = ReturnType<typeof toggleIsFetchingAction>
+
+
+
+export type UserInformation = {
+    aboutMe: string;
+    contacts: {
+        facebook: string | null,
+        website: string | null,
+        vk: string | null,
+        twitter: string | null,
+        instagram: string | null,
+        youtube: string | null,
+        github: string | null,
+        mainLink: string | null,
+    }
+    fullName: string,
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string | null,
+    photos: {
+        small: string,
+        large: string,
+    }
+    userId: number,
+}

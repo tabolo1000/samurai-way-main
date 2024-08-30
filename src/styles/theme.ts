@@ -1,8 +1,9 @@
 export const theme: Theme = {
     colors: {
-        logo: "#14cbd8",
-        headerbc: "#3b546a87",
+        logo: "#b52121  ",
+        headerbc: "#2f3c48eb",
         backgorundSection: "#00000089",
+        borderSection: "#555"
         //rgba(52, 68, 36, 0.849)
         //fonts: '#999'
     },
@@ -24,6 +25,7 @@ type Theme = {
         logo: string;
         headerbc: string;
         backgorundSection: string;
+        borderSection: string;
     },
     fonts: {
         "font-family": string;

@@ -2,8 +2,9 @@ import { Component } from "react";
 import styled from "styled-components";
 import { FlexWrapper } from "../../../FlexWrapper";
 import { Subscribe } from "./Subscibe";
-import { Avatar } from "./Avatar";
+import { SamuraiAvatar } from "./Avatar";
 import { ItemUser } from "../../../../api/api";
+import { theme } from "../../../../styles/theme";
 
 
 
@@ -23,7 +24,7 @@ export class User extends Component<UserProps> {
                             justify={"center"}
                             align={"center"}
                             direction={"column"}>
-                            <Avatar
+                            <SamuraiAvatar
                                 id={item.id}
                                 photos={item.photos}
                             />
@@ -52,16 +53,18 @@ export class User extends Component<UserProps> {
 
 
 //------------------styled_User-------------------------------------
-const MainUser = styled.div`
+export const MainUser = styled.div`
   margin-bottom: 20px;
 `
 
 const InformationUser = styled.div`
-  margin: 0 2%;
-  border: 1px solid olive;
+  padding: 10px;
+  ${theme.fonts}
+  font-size: 0.8rem;
   width: 100%;
   padding-left: 2%;
   border-radius: 20px;
+  line-height: 30px;
 `
 
 

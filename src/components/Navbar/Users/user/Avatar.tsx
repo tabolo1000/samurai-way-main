@@ -1,11 +1,11 @@
 import { Component } from "react";
-import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { Avatar } from "antd";
+import { RxAvatar } from "react-icons/rx";
 
 
 
-
-export class Avatar extends Component<UserProps> {
+export class SamuraiAvatar extends Component<UserProps> {
     render() {
         const {
             id,
@@ -14,10 +14,11 @@ export class Avatar extends Component<UserProps> {
         return (
             <NavLink
                 to={`/profile/` + id}>
-                <SamuraiAvatar
+                <Avatar
+                    size={80}
                     src={
                         (photos.large === null)
-                            ? ("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcCpOS2pB-j57L3TGakCD768IzT27le10ZMg&usqp=CAU")
+                            ? <RxAvatar size={"large"}/>
                             : photos.large
                     } />
             </NavLink>
@@ -29,13 +30,7 @@ export class Avatar extends Component<UserProps> {
 
 //-----------styled_Avatar----------------------------------------
 
-const SamuraiAvatar = styled.img`
-  width: 100px;
-  border-radius: 50%;
-  border: 2px solid green;
-  object-fit: cover;
-  object-position: center;
-`
+
 
 
 

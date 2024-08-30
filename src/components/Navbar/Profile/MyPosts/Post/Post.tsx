@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from "styled-components";
 import {FlexWrapper} from "../../../../FlexWrapper";
 import {allMyPropsType} from "../../../../../app/App";
@@ -19,7 +18,9 @@ export const Post = (props: postPropsType) => {
             })
             }
             <FlexWrapper align={"center"}>
-                <AvatarStyled src={"https://cdn.pixabay.com/photo/2021/06/11/12/26/woman-6328478_1280.jpg"} alt=""/>
+                <AvatarStyled 
+                src={"https://cdn.pixabay.com/photo/2021/06/11/12/26/woman-6328478_1280.jpg"}
+                 alt=""/>
                 <h2>What's you know about it</h2>
             </FlexWrapper>
         </div>

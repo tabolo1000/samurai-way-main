@@ -5,6 +5,7 @@ import { DialogMessage } from "./DialogMessage/DialogMessage";
 import { Button } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import { s } from "./DialogsStyled";
+import styled from 'styled-components';
 
 
 
@@ -65,9 +66,9 @@ export class Dialogs extends Component<DialogProps> {
         return (
             <s.MainDialogs>
                 <s.Сorrespondence>
-                    <ul>
+                    <MessagesList>
                         {dialogsElements}
-                    </ul>
+                    </MessagesList>
                     {allMessage}
                     <s.TypeBox>
                         <TextArea
@@ -93,6 +94,11 @@ export class Dialogs extends Component<DialogProps> {
 }
 
 //postData.dialogTextArea.textMessage
+
+const MessagesList = styled.div`
+    position: relative;
+    min-height: 140px;
+`
 
 
 //-------------------------type_dialogs----------------------------------------------

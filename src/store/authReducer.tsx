@@ -33,7 +33,6 @@ const authReducer = (state = initialState, action: AuthAction) => {
 
 
 export const setAuthUserData = (data: Data) => {
-    debugger
     return {
         type: ACT.SET_AUTH_USER_DATA,
         data,

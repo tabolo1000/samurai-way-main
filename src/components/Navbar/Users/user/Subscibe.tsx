@@ -1,3 +1,4 @@
+import { Button } from "antd";
 import { Component } from "react";
 import styled from "styled-components";
 
@@ -18,23 +19,27 @@ export class Subscribe extends Component<UserProps> {
         return (
 
             (followed)
-                ? <FollowButton
-                    disabled={ followingInProgress.some((items: any) => {
+                ? <Button
+                    size="small"
+                    type="primary"
+                    disabled={followingInProgress.some((items: any) => {
                         return id === items
                     })}
                     onClick={() => {
                         unfollowThunk(id)
                     }}>
                     Unfollow
-                </FollowButton>
+                </Button>
 
-                : <UnfollowButton
+                : <Button
+                    size="small"
+                    type="primary"
                     disabled={followingInProgress.some((items: any) => id == items)}
                     onClick={() => {
                         followThunk(id)
                     }}>
                     Follow
-                </UnfollowButton>
+                </Button>
         )
     }
 
@@ -72,7 +77,7 @@ type UserProps = {
     id: number,
     followed: boolean,
     followingInProgress: [],
-    
+
     unfollowThunk: (itemId: number) => void
     followThunk: (itemId: number) => void
 }
