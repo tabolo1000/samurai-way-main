@@ -1,83 +1,64 @@
-import React from 'react';
-import {dialogType} from "../app/App";
 
-const ADD_MESSAGE: string = "ADD_MESSAGE";
-const CHANGE_DIALOGS_TEXT_AREA: string = "CHANGE_DIALOGS_TEXT_AREA";
-
-type actionType = {
-    type: string,
-    message?: string,
-    like?: number,
-    timeMessage?: number,
-    isItMyMessage?: boolean,
+enum ACT {
+    ADD_MESSAGE = "ADD_MESSAGE",
+    CHANGE_DIALOGS_TEXT_AREA = "CHANGE_DIALOGS_TEXT_AREA",
 }
-let initialState = {
+
+type DialogsData = {
+    id: number,
+    name: string,
+    image: string,
+}
+type PostData = {
+    otherUsersMessage: { id: number, message: string, countLikes: number, timeMessage: number, isItMyMessage: boolean }[],
+    myMessage: { id: number, message: string, countLikes: number, timeMessage: number, isItMyMessage: boolean }[],
+    dialogTextArea: { textMessage: string }
+}
+type InitialState = {
+    dialogsData: DialogsData[],
+    postData: PostData,
+}
+
+let initialState: any = {
     dialogsData: [
-                {
-                    id: 1,
-                    name: "Ola",
-                    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=987&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                },
-                {
-                    id: 2,
-                    name: "Viktoria",
-                    image: "https://plus.unsplash.com/premium_photo-1675797367645-d441fd712bf3?auto=format&fit=crop&q=80&w=987&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                },
-                {
-                    id: 3,
-                    name: "Anna",
-                    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=1170&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                },
-            ],
+        {
+            id: 1,
+            name: "Viktoria",
+            image: "https://plus.unsplash.com/premium_photo-1675797367645-d441fd712bf3?auto=format&fit=crop&q=80&w=987&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        },
+    ],
 
 
     postData: {
-                otherUsersMessage: [
-                    {id: 1, message: "Hello!", countLikes: 1, timeMessage: 12, isItMyMessage: false,},
-                    {id: 2, message: "How are you?", countLikes: 1, timeMessage: 14, isItMyMessage: false},
-                    {id: 3, message: "Not bad!", countLikes: 1, timeMessage: 16, isItMyMessage: false},
-                    {id: 4, message: "", countLikes: 1, timeMessage: 18, isItMyMessage: false},
-                ],
-                myMessage: [
-                    {
-                        id: 1, message: "Hi!", countLikes: 1, timeMessage: 13, isItMyMessage: true,
-                    },
-                    {
-                        id: 2, message: "I'm fine. You?", countLikes: 2, timeMessage: 15, isItMyMessage: true,
-                    },
-                    {
-                        id: 3, message: "What's you family?", countLikes: 2, timeMessage: 17, isItMyMessage: true,
-                    },
-                    {
-                        id: 4, message: "Good too!", countLikes: 2, timeMessage: 19, isItMyMessage: true,
-                    }
-                ],
-                dialogTextArea: {
-                    textMessage: "text"
-                }
-
-
+        otherUsersMessage: [
+            { id: 1, message: "Hello!", countLikes: 1, timeMessage: 12, isItMyMessage: false, },
+        ],
+        myMessage: [
+            {
+                id: 1, message: "Hi!", countLikes: 1, timeMessage: 13, isItMyMessage: true,
             },
+
+        ],
+        dialogTextArea: {
+            textMessage: ""
+        }
+
+
+    },
 }
 
-interface newMessageType {
-    id: number,
-    message: string,
-    counterLike?: any,
-    timeMessage: number,
-    isItMyMessage: boolean,
-}
 
-const dialogReducer = (state = initialState, action: any) => {
+
+const dialogReducer = (state = initialState, action: DialogAction) => {
     switch (action.type) {
-        case ADD_MESSAGE:
+        case ACT.ADD_MESSAGE:
             let idForMessage = state.postData.myMessage.length
-            let newMessage: any = {
+            let newMessage: NewMessageType = {
                 id: idForMessage,
                 message: action.message,
-                counterLike: action.like,
-                timeMessage: action.timeMessage,
-                isItMyMessage: action.isItMyMessage,
+                counterLike: 5,
+                timeMessage: 20,
+                isItMyMessage: true,
             }
             return {
                 ...state,
@@ -93,7 +74,7 @@ const dialogReducer = (state = initialState, action: any) => {
                     },
                 },
             };
-        case CHANGE_DIALOGS_TEXT_AREA:
+        case ACT.CHANGE_DIALOGS_TEXT_AREA:
             return {
                 ...state,
                 postData: {
@@ -109,20 +90,37 @@ const dialogReducer = (state = initialState, action: any) => {
     }
 };
 
-export let addMessageActionCreator = (message: string) => (
+
+
+
+export let addMessageAction = (message: string) => (
     {
-        type: ADD_MESSAGE,
+        type: ACT.ADD_MESSAGE,
         message: message,
-        like: 5,
-        timeMessage: 20,
-        isItMyMessage: true,
-    }
+    } as const
 )
-export let changeDialogTextAreaActionCreator = (message: string) => (
+export let typingAction = (message: string) => (
     {
-        type: CHANGE_DIALOGS_TEXT_AREA,
+        type: ACT.CHANGE_DIALOGS_TEXT_AREA,
         message: message,
-    }
+    } as const
 )
 
 export default dialogReducer;
+
+
+//-----------------------Dialog_Type---------------------------------------------
+
+export type DialogAction = TypingAction | AddMessageAction
+
+type TypingAction = ReturnType<typeof typingAction>;
+type AddMessageAction = ReturnType<typeof addMessageAction>
+
+
+interface NewMessageType {
+    id: number,
+    message: string,
+    counterLike?: any,
+    timeMessage: number,
+    isItMyMessage: boolean,
+}

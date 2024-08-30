@@ -19,19 +19,19 @@ export class Subscribe extends Component<UserProps> {
 
             (followed)
                 ? <FollowButton
-                    disabled={followingInProgress.some((items: any) => {
+                    disabled={ followingInProgress.some((items: any) => {
                         return id === items
                     })}
                     onClick={() => {
-                        unfollowThunk(true, id, id)
+                        unfollowThunk(id)
                     }}>
                     Unfollow
                 </FollowButton>
 
                 : <UnfollowButton
-                    disabled={this.props.followingInProgress.some((items: any) => id == items)}
+                    disabled={followingInProgress.some((items: any) => id == items)}
                     onClick={() => {
-                        followThunk(true, id, id)
+                        followThunk(id)
                     }}>
                     Follow
                 </UnfollowButton>
@@ -72,6 +72,7 @@ type UserProps = {
     id: number,
     followed: boolean,
     followingInProgress: [],
-    unfollowThunk: (isFetching: boolean, itemId: number, userIndexId: number) => void
-    followThunk: (isFetching: boolean, itemId: number, userIndexId: number) => void
+    
+    unfollowThunk: (itemId: number) => void
+    followThunk: (itemId: number) => void
 }

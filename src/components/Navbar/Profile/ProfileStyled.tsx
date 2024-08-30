@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
-export const ImageAvatarStyled = styled.img`
-  //background-size: contain;
-  width: 200px;
-`
+
 
 export const ImageBackGroundStyled = styled.div`
   background-color: cornflowerblue;
@@ -18,6 +15,14 @@ export const ImageBackGroundStyled = styled.div`
   height: 100px;
 `
 
-export const ContentStyled = styled.div`
+
+
+//------
+
+export const MainProfile = styled.div`
   grid-area: content;
 `
+
+export const s = {
+  MainProfile
+}

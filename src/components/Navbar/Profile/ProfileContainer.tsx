@@ -1,33 +1,91 @@
-import React, {useEffect} from 'react';
-import {ContentStyled} from "./ProfileStyled";
-import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {MyPosts} from "./MyPosts/MyPosts";
-import axios from "axios";
+import React, { Component, ReactNode } from 'react';
+import { MyPosts } from "./MyPosts/MyPosts";
 import {
-    addPostActionCreator,
-    changePostTextAreaDataCreator, getUserThunk,
-    setUsersAC,
-    toggleIsFetchingAC
+    addPostAction,
+    changeTypingPostAction,
+    getUserThunk,
+    setUsersAction,
+    toggleIsFetchingAction,
 } from "../../../store/profileReducer";
-import {connect} from "react-redux";
-// import {useNavigate} from "react-router";
-import {withRouter} from "../../withRouter";
-import {useParams} from "react-router-dom";
-import {compose} from "redux";
-import {withAuthRedirect} from "../../../hoc/AuthRedirect";
-import {ProfileStatus} from "./ProfileStatus";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { withAuthRedirect } from "../../../hoc/AuthRedirect";
+import { RootState } from '../../../store/reduxStore';
+import { s } from "./ProfileStyled"
+import { ProfileInfo } from './ProfileInfo/ProfileInfo';
 
 
-interface propsType {
-    profileInfo: profileInfoType,
-    allMyPosts: allMyPostsType[],
-    postTextAreaData: postTextAreaDataType,
-    onPostChange: (message: string) => void,
-    addPost: (message: string) => void,
-    setUsers: (users: any) => void,
+
+
+export class ProfileContainer extends Component<ProfileContainerProps> {
+    render(): ReactNode {
+        const {
+            fetching,
+            userInformation,
+            profileInfo,
+            allMyPosts,
+            postTextAreaData,
+            changeTypingPostAction,
+            addPostAction,
+        } = this.props
+        return (
+            <s.MainProfile>
+                <ProfileInfo
+                    profileInfo={profileInfo}
+                    userInformation={userInformation}
+                    fetching={fetching}
+                />
+                <MyPosts
+                    allMyPosts={allMyPosts}
+                    postTextAreaData={postTextAreaData}
+                    onPostChange={changeTypingPostAction}
+                    addPost={addPostAction}
+                    userInformation={userInformation}
+                />
+            </s.MainProfile>
+        )
+    }
 }
 
-export interface profileInfoType {
+
+//-----------------------Connect_HOC-------------------------------
+
+const mapStateToProps = (state: RootState) => {
+    return {
+        userInformation: state.profileReducer.userInformation,
+        profileInfo: state.profileReducer.postsProfileData.profileInfo,
+        allMyPosts: state.profileReducer.postsProfileData.allMyPosts,
+        postTextAreaData: state.profileReducer.postsProfileData.postTextAreaData,
+        fetching: state.profileReducer.fetching,
+    }
+}
+
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {
+        getUserThunk,
+        changeTypingPostAction,
+        addPostAction,
+        setUsersAction,
+        toggleIsFetchingAction
+    }),
+    withAuthRedirect
+)(ProfileContainer)
+
+
+//----------------Type_Profile-------------------------------------
+
+type ProfileContainerProps = {
+    fetching: boolean
+    userInformation: string
+    profileInfo: ProfileItem,
+    allMyPosts: AllMyPostsType[],
+    postTextAreaData: PostTextAreaDataType,
+    changeTypingPostAction: (message: string) => void,
+    addPostAction: (message: string) => void,
+    setUsersAction: (users: any) => void,
+}
+
+export interface ProfileItem {
     img: string,
     name: string,
     data: string,
@@ -36,92 +94,12 @@ export interface profileInfoType {
     webSite: string,
 }
 
-interface allMyPostsType {
+export interface AllMyPostsType {
     id: number,
     image: string,
     message: string,
 }
 
-interface postTextAreaDataType {
+export interface PostTextAreaDataType {
     letter: string,
 }
-
-export let ProfileContainer = (props: any) => {
-debugger
-    // debugger
-
-    // let {userId}: any = useParams();
-    // if (!userId) {
-    //     userId = 2
-    // }
-    props.getUserInfo(2)
-
-    // useEffect(() => {
-    //     props.getUserInfo(userId)
-    //      },[userId])
-
-    //
-    // props.getUserInfo(2)
-    // useEffect(() => {
-    //     axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-    //         .then((response: any) => {
-    //             props.setUsers(response.data)
-    //             props.toggleIsFetching(true)
-    //         })
-    // }, [userId]);
-    // // this.props.toggleIsFetching(true)
-
-
-    return (
-        <ContentStyled>
-            <ProfileInfo profileInfo={props.profileInfo}
-                         userInformation={props.userInformation}
-                         isFetching={props.isFetching}/>
-            <ProfileStatus/>
-            <MyPosts allMyPosts={props.allMyPosts} postTextAreaData={props.postTextAreaData}
-                     onPostChange={props.onPostChange} addPost={props.addPost}
-                     userInformation={props.userInformation}/>
-        </ContentStyled>
-    );
-}
-
-
-
-const mapStateToProps = (...arg: any) => {
-    return {
-        userInformation: arg[0].profileReducer.userInformation,
-        profileInfo: arg[0].profileReducer.postsProfileData.profileInfo,
-        allMyPosts: arg[0].profileReducer.postsProfileData.allMyPosts,
-        postTextAreaData: arg[0].profileReducer.postsProfileData.postTextAreaData,
-        isFetching: arg[0].profileReducer.isFetching,
-
-    }
-}
-
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        getUserInfo: (userId: number ) => {
-            dispatch(getUserThunk(userId))
-        },
-        onPostChange: (message: string) => {
-            dispatch(changePostTextAreaDataCreator(message))
-        },
-        addPost: (message: string) => {
-            dispatch(addPostActionCreator(message))
-        },
-        setUsers: (userInformation: any) => {
-            dispatch(setUsersAC(userInformation))
-        },
-        toggleIsFetching: (isFetching: any) => {
-            dispatch(toggleIsFetchingAC(isFetching))
-        }
-    }
-}
-export default compose<React.ComponentType>(
-    connect(mapStateToProps, mapDispatchToProps),
-    withAuthRedirect
-    )(ProfileContainer)
-// export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);
-
-
-

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { FlexWrapper } from "../../../FlexWrapper";
 import { Subscribe } from "./Subscibe";
 import { Avatar } from "./Avatar";
+import { ItemUser } from "../../../../api/api";
 
 
 
@@ -70,21 +71,10 @@ const InformationUser = styled.div`
 
 
 type UserProps = {
-    item: Item,
+    item: ItemUser,
     followingInProgress: [],
-    unfollowThunk: (isFetching: boolean, itemId: number, userIndexId: number) => void
-    followThunk: (isFetching: boolean, itemId: number, userIndexId: number) => void
+    unfollowThunk: (itemId: number) => void
+    followThunk: (itemId: number) => void
 }
 
 
-type Item = {
-    followed: boolean,
-    id: number,
-    name: string,
-    photos: {
-        small: string | null,
-        large: string | null,
-    }
-    status: null | string,
-    uniqueUrlName: null | string,
-}

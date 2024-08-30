@@ -1,47 +1,69 @@
 import styled from "styled-components";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { theme } from "../../../styles/theme";
 
-export const DialogsStyled = styled.div`
-  display: grid;
-  grid-template-columns: 2fr 10fr;
+
+const Сorrespondence = styled.div`
+  width: 50%;
+  margin: 0 auto;
+  background-color: #00000089;
+  padding: 20px;
+  min-height: calc(100vh - 150px);
 `
 
-export const UlList = styled.ul`
-    text-decoration: none;
-    `
+
 
 export const LinkStyle = styled(Link)`
      padding: 10px;
      font-size: 20px;
      text-decoration: none;
     `
+    
 
 export const LinkListLeft = styled.li`
      padding: 10px;
      font-size: 20px;
-     list-style: none;
-  text-decoration: none;
-  color: yellow;
+  color: ${theme.fonts};
     `
 
 export const LinkListRight = styled.li`
   padding: 10px;
   font-size: 20px;
-  list-style: none;
-  text-decoration: none;
   text-align: right;
-  color: blue;
+  color: ${theme.fonts};
 `
 export const LinkList = styled.li`
-     padding: 10px;
      font-size: 20px;
-     list-style: none;
-  text-decoration: none;;
     `
 export const NameDialog = styled.h2`
-  padding: 0 100px;
-  background-image: conic-gradient(#1aff00, #00ffbb);
-  -webkit-background-clip: text;
-  color: transparent;
-
+  padding: 0 0px;
+  color: ${theme.fonts};
+  font-size: 25px;
 `
+
+const MainDialogs = styled.div`
+  padding: 20px;
+`
+const TypeBox = styled.div`
+  display: flex;
+  align-items: flex-end;
+  position: fixed;
+  bottom: 2%;
+  right: 23%;
+  textarea {
+    display: inline;
+    width: 500px;
+  }
+  @media screen and (max-width: 920px) {
+    textarea {
+    width: 200px;
+  }
+  }
+`;
+
+
+export const s = {
+  TypeBox,
+  MainDialogs,
+  Сorrespondence,
+}

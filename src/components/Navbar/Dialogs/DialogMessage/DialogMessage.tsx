@@ -1,4 +1,4 @@
-import {LinkListLeft, LinkListRight} from "../DialogsStyled";
+import { LinkListLeft, LinkListRight } from "../DialogsStyled";
 import styled from "styled-components";
 
 
@@ -11,12 +11,31 @@ interface DialogsMessageProps {
 }
 
 
-export const DialogMessage = (props: DialogsMessageProps) => {
+export const DialogMessage = ({
+    message,
+    id,
+    countLikes,
+    timeMessage,
+    isItMyMessage,
+    
+}: DialogsMessageProps) => {
     let con = []
-    if (props.isItMyMessage === true) {
-        con.push(<LinkListRight><MessageStyle>{props.message}</MessageStyle></LinkListRight>)
-    } else{
-        con.push(<LinkListLeft><MessageStyle>{props.message}</MessageStyle></LinkListLeft>)
+    if (isItMyMessage) {
+        con.push(
+            <LinkListRight>
+                <MessageStyle>
+                    {message}
+                </MessageStyle>
+            </LinkListRight>
+        )
+    } else {
+        con.push(
+            <LinkListLeft>
+                <MessageStyle>
+                    {message}
+                </MessageStyle>
+            </LinkListLeft>
+        )
     }
     return (
         <>

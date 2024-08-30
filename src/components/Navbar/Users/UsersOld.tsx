@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { FlexWrapper } from "../../FlexWrapper";
-import { usersType } from "./UsersContainer";
 import { NavLink } from "react-router-dom";
 import { Pagination } from "antd";
+import { ItemUser } from "../../../api/api";
 
 
 
@@ -51,11 +51,7 @@ export const Users = ({
                                         <div>
                                             <NavLink to={`/profile/` + item.id}>
                                                 <ImageStyled
-                                                    src={
-                                                        (users[index].photos.large === null)
-                                                            ? ("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcCpOS2pB-j57L3TGakCD768IzT27le10ZMg&usqp=CAU")
-                                                            : users[index].photos.large
-                                                    } />
+                                                    src="" />
                                             </NavLink>
                                         </div>
                                         <div>
@@ -194,7 +190,7 @@ interface propsType {
     followThunk: any,
     unfollowThunk: (isFetching: boolean, itemId: number, userIndexId: number ) => void,
     //setUsers: (users: itemsType) => void,
-    users: usersType[],
+    users: ItemUser[],
     getCurrentPage: (currentNumber: number) => void,
     currentPage: number,
     totalCount: number,

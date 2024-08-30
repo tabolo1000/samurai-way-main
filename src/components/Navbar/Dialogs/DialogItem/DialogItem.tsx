@@ -1,6 +1,7 @@
-import React from "react";
-import {LinkList, LinkListRight, LinkStyle} from "../DialogsStyled";
-import {Avatar} from "../../../../styles/GlobalStyle";
+import { Avatar } from "antd";
+import { LinkStyle } from "../DialogsStyled";
+import { FlexWrapper } from "../../../FlexWrapper";
+
 
 
 interface DialogsItemProps {
@@ -9,12 +10,23 @@ interface DialogsItemProps {
     image: string,
 }
 
-export const DialogItem = (props: DialogsItemProps) => {
-    const path = "dialogs" + props.id;
+export const DialogItem = ({
+    name,
+    id,
+    image
+}: DialogsItemProps) => {
+    const path = "dialogs" + id;
     return (
-        <>
-            <Avatar src={props.image} alt=""/>
-            <LinkList><LinkStyle to={path}>{props.name}</LinkStyle></LinkList>
-        </>
+        <FlexWrapper
+            direction="column"
+            justify="center"
+        >
+            <Avatar size={100} src={image} />
+            <div>
+                <LinkStyle to={path}>
+                    {name}
+                </LinkStyle>
+            </div>
+        </FlexWrapper>
     )
 }

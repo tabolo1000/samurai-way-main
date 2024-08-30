@@ -1,5 +1,5 @@
 import beach from "../image/images.jpeg"
-import profileReducer from "./profileReducer";
+import {profileReducer} from "./profileReducer";
 import dialogReducer from "./dialogReducer";
 
 

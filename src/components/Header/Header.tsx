@@ -2,11 +2,11 @@ import { Component } from 'react';
 import sprite from '../../assets/image/spite.svg'
 import { s } from "./Header.styles";
 import { FlexWrapper } from "../FlexWrapper";
-import { Container } from '../Container';
+import { Data } from '../../store/authReducer';
 
 type HeaderProps = {
     auth: boolean
-    authId: string
+    authId: Data
 }
 
 

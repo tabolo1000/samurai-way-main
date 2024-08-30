@@ -5,7 +5,7 @@ import { News } from "../components/Navbar/News/News";
 import { Music } from "../components/Navbar/Music/Music";
 import { Setting } from "../components/Navbar/Setting/Setting";
 import { Hoo } from "../components/Navbar/Hoo/Hoo";
-import { DialogsContainer } from "../components/Navbar/Dialogs/DialogsContainer";
+import DialogsContainer  from "../components/Navbar/Dialogs/DialogsContainer";
 import ProfileContainer from "../components/Navbar/Profile/ProfileContainer";
 import UsersContainer from "../components/Navbar/Users/UsersContainer";
 import AuthContainer from "../components/Header/Auth/AuthorizationContainer";

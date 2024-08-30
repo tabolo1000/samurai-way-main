@@ -1,128 +1,88 @@
 import { connect } from "react-redux";
 import {
-    follow, followThunk, getCurrentPageThunkCreator, getUserThunkCreator,
+    followThunk,
+    getUsersPageThunk,
+    getUserThunk,
     itemsType,
     setCountUsers,
     setCurrentPage,
-    setUsers, toggleFollowingInProgress, toggleIsFetching,
-    unfollow, unfollowThunk
+    unfollowThunk,
 } from "../../../store/userReducer";
 import { Users } from "./Users";
-import React from "react";
+import React, { ComponentType, Dispatch } from "react";
 import { withAuthRedirect } from "../../../hoc/AuthRedirect";
 import { compose } from "redux";
+import { RootState } from "../../../store/reduxStore";
+import { ItemUser } from "../../../api/api";
 
 
-interface Props {
-    comp: React.ElementType<any>;
-}
 
-
-interface propsType {
-    //follow: (usersId: number) => void,
-    //unfollow: (usersId: number) => void,
-    setUsers: (users: itemsType) => void,
-    users: usersType[],
-    setCurrentPage: (users: itemsType, currentPage: number) => void,
-    currentPage: number,
-    setCountUsers: (totalCounts: number) => void,
-    totalCount: number,
-    isFetching: boolean,
-    toggleIsFetching: (loaderStatus: boolean) => void,
-}
-
-export interface usersType {
-    followed: boolean,
-    name: string,
-    id: number,
-    uniqueUrlName: null | string,
-    photos: photosType,
-    status: string | null,
-}
-
-interface photosType {
-    large: string | undefined,
-    small: string | undefined,
-}
-
-export class UsersContainer extends React.Component<any> {
-
-    constructor(props: any) {
+export class UsersContainer extends React.Component<UsersContainerProps> {
+    constructor(props: UsersContainerProps) {
         super(props);
     }
     componentDidMount() {
-        this.props.getUserThunkCreator()
-    }
-
-    getPage = (nowClickCurrentPage: number) => {
-        this.props.getCurrentPageThunkCreator(nowClickCurrentPage, this.props.currentPage, this.props.setCurrentPage)
-        // usersAPI.getUsers(nowClickCurrentPage, this.props.currentPage)
-        //      .then(response => {
-        //          this.props.setCurrentPage(response.items, nowClickCurrentPage)
-        //      })
+        this.props.getUserThunk()
     }
 
     render() {
         return <Users
-            followThunk={this.props.followThunk}
-            unfollowThunk={this.props.unfollowThunk}
-            // follow={this.props.follow}
-            // unfollow={this.props.unfollow}
             users={this.props.users}
             currentPage={this.props.currentPage}
-            
             totalCount={this.props.totalCount}
-            isFetching={this.props.isFetching}
+            fetching={this.props.fetching}
             followingInProgress={this.props.followingInProgress}
-            toggleFollowingInProgress={this.props.toggleFollowingInProgress}
 
-            getPage={this.getPage}
+            followThunk={this.props.followThunk}
+            unfollowThunk={this.props.unfollowThunk}
+            getUsersPageThunk={this.props.getUsersPageThunk}
         />
     }
 
 }
 
-const myStateToProps = (state: any) => {
-    debugger
+
+//-------------------Type_of_User_Container------------------------------------
+
+interface UsersContainerProps {
+    users: ItemUser[],
+    currentPage: number,
+    totalCount: number,
+    fetching: boolean,
+    followingInProgress: [],
+
+    followThunk: () => (id: number) => void,
+    unfollowThunk: () => (id: number) => void,
+    setCurrentPage: (users: itemsType, currentPage: number) => void,
+    setCountUsers: (totalCounts: number) => void,
+    getUserThunk: () => void;
+    getUsersPageThunk: (page: number,) => void;
+}
+
+
+//-------------------Container_Connect_Users--------------------------
+
+const mapStateToProps = (state: RootState) => {
     return {
         users: state.userReducer.users,
         currentPage: state.userReducer.currentPage || 10,
         totalCount: state.userReducer.totalCount || 1,
-        isFetching: state.userReducer.isFetching,
+        fetching: state.userReducer.fetching,
         followingInProgress: state.userReducer.followingInProgress,
     }
 }
-//
-export default compose<React.ComponentType>(
-    connect(myStateToProps, {
+
+export default compose<ComponentType>(
+    connect(mapStateToProps, {
+        followThunk,
+        unfollowThunk,
         setCurrentPage,
         setCountUsers,
-        unfollowThunk,
-        followThunk,
-        getUserThunkCreator,
-        getCurrentPageThunkCreator
+
+        getUserThunk,
+        getUsersPageThunk,
     }),
     withAuthRedirect
 )(UsersContainer)
 
 
-// let AuthRedirectComponent = withAuthRedirect(UsersContainer)
-// export default connect(myStateToProps, {
-//     setCurrentPage,
-//     setCountUsers,
-//     unfollowThunk,
-//     followThunk,
-//     getUserThunkCreator,
-//     getCurrentPageThunkCreator
-// })(AuthRedirectComponent);
-
-
-//     axios.get(`https://social-network.samuraijs.com/api/1.0/users`, {
-//         withCredentials: true,
-//     })
-//         .then((response: any) => {
-//             this.props.toggleIsFetching(false)
-//             this.props.setUsers(response.data.items)
-//             this.props.setCountUsers(response.data.totalCount)
-//
-//         })

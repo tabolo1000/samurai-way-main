@@ -2,12 +2,12 @@ import {connect} from "react-redux";
 import {Header} from "./Header";
 import { RootState } from '../../store/reduxStore';
 import { compose } from 'redux';
-import { ComponentType } from "react";
+import { Data } from "../../store/authReducer";
 
 
 
 
-const mapStateToProps: MapStateToProps = (state) => {
+const mapStateToProps: MapStateToProps = (state: any) => {
     return {
         auth: state.authReducer.isAuth,
         authId: state.authReducer.data.id,
@@ -30,6 +30,6 @@ export const HeaderContainer = compose(
 interface MapStateToProps {
     (state: RootState): {
         auth: boolean
-        authId: string
+        authId: Data
     }
 }

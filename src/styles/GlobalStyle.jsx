@@ -2,7 +2,9 @@ import styled, { createGlobalStyle } from "styled-components";
 import backgroundImage from "../assets/image/blackhole.jpeg"
 
 const GlobalStyled = createGlobalStyle`
-  *, *::after, *::before{
+  *, 
+  *::after,
+   *::before {
     margin:0;
     padding:0;
     box-sizing: border-box;
@@ -15,10 +17,8 @@ const GlobalStyled = createGlobalStyle`
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-
     min-height: 100vh;
     
-
   font-family: "Be Vietnam Pro", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -40,13 +40,14 @@ a{
 }
     `
 export const Avatar = styled.img`
-  width: 90px;
-  border-radius: 50px;
-  height: 110px;
-  background-image: url("./assets/image/paulskorupskas7KLaxLbSXAunsplash2.webp");
+  object-fit: cover;
+  object-position: center;
+  width: 80px;
+  border-radius: 50%;
+  height: 80px;
 `
 export const AvatarLittle = styled.img`
-  object-fit:cover;
+  object-fit: cover;
   object-position: left top;
   width: 40px;
   border-radius: 50px;

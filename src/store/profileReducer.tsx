@@ -1,49 +1,50 @@
 import beach from "../assets/image/images.jpeg"
-import {profileAPI} from "../api/api";
+import { profileAPI } from "../api/api";
+import { Dispatch } from "react";
+import { RootAction } from "./reduxStore";
 
 
-const ADD_POST: string = "ADD_POST";
-const CHANGE_POST_TEXT_AREA_DATA: string = "CHANGE_POST_TEXT_AREA_DATA";
-const SET_INFORMATION_USER: string = "SET_INFORMATION_USER";
-const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING"
 
-interface actionType {
-    type: string;
-    message?: string;
+enum ACT {
+    ADD_POST = "ADD_POST",
+    CHANGE_POST_TEXT_AREA_DATA = "CHANGE_POST_TEXT_AREA_DATA",
+    SET_INFORMATION_USER = "SET_INFORMATION_USER",
+    TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING",
 }
+
 
 let initialState: any = {
     userInformation: null,
-    isFetching: false,
-  postsProfileData: {
-                profileInfo: {
-                    img: beach,
-                    name: "Nik Tabala",
-                    date: "12.12.12",
-                    city: "Minsk",
-                    education: "BSU'11",
-                    webSite: "https://"
-                },
-                allMyPosts: [
-                    {
-                        id: 1,
-                        image: "https://cdn.pixabay.com/photo/2021/06/11/12/26/woman-6328478_1280.jpg",
-                        message: "What's you know about it"
-                    }
-                ],
-                postTextAreaData: {
-                    letter: "ss",
-                }
-            },
+    fetching: false,
+    postsProfileData: {
+        profileInfo: {
+            img: beach,
+            name: "Nik Tabala",
+            date: "12.12.12",
+            city: "Minsk",
+            education: "BSU'11",
+            webSite: "https://"
+        },
+        allMyPosts: [
+            {
+                id: 1,
+                image: "https://cdn.pixabay.com/photo/2021/06/11/12/26/woman-6328478_1280.jpg",
+                message: "What's you know about it"
+            }
+        ],
+        postTextAreaData: {
+            letter: "ss",
+        }
+    },
 }
 
 
-const profileReducer = (state= initialState, action: any) => {
+export const profileReducer = (state = initialState, action: ProfileAction) => {
     switch (action.type) {
-        case ADD_POST: {
-            let lengthThisArr: number = state.postsProfileData.allMyPosts.length;
+        case ACT.ADD_POST: {
             let post = {
-                id: lengthThisArr, message: action.message,
+                id: state.postsProfileData.allMyPosts.length,
+                message: action.message,
                 image: "https://cdn.pixabay.com/photo/2021/06/11/12/26/woman-6328478_1280.jpg",
             }
             return {
@@ -60,14 +61,13 @@ const profileReducer = (state= initialState, action: any) => {
                 }
             };
         }
-              case SET_INFORMATION_USER: {
+        case ACT.SET_INFORMATION_USER: {
             return {
                 ...state,
-                // isFetching: action.isFetching,
                 userInformation: action.userInformation,
             }
         }
-        case CHANGE_POST_TEXT_AREA_DATA:{
+        case ACT.CHANGE_POST_TEXT_AREA_DATA: {
             return {
                 ...state,
                 postsProfileData: {
@@ -78,12 +78,10 @@ const profileReducer = (state= initialState, action: any) => {
                 },
             };
         }
-        case TOGGLE_IS_FETCHING: {
-            debugger
+        case ACT.TOGGLE_IS_FETCHING: {
             return {
                 ...state,
-                isFetching: action.isFetching,
-                // userInformation: action.userInformation,
+                fetching: action.fetching,
             }
         }
 
@@ -92,36 +90,55 @@ const profileReducer = (state= initialState, action: any) => {
     }
 };
 
+//-----------Action_Creater---------------------------------------
 
-export let addPostActionCreator = (message: string) => ({
-    type: ADD_POST,
-    message: message,
-});
-export let changePostTextAreaDataCreator = (message: string) => (
+export const addPostAction = (message: string) => (
     {
-        type: CHANGE_POST_TEXT_AREA_DATA,
+        type: ACT.ADD_POST,
         message: message,
-    })
-export const setUsersAC = ( userInformation: any) => (
+    } as const
+);
+export const changeTypingPostAction = (message: string) => (
     {
-        type: SET_INFORMATION_USER,
-         userInformation,
-    }
+        type: ACT.CHANGE_POST_TEXT_AREA_DATA,
+        message: message,
+    } as const
 )
-export const toggleIsFetchingAC = ( isFetching: any) => (
+export const setUsersAction = (userInformation: string) => (
     {
-        type: TOGGLE_IS_FETCHING,
-         isFetching,
-    }
+        type: ACT.SET_INFORMATION_USER,
+        userInformation,
+    } as const
 )
+export const toggleIsFetchingAction = (fetching: boolean) => (
+    {
+        type: ACT.TOGGLE_IS_FETCHING,
+        fetching,
+    } as const
+)
+
+
+//------------Thunk_Creater----------------------------------------
 
 export const getUserThunk = (userId: number) => {
-    return (dispatch: any) => {
+    return (dispatch: Dispatch<RootAction>) => {
         profileAPI.getUserProfile(userId)
-            .then((response)=>{
-                    dispatch(setUsersAC(response.data))
-                    dispatch(toggleIsFetchingAC(true))
+            .then((response) => {
+                dispatch(setUsersAction(response.data))
+                dispatch(toggleIsFetchingAction(true))
             })
     }
 }
-export default profileReducer;
+
+
+
+//--------Profile_Reducer_Type------------------------------------
+
+export type ProfileAction = AddPostActionCreator | ChangePostTextAreaDataCreator
+    | SetUsersAC | ToggleIsFetchingAC 
+
+export type GetUserThunk = ReturnType<typeof getUserThunk>
+type AddPostActionCreator = ReturnType<typeof addPostAction>
+type ChangePostTextAreaDataCreator = ReturnType<typeof changeTypingPostAction>
+type SetUsersAC = ReturnType<typeof setUsersAction>
+type ToggleIsFetchingAC = ReturnType<typeof toggleIsFetchingAction>

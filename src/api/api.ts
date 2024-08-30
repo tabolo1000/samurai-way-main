@@ -1,5 +1,4 @@
 import axios from "axios";
-import {setCurrentPage} from "../store/userReducer";
 
 const instance = axios.create({
     withCredentials: true,
@@ -10,35 +9,52 @@ const instance = axios.create({
 })
 
 export const usersAPI = {
-    getUsers(nowClickCurrentPage?: number, currentPage?: number) {
-        return instance.get(`users?page=${nowClickCurrentPage || currentPage}`)
-            .then(response => {
-                return response.data
-            })
+    getUsers(page: number) {
+        return instance.get<ResponseGetUsers>(`users?page=${page}`)
+            .then(res => {  return res.data })
     },
-    setUsers(){
-        return instance.get(`users`)
-            .then((response => {
-                debugger
-                return response.data
-            }))
+    setUsers() {
+        return instance.get<ResponseGetUsers>(`users`)
+            .then(res => { debugger; return res.data })
     },
-    sendUserFollowing(userId: number){
-        return instance.post(`follow/${userId}`)
-            .then(response => {
-                return response.data
-            })
+    setUserFollowing(userId: number) {
+        return instance.post<ResponseType>(`follow/${userId}`)
+            .then(res => res.data)
     },
-    deleteUserUnfollow(userId: number){
-        return instance.delete(`follow/${userId}`)
-            .then(response => {
-                return response.data
-            } )
+    deleteUserUnfollow(userId: number) {
+        return instance.delete<ResponseType>(`follow/${userId}`)
+            .then(res => res.data)
     }
 }
 
+type ResponseGetUsers = {
+    error: null | string,
+    items: ItemUser,
+    totalCount: number
+}
+
+type ResponseType = {
+    data: {},
+    fieldsError: string[],
+    messages: string[],
+    resultCode: number,
+}
+
 export const profileAPI = {
-    getUserProfile(userId: number){
+    getUserProfile(userId: number) {
         return instance.get(`profile/${userId}`)
     }
+}
+
+
+export type ItemUser = {
+    followed: boolean,
+    id: number,
+    name: string,
+    photos: {
+        small: string | null,
+        large: string | null,
+    }
+    status: null | string,
+    uniqueUrlName: null | string,
 }

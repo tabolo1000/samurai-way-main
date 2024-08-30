@@ -2,6 +2,7 @@ export const theme: Theme = {
     colors: {
         logo: "#14cbd8",
         headerbc: "#3b546a87",
+        backgorundSection: "#00000089",
         //rgba(52, 68, 36, 0.849)
         //fonts: '#999'
     },
@@ -22,6 +23,7 @@ type Theme = {
     colors: {
         logo: string;
         headerbc: string;
+        backgorundSection: string;
     },
     fonts: {
         "font-family": string;
