@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.js": "/samurai-way-main/static/js/main.56d1cb4c.js",
-    "static/media/image1.jpeg": "/samurai-way-main/static/media/image1.9d04a6e490e0d2841671.jpeg",
-    "static/media/blackhole.jpeg": "/samurai-way-main/static/media/blackhole.4b192af2d95891d417aa.jpeg",
-    "index.html": "/samurai-way-main/index.html",
-    "main.56d1cb4c.js.map": "/samurai-way-main/static/js/main.56d1cb4c.js.map"
+    "main.js": "/static/js/main.a1f18604.js",
+    "static/media/image1.jpeg": "/static/media/image1.9d04a6e490e0d2841671.jpeg",
+    "static/media/blackhole.jpeg": "/static/media/blackhole.4b192af2d95891d417aa.jpeg",
+    "index.html": "/index.html",
+    "main.a1f18604.js.map": "/static/js/main.a1f18604.js.map"
   },
   "entrypoints": [
-    "static/js/main.56d1cb4c.js"
+    "static/js/main.a1f18604.js"
   ]
 }
