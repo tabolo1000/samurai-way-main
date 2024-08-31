@@ -3,10 +3,13 @@ enum ACT {
     SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA',
 }
 
-const initialState: {
+export type StateAuth = {
     isAuth: boolean,
-    data: Data 
-} = {
+    data: Data
+}
+
+
+const initialState: StateAuth = {
     isAuth: false,
     data: {
         id: null,

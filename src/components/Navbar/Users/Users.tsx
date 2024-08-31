@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { Pagination } from "antd";
 import { MainUser, User } from "./user/User";
-import { ItemUser } from "../../../api/api";
+
 import { theme } from "../../../styles/theme";
+import { ItemUser } from "../../../store/userReducer";
 
 
 
@@ -17,7 +18,7 @@ export const Users = ({
     followThunk,
     unfollowThunk,
     getUsersPageThunk,
-}: any) => {
+}: UserProps) => {
 
 
     const paginationHandler = (page: number) => {
@@ -28,7 +29,7 @@ export const Users = ({
 
         if (!fetching) {
             return (
-                users.map((item: any, index: number) => {
+                users.map((item: ItemUser, index: number) => {
                     return (
                         <User
                             item={item}
@@ -96,7 +97,7 @@ const SectionName = styled.h2`
 //-------------------Type-of-User-----------------------------
 
 
-interface propsType {
+interface UserProps {
     users: ItemUser[],
     currentPage: number,
     totalCount: number,

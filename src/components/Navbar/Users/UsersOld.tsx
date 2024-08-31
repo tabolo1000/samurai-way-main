@@ -2,7 +2,8 @@ import styled from "styled-components";
 import { FlexWrapper } from "../../FlexWrapper";
 import { NavLink } from "react-router-dom";
 import { Pagination } from "antd";
-import { ItemUser } from "../../../api/api";
+import { ItemUser } from "../../../store/userReducer";
+
 
 
 

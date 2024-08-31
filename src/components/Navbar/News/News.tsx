@@ -1,9 +1,15 @@
-import React from 'react';
+import { withAuthRedirect } from '../../../hoc/AuthRedirect';
+import { compose } from 'redux';
 
-export const News = () => {
+const NewsContainer = () => {
     return (
         <div>
             <h1>News</h1>
         </div>
     );
 };
+
+export let AuthRedirect = withAuthRedirect(NewsContainer)
+export const News = compose(
+    AuthRedirect
+);

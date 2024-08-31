@@ -7,8 +7,7 @@ import { theme } from "../../styles/theme";
 
 export const NavLinkCustom = styled(Link)`
   ${theme.fonts};
-  
-  &:hover {
+   &:hover {
     color: #b2aaa6;
    }
 `
@@ -23,14 +22,15 @@ const Sidebar = styled.div`
     background-color: #3b546a87;
 `
 const NavList = styled.ul`
+  padding: 20px 0 0 10px;
  `
 
- const NavItem = styled.li`
-  padding: 10px;
+const NavItem = styled.li`
+  padding: 20px;
   ${theme.fonts}
 `;
 
-const Friends = styled.div`
+const HARD_CODE_Friends = styled.div`
   background-color: #7e525288;
   display: grid;
   grid-template-columns: repeat(3, 45px);
@@ -59,6 +59,6 @@ export const s = {
   NavLinkCustom,
   Sidebar,
   NavList,
-  Friends,
+  HARD_CODE_Friends,
   FriendItem,
 }

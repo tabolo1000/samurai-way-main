@@ -1,4 +1,4 @@
-import { ItemUser, usersAPI } from "../api/api";
+import { usersAPI } from "../api/api";
 import { Dispatch } from "react";
 
 
@@ -13,8 +13,20 @@ enum ACT {
     TOGGLE_FOLLOWING_IM_PROGRESS = "TOGGLE_FOLLOWING_IN_PROGRESS"
 }
 
-const initialState: any = {
-    users: [],
+const initialState: StateUser = {
+    users: [
+        {
+            followed: true,
+            id: 1,
+            name: "string",
+            photos: {
+                small: "string",
+                large: "string",
+            },
+            status: "string",
+            uniqueUrlName: "string",
+        }
+    ],
     currentPage: 1,
     totalCount: null,
     fetching: false,
@@ -131,13 +143,13 @@ export const unfollow = (usersId: number) => {
         usersId,
     } as const
 }
-export const setUsers = (users: any) => {
+export const setUsers = (users: ItemUser[]) => {
     return {
         type: ACT.SET_USERS,
         users,
     } as const
 }
-export const setCurrentPage = (users: any, currentPage: number) => {
+export const setCurrentPage = (users: ItemUser[], currentPage: number) => {
     return {
         type: ACT.SET_CURRENT_PAGE,
         currentPage,
@@ -219,4 +231,26 @@ export const followThunk = (id: number) => {
             })
     }
 }
+
+export type ItemUser = {
+    followed: boolean,
+    id: number,
+    name: string,
+    photos: {
+        small: string | null,
+        large: string | null,
+    }
+    status: null | string,
+    uniqueUrlName: null | string,
+}
+
+export type StateUser = {
+    users: ItemUser[];
+    currentPage: number;
+    totalCount: number | null;
+    fetching: boolean;
+    followingInProgress: number[];
+}
+
+
 

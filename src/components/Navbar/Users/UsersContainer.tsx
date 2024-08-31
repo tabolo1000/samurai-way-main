@@ -4,6 +4,7 @@ import {
     getUsersPageThunk,
     getUserThunk,
     itemsType,
+    ItemUser,
     setCountUsers,
     setCurrentPage,
     unfollowThunk,
@@ -13,7 +14,7 @@ import React, { ComponentType, Dispatch } from "react";
 import { withAuthRedirect } from "../../../hoc/AuthRedirect";
 import { compose } from "redux";
 import { RootState } from "../../../store/reduxStore";
-import { ItemUser } from "../../../api/api";
+
 
 
 

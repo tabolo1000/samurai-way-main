@@ -13,7 +13,7 @@ enum ACT {
 }
 
 
-let initialState: any = {
+let initialState: StateProfile = {
     userInformation: null,
     fetching: true,
     postsProfileData: {
@@ -30,9 +30,22 @@ let initialState: any = {
                 large: null,
                 small: null,
             },
+            lookingForAJob: true,
+            lookingForAJobDescription: "string | null",
+            userId: 1,
+            contacts: {
+                facebook: "string | null",
+                website: "string | null",
+                vk: "string | null",
+                twitter: "string | null",
+                instagram: "string | null",
+                youtube: "string | null",
+                github: "string | null",
+                mainLink: "string | null",
+            },
             fullName: "",
             aboutMe: "",
-            github: "",
+
         },
         allMyPosts: [
             {
@@ -113,7 +126,7 @@ export const changeTypingPostAction = (message: string) => (
         message: message,
     } as const
 )
-export const setUsersAction = (userInformation: any) => (
+export const setUsersAction = (userInformation: UserInformation) => (
     {
         type: ACT.SET_INFORMATION_USER,
         userInformation,
@@ -160,6 +173,25 @@ type ToggleIsFetchingAC = ReturnType<typeof toggleIsFetchingAction>
 
 
 
+
+export type StateProfile = {
+    userInformation: UserInformation | null;
+    fetching: boolean;
+    postsProfileData: PostsProfileData;
+}
+
+interface PostsProfileData {
+    profileInfo: ProfileInfo;
+    userInformation: UserInformation;
+    allMyPosts: Post[];
+    postTextAreaData: PostTextAreaData;
+}
+
+interface Photo {
+    large: string | null;
+    small: string | null;
+}
+
 export type UserInformation = {
     aboutMe: string;
     contacts: {
@@ -172,12 +204,29 @@ export type UserInformation = {
         github: string | null,
         mainLink: string | null,
     }
+
     fullName: string,
     lookingForAJob: boolean,
     lookingForAJobDescription: string | null,
-    photos: {
-        small: string,
-        large: string,
-    }
+    photos: Photo,
     userId: number,
+}
+
+interface ProfileInfo {
+    img: string;
+    name: string;
+    date: string;
+    city: string;
+    education: string;
+    webSite: string;
+}
+
+interface Post {
+    id: number;
+    image: string;
+    message: string;
+}
+
+interface PostTextAreaData {
+    letter: string;
 }

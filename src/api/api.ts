@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ItemUser } from "../store/userReducer";
 
 const instance = axios.create({
     withCredentials: true,
@@ -29,7 +30,7 @@ export const usersAPI = {
 
 type ResponseGetUsers = {
     error: null | string,
-    items: ItemUser,
+    items: ItemUser[],
     totalCount: number
 }
 
@@ -47,14 +48,3 @@ export const profileAPI = {
 }
 
 
-export type ItemUser = {
-    followed: boolean,
-    id: number,
-    name: string,
-    photos: {
-        small: string | null,
-        large: string | null,
-    }
-    status: null | string,
-    uniqueUrlName: null | string,
-}

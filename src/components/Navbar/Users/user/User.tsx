@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { FlexWrapper } from "../../../FlexWrapper";
 import { Subscribe } from "./Subscibe";
 import { SamuraiAvatar } from "./Avatar";
-import { ItemUser } from "../../../../api/api";
 import { theme } from "../../../../styles/theme";
+import { ItemUser } from "../../../../store/userReducer";
 
 
 

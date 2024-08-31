@@ -4,22 +4,9 @@ enum ACT {
     CHANGE_DIALOGS_TEXT_AREA = "CHANGE_DIALOGS_TEXT_AREA",
 }
 
-type DialogsData = {
-    id: number,
-    name: string,
-    image: string,
-}
-type PostData = {
-    otherUsersMessage: { id: number, message: string, countLikes: number, timeMessage: number, isItMyMessage: boolean }[],
-    myMessage: { id: number, message: string, countLikes: number, timeMessage: number, isItMyMessage: boolean }[],
-    dialogTextArea: { textMessage: string }
-}
-type InitialState = {
-    dialogsData: DialogsData[],
-    postData: PostData,
-}
 
-let initialState: any = {
+
+let initialState: StateDialog = {
     dialogsData: [
         {
             id: 1,
@@ -53,10 +40,10 @@ const dialogReducer = (state = initialState, action: DialogAction) => {
     switch (action.type) {
         case ACT.ADD_MESSAGE:
             let idForMessage = state.postData.myMessage.length
-            let newMessage: NewMessageType = {
+            let newMessage: Message = {
                 id: idForMessage,
                 message: action.message,
-                counterLike: 5,
+                countLikes: 5,
                 timeMessage: 20,
                 isItMyMessage: true,
             }
@@ -116,11 +103,31 @@ export type DialogAction = TypingAction | AddMessageAction
 type TypingAction = ReturnType<typeof typingAction>;
 type AddMessageAction = ReturnType<typeof addMessageAction>
 
+export type StateDialog = {
+    dialogsData: DialogEntry[];
+    postData: PostData;
+}
 
-interface NewMessageType {
-    id: number,
-    message: string,
-    counterLike?: any,
-    timeMessage: number,
-    isItMyMessage: boolean,
+interface PostData {
+    otherUsersMessage: Message[];
+    myMessage: Message[];
+    dialogTextArea: DialogTextArea;
+}
+
+interface DialogEntry {
+    id: number;
+    name: string;
+    image: string;
+}
+
+interface Message {
+    id: number;
+    message: string;
+    countLikes?: number;
+    timeMessage: number;
+    isItMyMessage: boolean;
+}
+
+interface DialogTextArea {
+    textMessage: string;
 }
